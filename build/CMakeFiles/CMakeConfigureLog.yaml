@@ -61,8 +61,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-GnMjNU"
-      binary: "/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-GnMjNU"
+      source: "/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-rYDk04"
+      binary: "/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-rYDk04"
     cmakeVariables:
       CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/usr/bin/clang-scan-deps"
       CMAKE_C_FLAGS: ""
@@ -72,13 +72,13 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-GnMjNU'
+        Change Dir: '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-rYDk04'
         
-        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_bacb5/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_bacb5.dir/build.make CMakeFiles/cmTC_bacb5.dir/build
-        make[1]: Entering directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-GnMjNU'
-        Building C object CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o
-        /usr/bin/clang   -v -MD -MT CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_12965/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_12965.dir/build.make CMakeFiles/cmTC_12965.dir/build
+        make[1]: Entering directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-rYDk04'
+        Building C object CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o
+        /usr/bin/clang   -v -MD -MT CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
         clang version 17.0.6
         Target: x86_64-pc-linux-gnu
         Thread model: posix
@@ -90,7 +90,7 @@ events:
         Candidate multilib: 32;@m32
         Selected multilib: .;@m64
          (in-process)
-         "/usr/bin/clang-17" -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -v -fcoverage-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-GnMjNU -resource-dir /usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o -sys-header-deps -internal-isystem /usr/lib/clang/17/include -internal-isystem /usr/local/include -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../x86_64-pc-linux-gnu/include -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdebug-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-GnMjNU -ferror-limit 19 -stack-protector 2 -fgnuc-version=4.2.1 -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+         "/usr/bin/clang-17" -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -v -fcoverage-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-rYDk04 -resource-dir /usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o -sys-header-deps -internal-isystem /usr/lib/clang/17/include -internal-isystem /usr/local/include -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../x86_64-pc-linux-gnu/include -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdebug-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-rYDk04 -ferror-limit 19 -stack-protector 2 -fgnuc-version=4.2.1 -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake/Modules/CMakeCCompilerABI.c
         clang -cc1 version 17.0.6 based upon LLVM 17.0.6 default target x86_64-pc-linux-gnu
         ignoring nonexistent directory "/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../x86_64-pc-linux-gnu/include"
         ignoring nonexistent directory "/include"
@@ -100,9 +100,9 @@ events:
          /usr/local/include
          /usr/include
         End of search list.
-        Linking C executable cmTC_bacb5
-        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bacb5.dir/link.txt --verbose=1
-        /usr/bin/clang  -v -Wl,-v CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o -o cmTC_bacb5
+        Linking C executable cmTC_12965
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_12965.dir/link.txt --verbose=1
+        /usr/bin/clang  -v -Wl,-v CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o -o cmTC_12965
         clang version 17.0.6
         Target: x86_64-pc-linux-gnu
         Thread model: posix
@@ -113,9 +113,9 @@ events:
         Candidate multilib: .;@m64
         Candidate multilib: 32;@m32
         Selected multilib: .;@m64
-         "/usr/bin/ld" -pie --hash-style=gnu --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_bacb5 /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/Scrt1.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crti.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginS.o -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1 -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lib -L/usr/lib -v CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtendS.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crtn.o
+         "/usr/bin/ld" -pie --hash-style=gnu --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_12965 /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/Scrt1.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crti.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginS.o -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1 -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lib -L/usr/lib -v CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtendS.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crtn.o
         GNU ld (GNU Binutils) 2.42.0
-        make[1]: Leaving directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-GnMjNU'
+        make[1]: Leaving directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-rYDk04'
         
       exitCode: 0
   -
@@ -148,13 +148,13 @@ events:
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
-        ignore line: [Change Dir: '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-GnMjNU']
+        ignore line: [Change Dir: '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-rYDk04']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_bacb5/fast]
-        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_bacb5.dir/build.make CMakeFiles/cmTC_bacb5.dir/build]
-        ignore line: [make[1]: Entering directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-GnMjNU']
-        ignore line: [Building C object CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o]
-        ignore line: [/usr/bin/clang   -v -MD -MT CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_12965/fast]
+        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_12965.dir/build.make CMakeFiles/cmTC_12965.dir/build]
+        ignore line: [make[1]: Entering directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-rYDk04']
+        ignore line: [Building C object CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/bin/clang   -v -MD -MT CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
         ignore line: [clang version 17.0.6]
         ignore line: [Target: x86_64-pc-linux-gnu]
         ignore line: [Thread model: posix]
@@ -169,7 +169,7 @@ events:
         ignore line: [Selected multilib: .]
         ignore line: [@m64]
         ignore line: [ (in-process)]
-        ignore line: [ "/usr/bin/clang-17" -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -v -fcoverage-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-GnMjNU -resource-dir /usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o -sys-header-deps -internal-isystem /usr/lib/clang/17/include -internal-isystem /usr/local/include -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../x86_64-pc-linux-gnu/include -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdebug-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-GnMjNU -ferror-limit 19 -stack-protector 2 -fgnuc-version=4.2.1 -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [ "/usr/bin/clang-17" -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -v -fcoverage-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-rYDk04 -resource-dir /usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o -sys-header-deps -internal-isystem /usr/lib/clang/17/include -internal-isystem /usr/local/include -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../x86_64-pc-linux-gnu/include -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdebug-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-rYDk04 -ferror-limit 19 -stack-protector 2 -fgnuc-version=4.2.1 -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
         ignore line: [clang -cc1 version 17.0.6 based upon LLVM 17.0.6 default target x86_64-pc-linux-gnu]
         ignore line: [ignoring nonexistent directory "/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../x86_64-pc-linux-gnu/include"]
         ignore line: [ignoring nonexistent directory "/include"]
@@ -179,9 +179,9 @@ events:
         ignore line: [ /usr/local/include]
         ignore line: [ /usr/include]
         ignore line: [End of search list.]
-        ignore line: [Linking C executable cmTC_bacb5]
-        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bacb5.dir/link.txt --verbose=1]
-        ignore line: [/usr/bin/clang  -v -Wl -v CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o -o cmTC_bacb5]
+        ignore line: [Linking C executable cmTC_12965]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_12965.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/clang  -v -Wl -v CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o -o cmTC_12965]
         ignore line: [clang version 17.0.6]
         ignore line: [Target: x86_64-pc-linux-gnu]
         ignore line: [Thread model: posix]
@@ -195,7 +195,7 @@ events:
         ignore line: [@m32]
         ignore line: [Selected multilib: .]
         ignore line: [@m64]
-        link line: [ "/usr/bin/ld" -pie --hash-style=gnu --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_bacb5 /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/Scrt1.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crti.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginS.o -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1 -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lib -L/usr/lib -v CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtendS.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crtn.o]
+        link line: [ "/usr/bin/ld" -pie --hash-style=gnu --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_12965 /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/Scrt1.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crti.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginS.o -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1 -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lib -L/usr/lib -v CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtendS.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crtn.o]
           arg [/usr/bin/ld] ==> ignore
           arg [-pie] ==> ignore
           arg [--hash-style=gnu] ==> ignore
@@ -206,7 +206,7 @@ events:
           arg [-dynamic-linker] ==> ignore
           arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_bacb5] ==> ignore
+          arg [cmTC_12965] ==> ignore
           arg [/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/Scrt1.o] ==> obj [/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/Scrt1.o]
           arg [/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crti.o] ==> obj [/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crti.o]
           arg [/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginS.o] ==> obj [/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginS.o]
@@ -217,7 +217,7 @@ events:
           arg [-L/lib] ==> dir [/lib]
           arg [-L/usr/lib] ==> dir [/usr/lib]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_bacb5.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [CMakeFiles/cmTC_12965.dir/CMakeCCompilerABI.c.o] ==> ignore
           arg [-lgcc] ==> lib [gcc]
           arg [--as-needed] ==> ignore
           arg [-lgcc_s] ==> lib [gcc_s]
@@ -266,8 +266,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-J8RVWM"
-      binary: "/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-J8RVWM"
+      source: "/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-KvtPEj"
+      binary: "/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-KvtPEj"
     cmakeVariables:
       CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/usr/bin/clang-scan-deps"
       CMAKE_CXX_FLAGS: ""
@@ -277,13 +277,13 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-J8RVWM'
+        Change Dir: '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-KvtPEj'
         
-        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_9e82f/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_9e82f.dir/build.make CMakeFiles/cmTC_9e82f.dir/build
-        make[1]: Entering directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-J8RVWM'
-        Building CXX object CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o
-        /usr/bin/clang++   -v -MD -MT CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_85ea9/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_85ea9.dir/build.make CMakeFiles/cmTC_85ea9.dir/build
+        make[1]: Entering directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-KvtPEj'
+        Building CXX object CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/clang++   -v -MD -MT CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
         clang version 17.0.6
         Target: x86_64-pc-linux-gnu
         Thread model: posix
@@ -295,7 +295,7 @@ events:
         Candidate multilib: 32;@m32
         Selected multilib: .;@m64
          (in-process)
-         "/usr/bin/clang++" -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -v -fcoverage-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-J8RVWM -resource-dir /usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../include/c++/13.2.1 -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../include/c++/13.2.1/x86_64-pc-linux-gnu -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../include/c++/13.2.1/backward -internal-isystem /usr/lib/clang/17/include -internal-isystem /usr/local/include -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../x86_64-pc-linux-gnu/include -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdeprecated-macro -fdebug-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-J8RVWM -ferror-limit 19 -stack-protector 2 -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+         "/usr/bin/clang++" -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -v -fcoverage-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-KvtPEj -resource-dir /usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../include/c++/13.2.1 -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../include/c++/13.2.1/x86_64-pc-linux-gnu -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../include/c++/13.2.1/backward -internal-isystem /usr/lib/clang/17/include -internal-isystem /usr/local/include -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../x86_64-pc-linux-gnu/include -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdeprecated-macro -fdebug-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-KvtPEj -ferror-limit 19 -stack-protector 2 -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
         clang -cc1 version 17.0.6 based upon LLVM 17.0.6 default target x86_64-pc-linux-gnu
         ignoring nonexistent directory "/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../x86_64-pc-linux-gnu/include"
         ignoring nonexistent directory "/include"
@@ -308,9 +308,9 @@ events:
          /usr/local/include
          /usr/include
         End of search list.
-        Linking CXX executable cmTC_9e82f
-        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9e82f.dir/link.txt --verbose=1
-        /usr/bin/clang++  -v -Wl,-v CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_9e82f
+        Linking CXX executable cmTC_85ea9
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_85ea9.dir/link.txt --verbose=1
+        /usr/bin/clang++  -v -Wl,-v CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_85ea9
         clang version 17.0.6
         Target: x86_64-pc-linux-gnu
         Thread model: posix
@@ -321,9 +321,9 @@ events:
         Candidate multilib: .;@m64
         Candidate multilib: 32;@m32
         Selected multilib: .;@m64
-         "/usr/bin/ld" -pie --hash-style=gnu --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_9e82f /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/Scrt1.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crti.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginS.o -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1 -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lib -L/usr/lib -v CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtendS.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crtn.o
+         "/usr/bin/ld" -pie --hash-style=gnu --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_85ea9 /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/Scrt1.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crti.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginS.o -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1 -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lib -L/usr/lib -v CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtendS.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crtn.o
         GNU ld (GNU Binutils) 2.42.0
-        make[1]: Leaving directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-J8RVWM'
+        make[1]: Leaving directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-KvtPEj'
         
       exitCode: 0
   -
@@ -362,13 +362,13 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
-        ignore line: [Change Dir: '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-J8RVWM']
+        ignore line: [Change Dir: '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-KvtPEj']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_9e82f/fast]
-        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_9e82f.dir/build.make CMakeFiles/cmTC_9e82f.dir/build]
-        ignore line: [make[1]: Entering directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-J8RVWM']
-        ignore line: [Building CXX object CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o]
-        ignore line: [/usr/bin/clang++   -v -MD -MT CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_85ea9/fast]
+        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_85ea9.dir/build.make CMakeFiles/cmTC_85ea9.dir/build]
+        ignore line: [make[1]: Entering directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-KvtPEj']
+        ignore line: [Building CXX object CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/clang++   -v -MD -MT CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [clang version 17.0.6]
         ignore line: [Target: x86_64-pc-linux-gnu]
         ignore line: [Thread model: posix]
@@ -383,7 +383,7 @@ events:
         ignore line: [Selected multilib: .]
         ignore line: [@m64]
         ignore line: [ (in-process)]
-        ignore line: [ "/usr/bin/clang++" -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -v -fcoverage-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-J8RVWM -resource-dir /usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../include/c++/13.2.1 -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../include/c++/13.2.1/x86_64-pc-linux-gnu -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../include/c++/13.2.1/backward -internal-isystem /usr/lib/clang/17/include -internal-isystem /usr/local/include -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../x86_64-pc-linux-gnu/include -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdeprecated-macro -fdebug-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-J8RVWM -ferror-limit 19 -stack-protector 2 -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [ "/usr/bin/clang++" -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -v -fcoverage-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-KvtPEj -resource-dir /usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../include/c++/13.2.1 -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../include/c++/13.2.1/x86_64-pc-linux-gnu -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../include/c++/13.2.1/backward -internal-isystem /usr/lib/clang/17/include -internal-isystem /usr/local/include -internal-isystem /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../x86_64-pc-linux-gnu/include -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdeprecated-macro -fdebug-compilation-dir=/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-KvtPEj -ferror-limit 19 -stack-protector 2 -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [clang -cc1 version 17.0.6 based upon LLVM 17.0.6 default target x86_64-pc-linux-gnu]
         ignore line: [ignoring nonexistent directory "/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../x86_64-pc-linux-gnu/include"]
         ignore line: [ignoring nonexistent directory "/include"]
@@ -396,9 +396,9 @@ events:
         ignore line: [ /usr/local/include]
         ignore line: [ /usr/include]
         ignore line: [End of search list.]
-        ignore line: [Linking CXX executable cmTC_9e82f]
-        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9e82f.dir/link.txt --verbose=1]
-        ignore line: [/usr/bin/clang++  -v -Wl -v CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_9e82f]
+        ignore line: [Linking CXX executable cmTC_85ea9]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_85ea9.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/clang++  -v -Wl -v CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_85ea9]
         ignore line: [clang version 17.0.6]
         ignore line: [Target: x86_64-pc-linux-gnu]
         ignore line: [Thread model: posix]
@@ -412,7 +412,7 @@ events:
         ignore line: [@m32]
         ignore line: [Selected multilib: .]
         ignore line: [@m64]
-        link line: [ "/usr/bin/ld" -pie --hash-style=gnu --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_9e82f /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/Scrt1.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crti.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginS.o -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1 -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lib -L/usr/lib -v CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtendS.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crtn.o]
+        link line: [ "/usr/bin/ld" -pie --hash-style=gnu --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_85ea9 /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/Scrt1.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crti.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginS.o -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1 -L/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/lib -L/usr/lib -v CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtendS.o /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crtn.o]
           arg [/usr/bin/ld] ==> ignore
           arg [-pie] ==> ignore
           arg [--hash-style=gnu] ==> ignore
@@ -423,7 +423,7 @@ events:
           arg [-dynamic-linker] ==> ignore
           arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_9e82f] ==> ignore
+          arg [cmTC_85ea9] ==> ignore
           arg [/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/Scrt1.o] ==> obj [/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/Scrt1.o]
           arg [/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crti.o] ==> obj [/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/../../../../lib64/crti.o]
           arg [/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginS.o] ==> obj [/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/13.2.1/crtbeginS.o]
@@ -434,7 +434,7 @@ events:
           arg [-L/lib] ==> dir [/lib]
           arg [-L/usr/lib] ==> dir [/usr/lib]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_9e82f.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [CMakeFiles/cmTC_85ea9.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
           arg [-lstdc++] ==> lib [stdc++]
           arg [-lm] ==> lib [m]
           arg [-lgcc_s] ==> lib [gcc_s]
@@ -485,8 +485,8 @@ events:
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-3Xkjyn"
-      binary: "/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-3Xkjyn"
+      source: "/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-nziXjQ"
+      binary: "/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-nziXjQ"
     cmakeVariables:
       CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/usr/bin/clang-scan-deps"
       CMAKE_C_FLAGS: ""
@@ -496,17 +496,17 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-3Xkjyn'
+        Change Dir: '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-nziXjQ'
         
-        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_f4fc6/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_f4fc6.dir/build.make CMakeFiles/cmTC_f4fc6.dir/build
-        make[1]: Entering directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-3Xkjyn'
-        Building C object CMakeFiles/cmTC_f4fc6.dir/src.c.o
-        /usr/bin/clang -DCMAKE_HAVE_LIBC_PTHREAD   -MD -MT CMakeFiles/cmTC_f4fc6.dir/src.c.o -MF CMakeFiles/cmTC_f4fc6.dir/src.c.o.d -o CMakeFiles/cmTC_f4fc6.dir/src.c.o -c /home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-3Xkjyn/src.c
-        Linking C executable cmTC_f4fc6
-        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f4fc6.dir/link.txt --verbose=1
-        /usr/bin/clang CMakeFiles/cmTC_f4fc6.dir/src.c.o -o cmTC_f4fc6
-        make[1]: Leaving directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-3Xkjyn'
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_c5602/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_c5602.dir/build.make CMakeFiles/cmTC_c5602.dir/build
+        make[1]: Entering directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-nziXjQ'
+        Building C object CMakeFiles/cmTC_c5602.dir/src.c.o
+        /usr/bin/clang -DCMAKE_HAVE_LIBC_PTHREAD   -MD -MT CMakeFiles/cmTC_c5602.dir/src.c.o -MF CMakeFiles/cmTC_c5602.dir/src.c.o.d -o CMakeFiles/cmTC_c5602.dir/src.c.o -c /home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-nziXjQ/src.c
+        Linking C executable cmTC_c5602
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c5602.dir/link.txt --verbose=1
+        /usr/bin/clang CMakeFiles/cmTC_c5602.dir/src.c.o -o cmTC_c5602
+        make[1]: Leaving directory '/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/CMakeScratch/TryCompile-nziXjQ'
         
       exitCode: 0
 ...
