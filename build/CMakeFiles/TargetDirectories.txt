@@ -1,3 +1,0 @@
-/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/Space.dir
-/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/edit_cache.dir
-/home/leonw/Documents/dev/OpenGL_Space/build/CMakeFiles/rebuild_cache.dir
