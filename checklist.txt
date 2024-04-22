@@ -1,0 +1,30 @@
+1. Window Class -> dont singleton it!!  [x]
+    glfw
+    window Size
+    framebuffer callback handled by window
+
+2. RenderEngine or ECS ? [x]
+    RenderEngine -> player..etc call to RenderEngine -> Simpler to implent, hard to scale
+    ECS -> player..etc have rendercomponent -> hard to implement, super easy scale (actually simple to implement!)
+    RenderEngine = GameObjects
+    ECS = Entities with Components;
+    ECS it is
+
+3. shaderClass [x]
+    loading & compiling shaders 
+
+4. Input handling -> Command pattern [x] 
+    NOTE: button release is a pain in the ass
+
+5. OpenGL -> draw a triangle [x]
+6. Make triangle move [x]
+
+7. movement with physics engine [x]
+    -> need posComponent from entity
+    -> modifys velocity and position
+    -> return calculated transform
+
+8. rotate with mousePosition [x]
+    problems: mousePosition polling needs window
+           -> Compenent doesnt know anything of a Window
+           -> 
