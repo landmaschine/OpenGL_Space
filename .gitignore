@@ -1,5 +1,2 @@
 build/
-build/CMakeFiles
 .vscode/
-lib/
-build/CMakeFiles/CMakeConfigureLog.yaml
