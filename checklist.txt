@@ -36,3 +36,10 @@
     -> projection matrix
         problem shader ID is not the same in rendercomponent and renderer, static? -> nope
         shader ID goes wandering
+
+10. How does object move with input velocity?
+    in pyhics calc Transform... whoops
+
+11. get center of triangle
+    -> no clue how to get center out of vertices...
+    

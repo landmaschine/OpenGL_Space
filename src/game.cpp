@@ -30,7 +30,7 @@ void init() {
 
     dep->renderer.shaderInit();
     dep->renderer.setProjectionOrto();
-    
+
 
     entities->player.getComponent<RenderComponent>().getShaderID(dep->renderer.shaderID());
 }
@@ -44,6 +44,7 @@ void update(float dt) {
     entities->player.getComponent<MovementComponent>().frameTime(dt);
     entities->player.getComponent<RenderComponent>().rotTransforms() = entities->player.getComponent<MovementComponent>().rotTransform();
     entities->player.getComponent<RenderComponent>().transform() = entities->player.getComponent<MovementComponent>().transform();
+    entities->player.getComponent<MovementComponent>().Pos() = entities->player.getComponent<RenderComponent>().Pos();
     entities->manager.update();
 }
 

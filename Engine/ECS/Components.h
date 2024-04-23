@@ -68,11 +68,22 @@ class RenderComponent : public Component {
             glDrawArrays(GL_TRIANGLES, 0, 3);
         }
 
+        glm::vec2 Pos() const {
+            glm::vec2 position(0.0f);
+            for (int i = 0; i < 3; ++i) {
+                glm::vec3 vertexPosition = glm::vec3(model * glm::vec4(vertices[i * 6], vertices[i * 6 + 1], vertices[i * 6 + 2], 1.0f));
+                position.x += vertexPosition.x;
+                position.y += vertexPosition.y;
+            }
+            position /= 3.0f;
+            return position;
+        }
+
     private:
         unsigned int VBO;
         unsigned int VAO;
         unsigned int shaderID;
-        glm::vec4 pos;
+        glm::vec2 pos;
         glm::mat4 trans;
         glm::mat4 rotMat;
         glm::mat4 model;
@@ -87,7 +98,7 @@ class RenderComponent : public Component {
 class MovementComponent : public Component {
     public:
         void init() override {
-            pos = glm::vec3(1.0f);
+            pos = glm::vec2(1.0f);
             velocity = glm::vec3(1.0f);
             trans = glm::mat4(1.0f);
             rotMat = glm::mat4(1.0f);
@@ -105,7 +116,7 @@ class MovementComponent : public Component {
 
         glm::mat4& transform() { return trans; }
         glm::mat4& rotTransform() { return rotMat; }
-        glm::vec3& getPos() { return pos; }
+        glm::vec2& Pos() { return pos; }
         glm::vec3& getVel() { return velocity; }
         float& getMass() { return mass; }
         int& getSpeed() { return speed; }
@@ -120,7 +131,7 @@ class MovementComponent : public Component {
 
     private:
         Movement mov;
-        glm::vec3 pos;
+        glm::vec2 pos;
         glm::vec3 velocity;
         glm::mat4 trans;
         glm::mat4 rotMat;
@@ -130,4 +141,19 @@ class MovementComponent : public Component {
         float scale;
         int speed;
         int speedMod;
+};
+
+class CameracComponent : public Component {
+    public:
+
+        void init() override {
+
+        }
+
+        void update() override {
+
+        }
+
+    private:
+        
 };
