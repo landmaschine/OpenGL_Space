@@ -14,10 +14,9 @@ void init() {
     glfwSetFramebufferSizeCallback(dep->window.getWin(), framebuffer_size_callback);
     
     entities->player.addComponent<PositionComponent>();
-    entities->player.addComponent<RenderComponent>();
     entities->player.addComponent<MovementComponent>();
-
     entities->player.getComponent<MovementComponent>().getWindow(dep->window);
+    entities->player.addComponent<RenderComponent>();
     
     dep->inputhandler.init(dep->window.getWin(), entities->player);
 
@@ -28,11 +27,17 @@ void init() {
     dep->inputhandler.bindKey(GLFW_KEY_LEFT_SHIFT, std::make_shared<MoveFaster>());
     dep->inputhandler.bindKey(GLFW_KEY_F2, std::make_shared<setVsync>());
     dep->inputhandler.bindKey(GLFW_KEY_F1, std::make_shared<SetFrameUnlimited>());
+
+    dep->renderer.shaderInit();
+    dep->renderer.setProjectionOrto();
+    
+
+    entities->player.getComponent<RenderComponent>().getShaderID(dep->renderer.shaderID());
 }
 
 void input() {
-    dep->inputhandler.shutdownKey();
     dep->inputhandler.update();
+    dep->inputhandler.shutdownKey();
 }
 
 void update(float dt) {
@@ -83,7 +88,6 @@ void gameLoop::run() {
 
 void shutDown() {
     delete dep;
-    delete entities;
     glfwTerminate();
 }
 

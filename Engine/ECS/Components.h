@@ -1,6 +1,5 @@
 #pragma once
 #include "ECS.h"
-#include "Engine/RenderEngine/Shaders/shader.h"
 #include "Engine/Pyhsics/physics.h"
 #include <glm/glm.hpp>
 #include "Engine/RenderEngine/Window/window.h"
@@ -28,6 +27,7 @@ class RenderComponent : public Component {
         void init() override {
             trans = glm::mat4(1.0f);
             rotMat = glm::mat4(1.0f);
+            model = glm::mat4(1.0f);
 
             glGenVertexArrays(1, &VAO);
             glGenBuffers(1, &VBO);
@@ -44,28 +44,26 @@ class RenderComponent : public Component {
 
             glBindBuffer(GL_ARRAY_BUFFER, 0); 
             glBindVertexArray(0);
-
-            shader.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/Shaders/shaderfiles/vertex.vs",
-                              "/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/Shaders/shaderfiles/fragment.fs");
-            shader.use();
         }
 
         void setPos(glm::vec4 _pos) {
             pos = _pos;
         }
 
+        void getShaderID(unsigned int ID) { shaderID = ID; }
+
+        glm::mat4& getModelMat() { return model; } 
         glm::mat4& transform() { return trans; }
         glm::mat4& rotTransforms() { return rotMat; }
 
         void update() override {
-            
+            //dont change -> beahviour of this multiplication wanted
+            model = rotMat * trans;
         }
 
         void draw() override {
-            unsigned int transformLoc = glGetUniformLocation(shader.ID, "transform");
-            glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
-            unsigned int rottransformLoc = glGetUniformLocation(shader.ID, "rotTransform");
-            glUniformMatrix4fv(rottransformLoc, 1, GL_FALSE, glm::value_ptr(rotMat));
+            unsigned int modelLoc = glGetUniformLocation(shaderID, "model");
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
             glBindVertexArray(VAO);
             glDrawArrays(GL_TRIANGLES, 0, 3);
         }
@@ -73,10 +71,11 @@ class RenderComponent : public Component {
     private:
         unsigned int VBO;
         unsigned int VAO;
+        unsigned int shaderID;
         glm::vec4 pos;
         glm::mat4 trans;
         glm::mat4 rotMat;
-        Shader shader;
+        glm::mat4 model;
 
         float vertices[18] = {
             0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
@@ -96,7 +95,7 @@ class MovementComponent : public Component {
             speed = 100;
             speedMod = 1;
             dt = 0;
-            scale = 0.4f;
+            scale = .5f;
             trans = glm::scale(trans, glm::vec3(scale));
         }
 

@@ -27,4 +27,12 @@
 8. rotate with mousePosition [x]
     problems: mousePosition polling needs window
            -> Compenent doesnt know anything of a Window
-           -> 
+           -> window pointer goes wandering through source code...
+
+9. projection [x]
+    -> projection class orthographic
+    -> also needs window Size
+    -> view matrix
+    -> projection matrix
+        problem shader ID is not the same in rendercomponent and renderer, static? -> nope
+        shader ID goes wandering

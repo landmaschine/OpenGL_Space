@@ -11,7 +11,7 @@ void Movement::calcTransform(glm::mat4& trans, glm::mat4& rotMat, Window& _win, 
 
     float cursorangle = glm::atan(deltaX, deltaY);
 
-    std::cout << "xpos: " << x << std::endl << "ypos: " << y << std::endl;
+    std::cout << "centerX: " << deltaX << std::endl << "CenteY: " << deltaY << std::endl;
     trans = glm::translate(trans, _vel * glm::vec3(1.f * dt * speedMod, 1.f * dt * speedMod, 0.0f));
     rotMat = glm::rotate(glm::mat4(1.0f), cursorangle, glm::vec3(0.0f, 0.0f, 1.0f));
 }
