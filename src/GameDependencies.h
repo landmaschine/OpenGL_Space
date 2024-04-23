@@ -1,16 +1,15 @@
 #pragma once
-#include <glad/glad.h>
 
 #define FMT_HEADER_ONLY
+#include "RenderEngine/OpenGL/Renderer.h"
 #include <fmt/core.h>
-#include "Engine/ECS/Components/Components.h"
+#include "ECS/ECS.h"
 #include "profiler/profiler.h"
 #include "input/keyClasses.h"
 
 #include "RenderEngine/Window/window.h"
 #include "input/InputHandler.h"
-#include "RenderEngine/OpenGL/Renderer.h"
-#include "ECS/ECS.h"
+#include "Engine/ECS/Components.h"
 
 struct Gamedependencies {
     Window window;

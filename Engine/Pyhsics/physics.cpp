@@ -8,13 +8,11 @@ void Movement::calcTransform(glm::mat4& trans, glm::mat4& rotMat, Window& _win, 
     float centerY = _win.size().h / 2.0f;
     float deltaX = x - centerX;
     float deltaY = y - centerY;
-
     glm::vec2 dirVec = glm::vec2(deltaX, deltaY);
-    //std::cout << "centerX: " << _pos.x << std::endl << "CenteY: " << _pos.y << std::endl;
-    
+
     float cursorangle = atan2(dirVec.y, dirVec.x);
+    std::cout << deltaX << " : " << deltaY << std::endl;
 
     trans = glm::translate(trans, _vel * glm::vec3(1.f * dt * speedMod, 1.f * dt * speedMod, 0.0f));
-
     rotMat = glm::rotate(glm::mat4(1.0f), -cursorangle, glm::vec3(0.0f, 0.0f, 1.0f));
 }

@@ -1,10 +1,5 @@
 #pragma once
-#include "../ECS.h"
-#include "Engine/Pyhsics/physics.h"
-#include <glm/glm.hpp>
-#include "Engine/RenderEngine/Window/window.h"
-
-
+#include "Components.h"
 
 class MovementComponent : public Component {
     public:
@@ -37,7 +32,6 @@ class MovementComponent : public Component {
         void setX_vel(float _x) { velocity.x = _x; }
         void setY_vel(float _y) { velocity.y = _y; }
         void frameTime(float _dt) { dt = _dt; }
-
         void getWindow(Window& _win) { window = _win; }
 
     private:

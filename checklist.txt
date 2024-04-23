@@ -43,3 +43,9 @@
 11. get center of triangle
     -> no clue how to get center out of vertices...
     
+12. Texture Rendering
+    -> the attempt of rendering a texture was a miserable failure
+    -> its quite an astonishing view to watch a window with nothing in it, just a slugish greenish color.
+    -> i dont get it to work
+
+everythin broken.

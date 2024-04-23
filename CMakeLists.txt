@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 
+add_definitions(-DGLFW_INCLUDE_NONE)
+
 set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 
 file(GLOB_RECURSE SOURCE_FILES "${SOURCE_DIR}/src/*.cpp" "${SOURCE_DIR}/Engine/*.cpp" "${SOURCE_DIR}/lib/*.cpp" "${SOURCE_DIR}/lib/*.c")

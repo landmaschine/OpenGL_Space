@@ -1,8 +1,5 @@
 #pragma once
-#include "../ECS.h"
-#include "Engine/Pyhsics/physics.h"
-#include <glm/glm.hpp>
-#include "Engine/RenderEngine/Window/window.h"
+#include "Components.h"
 
 
 class PositionComponent : public Component {

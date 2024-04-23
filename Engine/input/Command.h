@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/ECS/ECS.h"
+#include "Engine/ECS/Components.h"
 
 class Command {
     public:
