@@ -23,6 +23,5 @@ class Renderer {
     private:
         Shader shader;
         glm::mat4 orto = glm::mat4(1.0f);
-        glm::mat4 view = glm::mat4(1.0f);
     
 };

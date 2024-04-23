@@ -3,7 +3,7 @@
 
 #define FMT_HEADER_ONLY
 #include <fmt/core.h>
-#include "ECS/Components.h"
+#include "Engine/ECS/Components/Components.h"
 #include "profiler/profiler.h"
 #include "input/keyClasses.h"
 
