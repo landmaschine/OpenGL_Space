@@ -7,8 +7,6 @@ class Renderer {
     public:
         void init() {
             shaderInit();
-            orto = glm::ortho(0.0f, 800.0f, 0.0f, 800.0f, 0.1f, 100.0f);
-            view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
         }
 
         void shaderInit() {

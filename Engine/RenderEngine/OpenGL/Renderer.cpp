@@ -7,7 +7,7 @@ void Renderer::render() {
 }
 
 void Renderer::setProjectionOrto() {
-    shader.setMat4("view", view);
+    orto = glm::ortho(-400.0f, 400.0f, -300.0f, 300.0f, -100.0f, 100.0f);
     shader.setMat4("projection", orto);
 }
 

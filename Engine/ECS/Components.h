@@ -31,16 +31,18 @@ class RenderComponent : public Component {
 
             glGenVertexArrays(1, &VAO);
             glGenBuffers(1, &VBO);
+            glGenBuffers(1, &EBO);
+
             glBindVertexArray(VAO);
 
             glBindBuffer(GL_ARRAY_BUFFER, VBO);
             glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-            glEnableVertexAttribArray(0);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3* sizeof(float)));
-            glEnableVertexAttribArray(1);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+            glEnableVertexAttribArray(0);
 
             glBindBuffer(GL_ARRAY_BUFFER, 0); 
             glBindVertexArray(0);
@@ -57,7 +59,7 @@ class RenderComponent : public Component {
         glm::mat4& rotTransforms() { return rotMat; }
 
         void update() override {
-            //dont change -> beahviour of this multiplication wanted
+            //dont change -> beahviour of this multiplication is wanted
             model = rotMat * trans;
         }
 
@@ -65,48 +67,59 @@ class RenderComponent : public Component {
             unsigned int modelLoc = glGetUniformLocation(shaderID, "model");
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
             glBindVertexArray(VAO);
-            glDrawArrays(GL_TRIANGLES, 0, 3);
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         }
 
-        glm::vec2 Pos() const {
-            glm::vec2 position(0.0f);
-            for (int i = 0; i < 3; ++i) {
-                glm::vec3 vertexPosition = glm::vec3(model * glm::vec4(vertices[i * 6], vertices[i * 6 + 1], vertices[i * 6 + 2], 1.0f));
-                position.x += vertexPosition.x;
-                position.y += vertexPosition.y;
+        glm::vec3 Pos() const {
+            glm::vec3 position(0.0f);
+            for (int i = 0; i < 4; ++i) {
+                glm::vec3 vertexPosition = glm::vec3(model * glm::vec4(vertices[i * 3], vertices[i * 3 + 1], vertices[i * 3 + 2], 1.0f));
+                position += vertexPosition;
             }
-            position /= 3.0f;
+            position /= 4.0f;
             return position;
+        }
+
+        ~RenderComponent() override {
+            glDeleteVertexArrays(1, &VAO);
+            glDeleteBuffers(1, &VBO);
+            glDeleteBuffers(1, &EBO);
         }
 
     private:
         unsigned int VBO;
         unsigned int VAO;
+        unsigned int EBO;
         unsigned int shaderID;
         glm::vec2 pos;
         glm::mat4 trans;
         glm::mat4 rotMat;
         glm::mat4 model;
 
-        float vertices[18] = {
-            0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
-           -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
-            0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f
+        float vertices[12] = {
+            0.5f,  0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f,
+           -0.5f, -0.5f, 0.0f,
+           -0.5f,  0.5f, 0.0f 
         };
+        unsigned int indices[6] = {
+            0, 1, 3,
+            1, 2, 3
+        };  
 };
 
 class MovementComponent : public Component {
     public:
         void init() override {
-            pos = glm::vec2(1.0f);
-            velocity = glm::vec3(1.0f);
+            pos = glm::vec3(1.0f);
+            velocity = glm::vec3(0.0f);
             trans = glm::mat4(1.0f);
             rotMat = glm::mat4(1.0f);
             mass = 10;
             speed = 100;
             speedMod = 1;
             dt = 0;
-            scale = .5f;
+            scale = 200.0f;
             trans = glm::scale(trans, glm::vec3(scale));
         }
 
@@ -116,7 +129,7 @@ class MovementComponent : public Component {
 
         glm::mat4& transform() { return trans; }
         glm::mat4& rotTransform() { return rotMat; }
-        glm::vec2& Pos() { return pos; }
+        glm::vec3& Pos() { return pos; }
         glm::vec3& getVel() { return velocity; }
         float& getMass() { return mass; }
         int& getSpeed() { return speed; }
@@ -131,7 +144,7 @@ class MovementComponent : public Component {
 
     private:
         Movement mov;
-        glm::vec2 pos;
+        glm::vec3 pos;
         glm::vec3 velocity;
         glm::mat4 trans;
         glm::mat4 rotMat;
@@ -155,5 +168,5 @@ class CameracComponent : public Component {
         }
 
     private:
-        
+
 };

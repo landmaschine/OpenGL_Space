@@ -9,5 +9,5 @@
 
 class Movement {
     public:
-        void calcTransform(glm::mat4& trans, glm::mat4& rotMat ,Window& _win, float dt, float& _mass, int& speedMod, glm::vec3& _vel, glm::vec2& _pos);
+        void calcTransform(glm::mat4& trans, glm::mat4& rotMat ,Window& _win, float dt, float& _mass, int& speedMod, glm::vec3& _vel, glm::vec3& _pos);
 };

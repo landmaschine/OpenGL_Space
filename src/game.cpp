@@ -12,7 +12,7 @@ void init() {
     }    
     glViewport(0, 0, dep->window.size().w, dep->window.size().h);
     glfwSetFramebufferSizeCallback(dep->window.getWin(), framebuffer_size_callback);
-    
+
     entities->player.addComponent<PositionComponent>();
     entities->player.addComponent<MovementComponent>();
     entities->player.getComponent<MovementComponent>().getWindow(dep->window);
@@ -20,6 +20,7 @@ void init() {
     
     dep->inputhandler.init(dep->window.getWin(), entities->player);
 
+    
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
     dep->inputhandler.bindKey(GLFW_KEY_S, std::make_shared<MoveDown>());
     dep->inputhandler.bindKey(GLFW_KEY_A, std::make_shared<MoveLeft>());
