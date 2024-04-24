@@ -13,9 +13,12 @@ void init() {
     }
 
     dep->renderer.init();
+    fmt::println("shaderID {:}", dep->renderer.shader.ID);
     glfwSetFramebufferSizeCallback(dep->window.getWin(), framebuffer_size_callback);
     glfwSetCursorPosCallback(dep->window.getWin(), cusor_position_callback);
     glViewport(0, 0, dep->window.size().w, dep->window.size().h);
+
+    dep->cam.init(dep->window);
 
     entities->player.addComponent<PositionComponent>();
     entities->player.addComponent<MovementComponent>();
@@ -32,7 +35,8 @@ void init() {
     dep->inputhandler.bindKey(GLFW_KEY_F2, std::make_shared<setVsync>());
     dep->inputhandler.bindKey(GLFW_KEY_F1, std::make_shared<SetFrameUnlimited>());
 
-    dep->renderer.setProjectionOrto(dep->window);
+    dep->renderer.shader.use();
+    dep->renderer.shader.setMat4("projection", dep->cam.getProjectionMatrix());
 }
 
 void input() {
@@ -41,12 +45,20 @@ void input() {
 }
 
 void update(float dt) {
-    entities->player.getComponent<MovementComponent>().frameTime(dt);
+    auto& playerMovement = entities->player.getComponent<MovementComponent>();
+    playerMovement.frameTime(dt);
+    
+    dep->cam.updatePosition(playerMovement.Pos(), dep->window);
+
+    fmt::print("playerX {:}", playerMovement.Pos().x);
+    fmt::println(" playerY {:}", playerMovement.Pos().y);
+
+    dep->renderer.shader.use();
+    dep->renderer.shader.setMat4("view", dep->cam.getViewMatrix());
+
     entities->player.getComponent<RenderComponent>().rotTransforms() = entities->player.getComponent<MovementComponent>().rotTransform();
     entities->player.getComponent<RenderComponent>().transform() = entities->player.getComponent<MovementComponent>().transform();
-    entities->player.getComponent<MovementComponent>().Pos() = entities->player.getComponent<RenderComponent>().Pos();
     
-    dep->renderer.setProjectionOrto(dep->window);
     entities->manager.update();
 }
 
@@ -120,7 +132,4 @@ void cusor_position_callback(GLFWwindow* window, double xpos, double ypos) {
 
     entities->player.getComponent<MovementComponent>().mouseX(x_window);
     entities->player.getComponent<MovementComponent>().mouseY(y_window);
-
-    fmt::print("x: {:} ", x_window);
-    fmt::println(" y: {:}", y_window);
 }

@@ -47,6 +47,7 @@ class RenderComponent : public Component {
             }
             stbi_image_free(data);
 
+
         }
 
         void update() override {
@@ -65,16 +66,6 @@ class RenderComponent : public Component {
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         }
 
-        glm::vec3 Pos() const {
-            glm::vec3 position(0.0f);
-            for (int i = 0; i < 4; ++i) {
-                glm::vec3 vertexPosition = glm::vec3(vertices[i * 8], vertices[i * 8 + 1], 0.0f);
-                position += vertexPosition;
-            }
-            position /= 4.0f;
-            return position;
-        }
-
         ~RenderComponent() override {
             glDeleteVertexArrays(1, &VAO);
             glDeleteBuffers(1, &VBO);
@@ -85,7 +76,7 @@ class RenderComponent : public Component {
         glm::mat4& transform() { return trans; }
         glm::mat4& rotTransforms() { return rotMat; }
         void getShaderID(unsigned int ID) { shaderID = ID; }
-        void setPos(glm::vec4 _pos) { pos = _pos; }
+        glm::vec3& Pos() {return pos;}
 
     private:
         unsigned int VBO;

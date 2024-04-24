@@ -11,12 +11,14 @@
 
 #include "RenderEngine/Window/window.h"
 #include "input/InputHandler.h"
+#include "Engine/Camera/Camera.h"
 #include "Engine/ECS/Components.h"
 
 struct Gamedependencies {
     Window window;
     InputHandler inputhandler;
     Renderer renderer;
+    Camera2D cam;
 };
 Gamedependencies* dep = new Gamedependencies;
 

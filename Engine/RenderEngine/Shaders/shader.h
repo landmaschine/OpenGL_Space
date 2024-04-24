@@ -7,6 +7,7 @@
 #include <sstream>
 #include <iostream>
 
+#define FMT_HEADER_ONLY
 #include <fmt/core.h>
 #include "Engine/math/math.h"
 
@@ -18,7 +19,7 @@ public:
     Shader() {}
     void loadShader(const char* vertexPath, const char* fragmentPath);
 
-    void use() {glUseProgram(ID);};
+    void use() { glUseProgram(ID); };
 
 void setBool(const std::string &name, bool value) const;
 void setInt(const std::string &name, int value) const;
