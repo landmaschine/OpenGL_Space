@@ -5,12 +5,14 @@ void Renderer::render() {
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Renderer::setProjectionOrto() {
-    orto = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, -100.0f, 100.0f);
+void Renderer::setProjectionOrto(Window& window) {
+    glUseProgram(shaderID());
+    orto = glm::mat4(1.0f);
+    orto = glm::ortho(-window.size().w / 2.f, window.size().w / 2.f, -window.size().h / 2.f, window.size().h / 2.f, -100.0f, 100.0f);
     shader.setMat4("projection", orto);
 }
 
-void Renderer::setProjectionPers() {
-    glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)800/(float)600, 0.1f, 100.0f);
+void Renderer::setProjectionPers(Window& window) {
+    glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)window.size().w/(float)window.size().h, 0.1f, 100.0f);
     shader.setMat4("projection", proj);
 }

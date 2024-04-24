@@ -26,11 +26,8 @@ class RenderComponent : public Component {
             glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
             glEnableVertexAttribArray(0);
 
-            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+            glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
             glEnableVertexAttribArray(1);
-
-            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-            glEnableVertexAttribArray(2);
 
             glGenTextures(1, &texture);
             glBindTexture(GL_TEXTURE_2D, texture);
@@ -41,20 +38,15 @@ class RenderComponent : public Component {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-            data = stbi_load("/home/leonw/Documents/dev/OpenGL_Space/Engine/textures/nice.jpg", &width, &height, &nrChannels, 0);
-            if (data)
-            {
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            data = stbi_load("/home/leonw/Documents/dev/OpenGL_Space/Engine/textures/SpaceSphipV2.png", &width, &height, &nrChannels, 0);
+            if (data) {
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
                 glGenerateMipmap(GL_TEXTURE_2D);
-            }
-            else
-            {
+            } else {
                 std::cout << "Failed to load texture" << std::endl;
             }
             stbi_image_free(data);
 
-            shader.use();
-            shader.setInt("texture1", 1);
         }
 
         void update() override {
@@ -63,10 +55,12 @@ class RenderComponent : public Component {
         }
 
         void draw() override {
+            glBindTexture(GL_TEXTURE_2D, texture);
+            
+            glUseProgram(shaderID);
             unsigned int modelLoc = glGetUniformLocation(shaderID, "model");
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-            glActiveTexture(GL_TEXTURE0); 
-            glBindTexture(GL_TEXTURE_2D, texture);
+
             glBindVertexArray(VAO);
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         }
@@ -87,7 +81,6 @@ class RenderComponent : public Component {
             glDeleteBuffers(1, &EBO);
         }
 
-        void setShader(Shader& shad) { shader = shad; }
         glm::mat4& getModelMat() { return model; } 
         glm::mat4& transform() { return trans; }
         glm::mat4& rotTransforms() { return rotMat; }
@@ -106,8 +99,6 @@ class RenderComponent : public Component {
         glm::mat4 trans;
         glm::mat4 rotMat;
         glm::mat4 model;
-        Shader shader;
-        
 
         float vertices[32] = {
             //position              //color            //texture

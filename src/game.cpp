@@ -3,28 +3,27 @@
 
 void init() {
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     dep->window.createWindow(800, 600);
+    
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         fmt::println("Failed to init GLAD!");
     }
 
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glViewport(0, 0, dep->window.size().w, dep->window.size().h);
     glfwSetFramebufferSizeCallback(dep->window.getWin(), framebuffer_size_callback);
-    dep->renderer.shaderInit();
+    glViewport(0, 0, dep->window.size().w, dep->window.size().h);
+
+    dep->renderer.init();
 
     entities->player.addComponent<PositionComponent>();
     entities->player.addComponent<MovementComponent>();
     entities->player.getComponent<MovementComponent>().getWindow(dep->window);
     entities->player.addComponent<RenderComponent>();
-    entities->player.getComponent<RenderComponent>().setShader(dep->renderer.shader);
+    entities->player.getComponent<RenderComponent>().getShaderID(dep->renderer.shaderID());
     
     dep->inputhandler.init(dep->window.getWin(), entities->player);
-
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
     dep->inputhandler.bindKey(GLFW_KEY_S, std::make_shared<MoveDown>());
     dep->inputhandler.bindKey(GLFW_KEY_A, std::make_shared<MoveLeft>());
@@ -33,8 +32,6 @@ void init() {
     dep->inputhandler.bindKey(GLFW_KEY_F2, std::make_shared<setVsync>());
     dep->inputhandler.bindKey(GLFW_KEY_F1, std::make_shared<SetFrameUnlimited>());
 
-    dep->renderer.setProjectionPers();
-    entities->player.getComponent<RenderComponent>().getShaderID(dep->renderer.shaderID());
 }
 
 void input() {
@@ -47,11 +44,11 @@ void update(float dt) {
     entities->player.getComponent<RenderComponent>().rotTransforms() = entities->player.getComponent<MovementComponent>().rotTransform();
     entities->player.getComponent<RenderComponent>().transform() = entities->player.getComponent<MovementComponent>().transform();
     entities->player.getComponent<MovementComponent>().Pos() = entities->player.getComponent<RenderComponent>().Pos();
+    
     entities->manager.update();
 }
 
 void render() {
-    dep->renderer.useShader();
     dep->renderer.render();
     entities->manager.draw();
     
@@ -96,5 +93,6 @@ void shutDown() {
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, dep->window.size().w, dep->window.size().h);
+    dep->renderer.setProjectionOrto(dep->window);
 }

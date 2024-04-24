@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Imgui.h"
+
 #define FMT_HEADER_ONLY
 #include "RenderEngine/OpenGL/Renderer.h"
 #include <fmt/core.h>

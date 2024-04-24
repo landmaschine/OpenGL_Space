@@ -37,15 +37,20 @@
         problem shader ID is not the same in rendercomponent and renderer, static? -> nope
         shader ID goes wandering
 
-10. How does object move with input velocity?
+10. How does object move with input velocity? [x]
     in pyhics calc Transform... whoops
 
-11. get center of triangle
+11. get center of triangle [x]
     -> no clue how to get center out of vertices...
     
-12. Texture Rendering
+12. Texture Rendering [x]
     -> the attempt of rendering a texture was a miserable failure
     -> its quite an astonishing view to watch a window with nothing in it, just a slugish greenish color.
     -> i dont get it to work
 
-everythin broken.
+everything broken.
+
+its working!
+
+13. adding ImGUI to project [x]
+    it just works!!

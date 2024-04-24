@@ -16,6 +16,7 @@ file(GLOB_RECURSE SOURCE_FILES "${SOURCE_DIR}/src/*.cpp" "${SOURCE_DIR}/Engine/*
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/Engine")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")
 
 add_executable(Space ${SOURCE_FILES})
 
