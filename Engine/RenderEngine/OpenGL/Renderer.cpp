@@ -7,8 +7,7 @@ void Renderer::render() {
 
 void Renderer::setProjectionOrto(Window& window) {
     glUseProgram(shaderID());
-    orto = glm::mat4(1.0f);
-    orto = glm::ortho(-window.size().w / 2.f, window.size().w / 2.f, -window.size().h / 2.f, window.size().h / 2.f, -100.0f, 100.0f);
+    orto = glm::ortho(-window.size().w / 2.f, window.size().w / 2.f, window.size().h / 2.f, -window.size().h / 2.f, -100.0f, 100.0f);
     shader.setMat4("projection", orto);
 }
 

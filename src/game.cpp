@@ -3,7 +3,7 @@
 
 void init() {
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     dep->window.createWindow(800, 600);
@@ -12,10 +12,10 @@ void init() {
         fmt::println("Failed to init GLAD!");
     }
 
-    glfwSetFramebufferSizeCallback(dep->window.getWin(), framebuffer_size_callback);
-    glViewport(0, 0, dep->window.size().w, dep->window.size().h);
-
     dep->renderer.init();
+    glfwSetFramebufferSizeCallback(dep->window.getWin(), framebuffer_size_callback);
+    glfwSetCursorPosCallback(dep->window.getWin(), cusor_position_callback);
+    glViewport(0, 0, dep->window.size().w, dep->window.size().h);
 
     entities->player.addComponent<PositionComponent>();
     entities->player.addComponent<MovementComponent>();
@@ -32,6 +32,7 @@ void init() {
     dep->inputhandler.bindKey(GLFW_KEY_F2, std::make_shared<setVsync>());
     dep->inputhandler.bindKey(GLFW_KEY_F1, std::make_shared<SetFrameUnlimited>());
 
+    dep->renderer.setProjectionOrto(dep->window);
 }
 
 void input() {
@@ -45,6 +46,7 @@ void update(float dt) {
     entities->player.getComponent<RenderComponent>().transform() = entities->player.getComponent<MovementComponent>().transform();
     entities->player.getComponent<MovementComponent>().Pos() = entities->player.getComponent<RenderComponent>().Pos();
     
+    dep->renderer.setProjectionOrto(dep->window);
     entities->manager.update();
 }
 
@@ -55,7 +57,6 @@ void render() {
     glfwSwapBuffers(dep->window.getWin());
     glfwPollEvents();   
 }
-
 
 void gameLoop::run() {
     init();
@@ -93,6 +94,33 @@ void shutDown() {
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+    dep->window.size().w = width;
+    dep->window.size().h = height;
+
+    int screenWidth, screenHeight;
+    glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
+    int posX = (screenWidth - width) / 2;
+    int posY = (screenHeight - height) / 2;
+
+    glfwSetWindowPos(window, posX, posY);
+
     glViewport(0, 0, dep->window.size().w, dep->window.size().h);
     dep->renderer.setProjectionOrto(dep->window);
+}
+
+void cusor_position_callback(GLFWwindow* window, double xpos, double ypos) {
+    int width, height;
+    glfwGetWindowSize(window, &width, &height);
+
+    float center_x = static_cast<float>(width) / 2.0f;
+    float center_y = static_cast<float>(height) / 2.0f;
+
+    float x_window = static_cast<float>(xpos) - center_x;
+    float y_window = center_y - static_cast<float>(ypos);
+
+    entities->player.getComponent<MovementComponent>().mouseX(x_window);
+    entities->player.getComponent<MovementComponent>().mouseY(y_window);
+
+    fmt::print("x: {:} ", x_window);
+    fmt::println(" y: {:}", y_window);
 }

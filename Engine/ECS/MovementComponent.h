@@ -17,7 +17,7 @@ class MovementComponent : public Component {
         }
 
         void update() override {
-            mov.calcTransform(trans, rotMat, window, dt, mass, speedMod, velocity, pos);
+            mov.calcTransform(trans, rotMat, window, dt, mass, speedMod, velocity, pos, mouseposX, mouseposY);
         }
 
         glm::mat4& transform() { return trans; }
@@ -33,6 +33,8 @@ class MovementComponent : public Component {
         void setY_vel(float _y) { velocity.y = _y; }
         void frameTime(float _dt) { dt = _dt; }
         void getWindow(Window& _win) { window = _win; }
+        void mouseX(double x) { mouseposX = x; }
+        void mouseY(double y) { mouseposY = y; }
 
     private:
         Movement mov;
@@ -46,4 +48,6 @@ class MovementComponent : public Component {
         float scale;
         int speed;
         int speedMod;
+        double mouseposX;
+        double mouseposY;
 };
