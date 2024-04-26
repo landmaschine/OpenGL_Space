@@ -12,7 +12,6 @@ class MoveRight : public Command {
     void pressed(Entity& ent) override {
        ent.getComponent<MovementComponent>().setY_vel(-1.f);
     }
-
     void released(Entity& ent) override {
         ent.getComponent<MovementComponent>().setY_vel(0);
     }

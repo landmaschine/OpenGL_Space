@@ -13,8 +13,14 @@ class Camera2D {
         }
 
         void updatePosition(glm::vec3 playerPosition, Window& window) {
-            position.x = playerPosition.x - window.size().w / (2.0f * zoom);
-            position.y = playerPosition.y - window.size().h / (2.0f * zoom);
+            glm::vec2 playerScreenPos = glm::vec2(playerPosition.x + window.size().w / 2.0f, playerPosition.y + window.size().h / 2.0f);
+
+            screenWidth = window.size().w;
+            screenHeight = window.size().h;
+
+            position.x = playerScreenPos.x - screenWidth;
+            position.y = playerScreenPos.y - screenHeight;
+
             updateViewMatrix();
         }
 
@@ -31,15 +37,14 @@ class Camera2D {
             return viewMatrix;
         }
 
-        glm::mat4 getProjectionMatrix() const {
+        glm::mat4 getProjectionMatrix() {
+            updateProjectionMatrix();
             return projectionMatrix;
         }
 
     private:
         void updateViewMatrix() {
             viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position.x, -position.y, 0.0f));
-            fmt::print("viewX {:}", -position.x);
-            fmt::println("viewY {:}", -position.y);
         }
 
         void updateProjectionMatrix() {
@@ -50,7 +55,7 @@ class Camera2D {
         glm::mat4 projectionMatrix;
         glm::vec3 position;
         Window _window;
-        float zoom = 0.5;
+        float zoom = 1.0f;
         int screenWidth = 0;
         int screenHeight = 0;
 };

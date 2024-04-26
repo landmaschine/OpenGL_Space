@@ -13,18 +13,18 @@ void init() {
     }
 
     dep->renderer.init();
-    fmt::println("shaderID {:}", dep->renderer.shader.ID);
     glfwSetFramebufferSizeCallback(dep->window.getWin(), framebuffer_size_callback);
-    glfwSetCursorPosCallback(dep->window.getWin(), cusor_position_callback);
     glViewport(0, 0, dep->window.size().w, dep->window.size().h);
 
     dep->cam.init(dep->window);
 
-    entities->player.addComponent<PositionComponent>();
     entities->player.addComponent<MovementComponent>();
-    entities->player.getComponent<MovementComponent>().getWindow(dep->window);
     entities->player.addComponent<RenderComponent>();
     entities->player.getComponent<RenderComponent>().getShaderID(dep->renderer.shaderID());
+
+    entities->test.addComponent<MovementComponent>();
+    entities->test.addComponent<RenderComponent>();
+    entities->test.getComponent<RenderComponent>().getShaderID(dep->renderer.shaderID());
     
     dep->inputhandler.init(dep->window.getWin(), entities->player);
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
@@ -46,25 +46,34 @@ void input() {
 
 void update(float dt) {
     auto& playerMovement = entities->player.getComponent<MovementComponent>();
-    playerMovement.frameTime(dt);
     
     dep->cam.updatePosition(playerMovement.Pos(), dep->window);
-
-    fmt::print("playerX {:}", playerMovement.Pos().x);
-    fmt::println(" playerY {:}", playerMovement.Pos().y);
+    playerMovement.frameTime(dt);
 
     dep->renderer.shader.use();
     dep->renderer.shader.setMat4("view", dep->cam.getViewMatrix());
 
-    entities->player.getComponent<RenderComponent>().rotTransforms() = entities->player.getComponent<MovementComponent>().rotTransform();
-    entities->player.getComponent<RenderComponent>().transform() = entities->player.getComponent<MovementComponent>().transform();
-    
+    entities->player.getComponent<RenderComponent>().getModelMat() = entities->player.getComponent<MovementComponent>().move();
+    entities->test.getComponent<RenderComponent>().getModelMat() = entities->test.getComponent<MovementComponent>().move();
+
+    int width, height;
+    double ypos, xpos;
+    glfwGetCursorPos(dep->window.getWin(), &xpos, &ypos);
+    glfwGetWindowSize(dep->window.getWin(), &width, &height);
+    float center_x = static_cast<float>(width) / 2.0f;
+    float center_y = static_cast<float>(height) / 2.0f;
+    float x_window = static_cast<float>(xpos) - center_x;
+    float y_window = center_y - static_cast<float>(ypos);
+    entities->player.getComponent<MovementComponent>().mouseX(x_window);
+    entities->player.getComponent<MovementComponent>().mouseY(y_window);
+
     entities->manager.update();
 }
 
 void render() {
     dep->renderer.render();
     entities->manager.draw();
+    //entities->test.draw();
     
     glfwSwapBuffers(dep->window.getWin());
     glfwPollEvents();   
@@ -108,28 +117,7 @@ void shutDown() {
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     dep->window.size().w = width;
     dep->window.size().h = height;
-
-    int screenWidth, screenHeight;
-    glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
-    int posX = (screenWidth - width) / 2;
-    int posY = (screenHeight - height) / 2;
-
-    glfwSetWindowPos(window, posX, posY);
-
-    glViewport(0, 0, dep->window.size().w, dep->window.size().h);
-    dep->renderer.setProjectionOrto(dep->window);
-}
-
-void cusor_position_callback(GLFWwindow* window, double xpos, double ypos) {
-    int width, height;
-    glfwGetWindowSize(window, &width, &height);
-
-    float center_x = static_cast<float>(width) / 2.0f;
-    float center_y = static_cast<float>(height) / 2.0f;
-
-    float x_window = static_cast<float>(xpos) - center_x;
-    float y_window = center_y - static_cast<float>(ypos);
-
-    entities->player.getComponent<MovementComponent>().mouseX(x_window);
-    entities->player.getComponent<MovementComponent>().mouseY(y_window);
+    glViewport(0, 0, width, height);
+    dep->cam.updatePosition(entities->player.getComponent<MovementComponent>().Pos(), dep->window);
+    dep->renderer.shader.setMat4("projection", dep->cam.getProjectionMatrix());
 }

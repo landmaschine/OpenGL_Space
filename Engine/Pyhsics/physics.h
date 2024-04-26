@@ -8,13 +8,18 @@
 #include "Engine/math/math.h"
 #include "Engine/RenderEngine/Window/window.h"
 
-class Movement {
-    public:
-        void calcTransform(glm::mat4& trans, glm::mat4& rotMat ,Window& _win, float dt, float& _mass, 
-                           int& speedMod, glm::vec3& _vel, glm::vec3& _pos, double xMousePos, double yMousePos);
-    private:
-        glm::vec3 extractTranslation(const glm::mat4& matrix) {
-            return glm::vec3(matrix[3][0], matrix[3][1], matrix[3][2]);
-        }
 
-};
+namespace Physics {
+    
+    class Movement {
+        public:
+            glm::mat4 calcBehaviour(glm::mat4& trans, float dt, float& _mass, int& speedMod,
+                                     glm::vec3& _vel, glm::vec3& _pos, double xMousePos, double yMousePos);
+        
+        private:
+            glm::vec3 extractTranslation(const glm::mat4& matrix) {
+                return glm::vec3(matrix[3][0], matrix[3][1], 1.0f);
+            }
+    };
+
+}

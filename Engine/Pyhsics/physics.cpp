@@ -1,18 +1,15 @@
 #include "physics.h"
 
-void Movement::calcTransform(glm::mat4& trans, glm::mat4& rotMat, Window& _win, float dt, float& _mass, int& speedMod, glm::vec3& _vel, glm::vec3& _pos, double xMousePos, double yMousePos) {
-    float deltaX = xMousePos - _pos.x;
-    float deltaY = yMousePos - _pos.y;
-    float cursorangle = glm::atan(deltaY, deltaX);
+glm::mat4 Physics::Movement::calcBehaviour(glm::mat4& trans, float dt, float& _mass, int& speedMod, 
+                                            glm::vec3& _vel, glm::vec3& _pos, double xMousePos, double yMousePos) {
 
-    trans = glm::translate(trans, _vel * glm::vec3(1.f * dt * speedMod, 1.f * dt * speedMod, 0.0f));
+    float cursorangle = atan2(yMousePos, xMousePos);
 
-    rotMat = glm::translate(glm::mat4(1.0f), glm::vec3(glm::vec2(0, 0), 0.0f)) *
-             glm::rotate(glm::mat4(1.0f), cursorangle, glm::vec3(0.0f, 0.0f, 1.0f)) *
-             glm::translate(glm::mat4(1.0f), glm::vec3(glm::vec2(0, 0), 0.0f));
+    glm::mat4 tmp = trans;
+    trans = glm::rotate(trans, cursorangle , glm::vec3(0.0f, 0.0f, 1.0f));
+    trans = tmp = glm::translate(trans, glm::vec3(_vel.x * 5.f * dt * speedMod, _vel.y * 5.f * dt * speedMod, 0.0f));
+    _pos = extractTranslation(trans);
 
-    _pos += _vel * glm::vec3(1.f * dt * speedMod, 1.f * dt * speedMod, 0.0f);
-
-    //fmt::print("x: {:}", _pos.x);
-    //fmt::println(" y: {:}", _pos.y);
+    trans = glm::rotate(trans, -cursorangle , glm::vec3(0.0f, 0.0f, 1.0f));
+    return tmp;
 }

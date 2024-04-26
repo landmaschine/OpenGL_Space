@@ -6,8 +6,6 @@
 class RenderComponent : public Component {
     public:
         void init() override {
-            trans = glm::mat4(1.0f);
-            rotMat = glm::mat4(1.0f);
             model = glm::mat4(1.0f);
             texture = 0;
 
@@ -38,7 +36,7 @@ class RenderComponent : public Component {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-            data = stbi_load("/home/leonw/Documents/dev/OpenGL_Space/Engine/textures/SpaceSphipV2.png", &width, &height, &nrChannels, 0);
+            data = stbi_load("/home/leonw/Documents/dev/OpenGL_Space/Engine/textures/Space.png", &width, &height, &nrChannels, 0);
             if (data) {
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
                 glGenerateMipmap(GL_TEXTURE_2D);
@@ -46,13 +44,10 @@ class RenderComponent : public Component {
                 std::cout << "Failed to load texture" << std::endl;
             }
             stbi_image_free(data);
-
-
         }
 
         void update() override {
-            //dont change -> behaviour of this multiplication is wanted
-            model = rotMat * trans;
+
         }
 
         void draw() override {
@@ -73,10 +68,7 @@ class RenderComponent : public Component {
         }
 
         glm::mat4& getModelMat() { return model; } 
-        glm::mat4& transform() { return trans; }
-        glm::mat4& rotTransforms() { return rotMat; }
         void getShaderID(unsigned int ID) { shaderID = ID; }
-        glm::vec3& Pos() {return pos;}
 
     private:
         unsigned int VBO;
@@ -86,9 +78,6 @@ class RenderComponent : public Component {
         unsigned int texture;
         int width, height, nrChannels;
         unsigned char *data;
-        glm::vec3 pos;
-        glm::mat4 trans;
-        glm::mat4 rotMat;
         glm::mat4 model;
 
         float vertices[32] = {

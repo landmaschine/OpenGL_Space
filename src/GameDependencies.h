@@ -25,9 +25,11 @@ Gamedependencies* dep = new Gamedependencies;
 struct Entities {
     Manager manager;
     Entity& player;
+    Entity& test;
 
-    Entities() : player(manager.addEntity())
-                
+    Entities() : player(manager.addEntity()),
+                 test(manager.addEntity())
+        
     {}
 };
 Entities* entities = new Entities;
