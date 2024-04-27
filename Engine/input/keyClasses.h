@@ -1,34 +1,33 @@
 #pragma once
 #include "Command.h"
-#include <fmt/core.h>
 
 class MoveLeft : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().setY_vel(1.f);
+        ent.getComponent<MovementComponent>().setX_vel(-1.f);
     }
 };
 
 class MoveRight : public Command {
     void pressed(Entity& ent) override {
-       ent.getComponent<MovementComponent>().setY_vel(-1.f);
+       ent.getComponent<MovementComponent>().setX_vel(1.f);
     }
     void released(Entity& ent) override {
-        ent.getComponent<MovementComponent>().setY_vel(0);
+        ent.getComponent<MovementComponent>().setX_vel(0);
     }
 };
 
 class MoveUp : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().setX_vel(1.f);
+        ent.getComponent<MovementComponent>().setY_vel(1.f);
     }
 };
 
 class MoveDown : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().setX_vel(-1.f);
+        ent.getComponent<MovementComponent>().setY_vel(-1.f);
     }
     void released(Entity& ent) override {
-        ent.getComponent<MovementComponent>().setX_vel(0);
+        ent.getComponent<MovementComponent>().setY_vel(0);
     }
 };
 
@@ -50,6 +49,6 @@ class SetFrameUnlimited : public Command {
 
 class setVsync : public Command {
     void pressed(Entity& ent) override {
-        glfwSwapInterval(4);
+        glfwSwapInterval(1);
     }
 };

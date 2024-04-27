@@ -6,7 +6,7 @@ void Window::createWindow(int width, int height) {
 
     window = glfwCreateWindow(_size.w, _size.h, "Space", NULL, NULL);
     if(window == NULL) {
-        fmt::println("Error: Failed to create GLFW window: {:}", glfwGetError(NULL));
+        std::cout << "Error: Failed to create GLFW window: " << glfwGetError(NULL) << std::endl;
         glfwTerminate();
     }
     glfwMakeContextCurrent(window);

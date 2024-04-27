@@ -2,41 +2,31 @@
 #include "Components.h"
 #include "lib/stb/stb_image.h"
 #include "Engine/RenderEngine/Shaders/shader.h"
+#include "Engine/Models/Model.h"
 
 class RenderComponent : public Component {
     public:
         void init() override {
             model = glm::mat4(1.0f);
-            texture = 0;
+        }
 
-            glGenVertexArrays(1, &VAO);
-            glGenBuffers(1, &VBO);
-            glGenBuffers(1, &EBO);
+        void update() override {
 
-            glBindVertexArray(VAO);
+        }
 
-            glBindBuffer(GL_ARRAY_BUFFER, VBO);
-            glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        void draw() override {
+            glUseProgram(shaderID);
+            unsigned int modelLoc = glGetUniformLocation(shaderID, "model");
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            mdl.Draw(shaderID);
+        }
 
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+        ~RenderComponent() override {
 
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-            glEnableVertexAttribArray(0);
+        }
 
-            glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-            glEnableVertexAttribArray(1);
-
-            glGenTextures(1, &texture);
-            glBindTexture(GL_TEXTURE_2D, texture);
-
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-            data = stbi_load("/home/leonw/Documents/dev/OpenGL_Space/Engine/textures/Space.png", &width, &height, &nrChannels, 0);
+        void setTex(std::string path) {
+            unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
             if (data) {
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
                 glGenerateMipmap(GL_TEXTURE_2D);
@@ -46,50 +36,16 @@ class RenderComponent : public Component {
             stbi_image_free(data);
         }
 
-        void update() override {
-
-        }
-
-        void draw() override {
-            glBindTexture(GL_TEXTURE_2D, texture);
-            
-            glUseProgram(shaderID);
-            unsigned int modelLoc = glGetUniformLocation(shaderID, "model");
-            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-            glBindVertexArray(VAO);
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        }
-
-        ~RenderComponent() override {
-            glDeleteVertexArrays(1, &VAO);
-            glDeleteBuffers(1, &VBO);
-            glDeleteBuffers(1, &EBO);
+        void setModel(std::string modelPath) {
+            mdl.load(modelPath);
         }
 
         glm::mat4& getModelMat() { return model; } 
         void getShaderID(unsigned int ID) { shaderID = ID; }
 
     private:
-        unsigned int VBO;
-        unsigned int VAO;
-        unsigned int EBO;
         unsigned int shaderID;
-        unsigned int texture;
         int width, height, nrChannels;
-        unsigned char *data;
         glm::mat4 model;
-
-        float vertices[32] = {
-            //position              //color            //texture
-            0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 0.0f,
-            0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   0.0f, 0.0f,
-            -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 1.0f,
-            -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   1.0f, 1.0f 
-        };
-
-        unsigned int indices[6] = {  
-            0, 1, 3,
-            1, 2, 3
-        };
+        Model mdl;
 };

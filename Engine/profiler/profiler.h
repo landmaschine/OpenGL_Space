@@ -2,7 +2,6 @@
 #include <iostream>
 #include <chrono>
 
-#include <fmt/core.h>
 #include "guiDebugInfo.h"
 
 template<typename... Fs>

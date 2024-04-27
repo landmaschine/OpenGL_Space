@@ -1,7 +1,5 @@
 #pragma once
 #include <GLFW/glfw3.h>
-#define FMT_HEADER_ONLY
-#include <fmt/core.h>
 #include <iostream>
 
 #include "Engine/ECS/ECS.h"

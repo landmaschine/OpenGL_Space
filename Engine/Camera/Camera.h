@@ -26,7 +26,6 @@ class Camera2D {
 
         void setZoom(float newZoom) {
             zoom = newZoom;
-            fmt::println("zoomm {:}", zoom);
             updateProjectionMatrix();
         }
 

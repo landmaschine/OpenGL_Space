@@ -8,8 +8,7 @@
 class Renderer {
     public:
         void init() {
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_DEPTH_TEST);
             shaderInit();
         }
 
@@ -22,10 +21,6 @@ class Renderer {
 
         unsigned int shaderID() { return shader.ID; }
 
-        void setProjectionOrto(Window& window);
-        void setProjectionPers(Window& window);
         void render();
         Shader shader;
-    private:
-        glm::mat4 orto = glm::mat4(1.0f);
 };

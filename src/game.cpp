@@ -9,8 +9,10 @@ void init() {
     dep->window.createWindow(800, 600);
     
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        fmt::println("Failed to init GLAD!");
+        std::cout << "Failed to init GLAD!" << std::endl;
     }
+
+    stbi_set_flip_vertically_on_load(true);
 
     dep->debGui.Init(dep->window.getWin());
 
@@ -24,10 +26,12 @@ void init() {
     entities->player.addComponent<MovementComponent>();
     entities->player.addComponent<RenderComponent>();
     entities->player.getComponent<RenderComponent>().getShaderID(dep->renderer.shaderID());
+    entities->player.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/backpack/backpack.obj");
 
     entities->test.addComponent<MovementComponent>();
     entities->test.addComponent<RenderComponent>();
     entities->test.getComponent<RenderComponent>().getShaderID(dep->renderer.shaderID());
+    entities->test.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/backpack/backpack.obj");
     
     dep->inputhandler.init(dep->window.getWin(), entities->player);
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
@@ -114,12 +118,9 @@ void gameLoop::run() {
 }
 
 void shutDown() {
-
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
-
-    delete dep;
     glfwTerminate();
 }
 

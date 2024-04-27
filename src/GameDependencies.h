@@ -1,8 +1,7 @@
 #pragma once
 
-#define FMT_HEADER_ONLY
+#include <iostream>
 #include "RenderEngine/OpenGL/Renderer.h"
-#include <fmt/core.h>
 #include "ECS/ECS.h"
 #include "profiler/guiDebugInfo.h"
 #include "profiler/profiler.h"

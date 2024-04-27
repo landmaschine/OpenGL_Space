@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
+find_package(assimp REQUIRED)
 
 add_definitions(-DGLFW_INCLUDE_NONE)
 
@@ -20,8 +21,8 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/lib")
 
 add_executable(Space ${SOURCE_FILES})
 
-target_link_libraries(Space PRIVATE glfw ${OPENGL_LIBRARIES})
+target_link_libraries(Space PRIVATE glfw assimp ${OPENGL_LIBRARIES})
 
 target_include_directories(Space PRIVATE "${OPENGL_INCLUDE_DIR}")
 
-target_compile_options(Space PRIVATE "-Wall" "-pedantic" "-O0" "-fstrict-aliasing")
+target_compile_options(Space PRIVATE "-Wall" "-pedantic" "-O2" "-fstrict-aliasing")
