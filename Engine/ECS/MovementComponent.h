@@ -11,7 +11,7 @@ class MovementComponent : public Component {
             speed = 100;
             speedMod = 1;
             dt = 0;
-            scale = 150.0f;
+            scale = 1.f;
             trans = glm::scale(trans, glm::vec3(scale));
         }
 

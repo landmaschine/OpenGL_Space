@@ -1,11 +1,10 @@
 #pragma once
 
-#include "Imgui.h"
-
 #define FMT_HEADER_ONLY
 #include "RenderEngine/OpenGL/Renderer.h"
 #include <fmt/core.h>
 #include "ECS/ECS.h"
+#include "profiler/guiDebugInfo.h"
 #include "profiler/profiler.h"
 #include "input/keyClasses.h"
 
@@ -19,6 +18,7 @@ struct Gamedependencies {
     InputHandler inputhandler;
     Renderer renderer;
     Camera2D cam;
+    guiDeb debGui;
 };
 Gamedependencies* dep = new Gamedependencies;
 
@@ -33,3 +33,10 @@ struct Entities {
     {}
 };
 Entities* entities = new Entities;
+
+typedef struct gameLoopData
+{
+    double frameTime = 0;
+} loopData;
+
+loopData gameloopdata;

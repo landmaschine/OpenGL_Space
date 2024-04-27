@@ -3,27 +3,24 @@
 #include <chrono>
 
 #include <fmt/core.h>
-
-void printFPS(double dt) {
-    fmt::println("FPS: {:f}", 1/dt);
-}
+#include "guiDebugInfo.h"
 
 template<typename... Fs>
-void measureFunctionTime(Fs&&... func) {
+double measureFunctionTime(Fs&&... func) {
     auto start = std::chrono::high_resolution_clock::now();
     (func(), ...);
     auto end = std::chrono::high_resolution_clock::now();
 
     std::chrono::duration<double> elapsed = end - start;
-    fmt::println("{:}", elapsed.count());
+    return elapsed.count();
 }
 
 template<typename... Fs>
-void measureFPS(Fs&&... func) {
+double measureFPS(Fs&&... func) {
     auto start = std::chrono::high_resolution_clock::now();
     (func(), ...);
     auto end = std::chrono::high_resolution_clock::now();
 
     std::chrono::duration<double> elapsed = end - start;
-    fmt::println("{:f}", 1/elapsed.count());
+    return 1 / elapsed.count();
 }

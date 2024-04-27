@@ -8,12 +8,12 @@ class Camera2D {
             this->screenHeight = win.size().h;
             this->screenWidth = win.size().w;
             position = glm::vec3(1.0f);
-            zoom = 1.0f;
+            zoom = 100.0f;
             updateProjectionMatrix();
         }
 
         void updatePosition(glm::vec3 playerPosition, Window& window) {
-            glm::vec2 playerScreenPos = glm::vec2(playerPosition.x + window.size().w / 2.0f, playerPosition.y + window.size().h / 2.0f);
+            glm::vec2 playerScreenPos = glm::vec2(playerPosition.x + window.size().w, playerPosition.y + window.size().h);
 
             screenWidth = window.size().w;
             screenHeight = window.size().h;
@@ -26,6 +26,7 @@ class Camera2D {
 
         void setZoom(float newZoom) {
             zoom = newZoom;
+            fmt::println("zoomm {:}", zoom);
             updateProjectionMatrix();
         }
 
@@ -48,7 +49,14 @@ class Camera2D {
         }
 
         void updateProjectionMatrix() {
-            projectionMatrix = glm::ortho(0.f, (float)screenWidth, 0.f, (float)screenHeight, -100.0f, 100.0f);
+            float zoomFactor = 1.0f / zoom;
+            float halfScreenWidth = (float)screenWidth * 0.5f;
+            float halfScreenHeight = (float)screenHeight * 0.5f;
+            float left = -halfScreenWidth * zoomFactor;
+            float right = halfScreenWidth * zoomFactor;
+            float bottom = -halfScreenHeight * zoomFactor;
+            float top = halfScreenHeight * zoomFactor;
+            projectionMatrix = glm::ortho(left, right, bottom, top, -100.0f, 100.0f);
         }
 
         glm::mat4 viewMatrix;

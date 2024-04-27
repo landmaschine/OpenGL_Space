@@ -12,8 +12,11 @@ void init() {
         fmt::println("Failed to init GLAD!");
     }
 
+    dep->debGui.Init(dep->window.getWin());
+
     dep->renderer.init();
     glfwSetFramebufferSizeCallback(dep->window.getWin(), framebuffer_size_callback);
+    glfwSetScrollCallback(dep->window.getWin(), scroll_callback);
     glViewport(0, 0, dep->window.size().w, dep->window.size().h);
 
     dep->cam.init(dep->window);
@@ -73,10 +76,12 @@ void update(float dt) {
 void render() {
     dep->renderer.render();
     entities->manager.draw();
-    //entities->test.draw();
     
+    dep->debGui.showValue("FPS", 1/gameloopdata.frameTime);
+
+    dep->debGui.draw();
     glfwSwapBuffers(dep->window.getWin());
-    glfwPollEvents();   
+    glfwPollEvents(); 
 }
 
 void gameLoop::run() {
@@ -89,27 +94,31 @@ void gameLoop::run() {
     while(!glfwWindowShouldClose(dep->window.getWin())) {
         
         double newTime = glfwGetTime();
-        double frameTime = newTime - currentTime;
+        gameloopdata.frameTime = newTime - currentTime;
 
-        if(frameTime > 0.25f) {frameTime = 0.25f;}
+        if(gameloopdata.frameTime > 0.25f) {gameloopdata.frameTime = 0.25f;}
 
         currentTime = newTime;
-        accumulator += frameTime;
+        accumulator += gameloopdata.frameTime;
 
         while(accumulator >= timeStep) {
             //measureFPS([&]() {input();}, [&](){update(frameTime);}, [&](){render();});
             input();
-            update(frameTime);
+            update(gameloopdata.frameTime);
             render(); 
 
-            accumulator -= frameTime;
+            accumulator -= gameloopdata.frameTime;
         }
-        //printFPS(frameTime);
     }
     shutDown();
 }
 
 void shutDown() {
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
     delete dep;
     glfwTerminate();
 }
@@ -119,5 +128,17 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     dep->window.size().h = height;
     glViewport(0, 0, width, height);
     dep->cam.updatePosition(entities->player.getComponent<MovementComponent>().Pos(), dep->window);
+    dep->renderer.shader.setMat4("projection", dep->cam.getProjectionMatrix());
+}
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+    static int tmp = 100;
+    
+    if(yoffset == 1) tmp += 10;
+    if(yoffset == -1) tmp -= 10;
+    if(tmp <= 40) tmp = 40;
+    if(tmp >= 7000) tmp = 7000;
+
+    dep->cam.setZoom(tmp);
     dep->renderer.shader.setMat4("projection", dep->cam.getProjectionMatrix());
 }
