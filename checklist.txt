@@ -54,3 +54,6 @@ its working again!
 
 13. adding ImGUI to project [x]
     it just works!!
+
+14. view, projection, transformation with rotation matrix [x]
+    -> everything working as i intented.
