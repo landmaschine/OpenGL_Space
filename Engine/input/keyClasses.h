@@ -3,41 +3,41 @@
 
 class MoveLeft : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().setX_vel(-1.f);
+        ent.getComponent<PlayerMovementComponent>().setX_vel(-1.f);
     }
 };
 
 class MoveRight : public Command {
     void pressed(Entity& ent) override {
-       ent.getComponent<MovementComponent>().setX_vel(1.f);
+       ent.getComponent<PlayerMovementComponent>().setX_vel(1.f);
     }
     void released(Entity& ent) override {
-        ent.getComponent<MovementComponent>().setX_vel(0);
+        ent.getComponent<PlayerMovementComponent>().setX_vel(0);
     }
 };
 
 class MoveUp : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().setY_vel(1.f);
+        ent.getComponent<PlayerMovementComponent>().setY_vel(1.f);
     }
 };
 
 class MoveDown : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().setY_vel(-1.f);
+        ent.getComponent<PlayerMovementComponent>().setY_vel(-1.f);
     }
     void released(Entity& ent) override {
-        ent.getComponent<MovementComponent>().setY_vel(0);
+        ent.getComponent<PlayerMovementComponent>().setY_vel(0);
     }
 };
 
 class MoveFaster : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().getSpeedMod() = 2; 
+        ent.getComponent<PlayerMovementComponent>().getSpeedMod() = 2; 
     }
 
     void released(Entity& ent) override {
-        ent.getComponent<MovementComponent>().getSpeedMod() = 1;
+        ent.getComponent<PlayerMovementComponent>().getSpeedMod() = 1;
     }
 };
 

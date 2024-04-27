@@ -10,7 +10,7 @@ class RenderComponent : public Component {
             model = glm::mat4(1.0f);
         }
 
-        void update() override {
+        void update(float dt) override {
 
         }
 

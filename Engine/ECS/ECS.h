@@ -31,7 +31,7 @@ class Component {
         Entity* entity;
 
         virtual void init() {};
-        virtual void update() {};
+        virtual void update(float dt) {};
         virtual void draw() {};
 
         virtual ~Component() {};
@@ -39,8 +39,8 @@ class Component {
 
 class Entity {
     public:
-        void update() {
-            for(auto& c : components) c->update();
+        void update(float dt) {
+            for(auto& c : components) c->update(dt);
         }
 
         void draw() {
@@ -87,14 +87,14 @@ class Manager {
     public:
         void draw() { for(auto& e : entities) e->draw(); }
 
-        void update() {
+        void update(float dt) {
             entities.erase(std::remove_if(std::begin(entities), std::end(entities), 
                 [](const std::unique_ptr<Entity> &mEntity) {
                     return !mEntity->isActive();
                 }), 
                 std::end(entities));
 
-                for(auto& e : entities) e->update();
+                for(auto& e : entities) e->update(dt);
             }
         
         Entity& addEntity() {

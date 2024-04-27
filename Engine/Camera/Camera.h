@@ -55,7 +55,7 @@ class Camera2D {
             float right = halfScreenWidth * zoomFactor;
             float bottom = -halfScreenHeight * zoomFactor;
             float top = halfScreenHeight * zoomFactor;
-            projectionMatrix = glm::ortho(left, right, bottom, top, -100.0f, 100.0f);
+            projectionMatrix = glm::ortho(left, right, bottom, top, -10000.0f, 10000.0f);
         }
 
         glm::mat4 viewMatrix;

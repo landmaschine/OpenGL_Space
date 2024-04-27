@@ -5,6 +5,7 @@ void init() {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_SAMPLES, 4);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     dep->window.createWindow(800, 600);
     
@@ -12,7 +13,7 @@ void init() {
         std::cout << "Failed to init GLAD!" << std::endl;
     }
 
-    stbi_set_flip_vertically_on_load(true);
+    //stbi_set_flip_vertically_on_load(true);
 
     dep->debGui.Init(dep->window.getWin());
 
@@ -23,15 +24,15 @@ void init() {
 
     dep->cam.init(dep->window);
 
-    entities->player.addComponent<MovementComponent>();
+    entities->player.addComponent<PlayerMovementComponent>();
     entities->player.addComponent<RenderComponent>();
     entities->player.getComponent<RenderComponent>().getShaderID(dep->renderer.shaderID());
-    entities->player.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/backpack/backpack.obj");
+    entities->player.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/player/player.obj");
 
-    entities->test.addComponent<MovementComponent>();
+    entities->test.addComponent<PlanetComponent>();
     entities->test.addComponent<RenderComponent>();
     entities->test.getComponent<RenderComponent>().getShaderID(dep->renderer.shaderID());
-    entities->test.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/backpack/backpack.obj");
+    entities->test.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/world/world.obj");
     
     dep->inputhandler.init(dep->window.getWin(), entities->player);
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
@@ -52,16 +53,15 @@ void input() {
 }
 
 void update(float dt) {
-    auto& playerMovement = entities->player.getComponent<MovementComponent>();
+    auto& playerMovement = entities->player.getComponent<PlayerMovementComponent>();
     
     dep->cam.updatePosition(playerMovement.Pos(), dep->window);
-    playerMovement.frameTime(dt);
 
     dep->renderer.shader.use();
     dep->renderer.shader.setMat4("view", dep->cam.getViewMatrix());
 
-    entities->player.getComponent<RenderComponent>().getModelMat() = entities->player.getComponent<MovementComponent>().move();
-    entities->test.getComponent<RenderComponent>().getModelMat() = entities->test.getComponent<MovementComponent>().move();
+    entities->player.getComponent<RenderComponent>().getModelMat() = playerMovement.move();
+    entities->test.getComponent<RenderComponent>().getModelMat() = entities->test.getComponent<PlanetComponent>().rotMat();
 
     int width, height;
     double ypos, xpos;
@@ -71,19 +71,20 @@ void update(float dt) {
     float center_y = static_cast<float>(height) / 2.0f;
     float x_window = static_cast<float>(xpos) - center_x;
     float y_window = center_y - static_cast<float>(ypos);
-    entities->player.getComponent<MovementComponent>().mouseX(x_window);
-    entities->player.getComponent<MovementComponent>().mouseY(y_window);
+    playerMovement.mouseX(x_window);
+    playerMovement.mouseY(y_window);
 
-    entities->manager.update();
+    entities->manager.update(dt);
 }
 
 void render() {
     dep->renderer.render();
     entities->manager.draw();
-    
-    dep->debGui.showValue("FPS", 1/gameloopdata.frameTime);
-
+    dep->debGui.newFrame();
+    dep->debGui.showValue("time/FPS", gameloopdata.frameTime, 1/gameloopdata.frameTime);
+    dep->debGui.showVec("Player Pos", entities->player.getComponent<PlayerMovementComponent>().Pos());
     dep->debGui.draw();
+
     glfwSwapBuffers(dep->window.getWin());
     glfwPollEvents(); 
 }
@@ -98,6 +99,7 @@ void gameLoop::run() {
     while(!glfwWindowShouldClose(dep->window.getWin())) {
         
         double newTime = glfwGetTime();
+        gameloopdata.frameTime = 0;
         gameloopdata.frameTime = newTime - currentTime;
 
         if(gameloopdata.frameTime > 0.25f) {gameloopdata.frameTime = 0.25f;}
@@ -128,16 +130,16 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     dep->window.size().w = width;
     dep->window.size().h = height;
     glViewport(0, 0, width, height);
-    dep->cam.updatePosition(entities->player.getComponent<MovementComponent>().Pos(), dep->window);
+    dep->cam.updatePosition(entities->player.getComponent<PlayerMovementComponent>().Pos(), dep->window);
     dep->renderer.shader.setMat4("projection", dep->cam.getProjectionMatrix());
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
     static int tmp = 100;
     
-    if(yoffset == 1) tmp += 10;
-    if(yoffset == -1) tmp -= 10;
-    if(tmp <= 40) tmp = 40;
+    if(yoffset == 1) tmp += 2;
+    if(yoffset == -1) tmp -= 2;
+    if(tmp <= 10) tmp = 10;
     if(tmp >= 7000) tmp = 7000;
 
     dep->cam.setZoom(tmp);

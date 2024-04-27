@@ -9,6 +9,7 @@ class Renderer {
     public:
         void init() {
             glEnable(GL_DEPTH_TEST);
+            glEnable(GL_MULTISAMPLE);
             shaderInit();
         }
 

@@ -8,7 +8,7 @@ class PositionComponent : public Component {
             pos = glm::vec4(1.0f);
         }
 
-        void update() override {
+        void update(float dt) override {
 
         }
 

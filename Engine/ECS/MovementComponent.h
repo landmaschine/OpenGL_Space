@@ -1,7 +1,7 @@
 #pragma once
 #include "Components.h"
 
-class MovementComponent : public Component {
+class PlayerMovementComponent : public Component {
     public:
         void init() override {
             pos = glm::vec3(1.0f);
@@ -10,12 +10,12 @@ class MovementComponent : public Component {
             mass = 10;
             speed = 100;
             speedMod = 1;
-            dt = 0;
             scale = 1.f;
             trans = glm::scale(trans, glm::vec3(scale));
+            trans = glm::rotate(trans, -glm::radians(90.f), glm::vec3(1.0f, 0.0f, 0.0f));
         }
 
-        void update() override {
+        void update(float dt) override {
             movement = mov.calcBehaviour(trans, dt, mass, speedMod, velocity, pos, mouseposX, mouseposY);
         }
 
@@ -29,7 +29,6 @@ class MovementComponent : public Component {
         void setY_pos(float _y) { pos.y = _y; }
         void setX_vel(float _x) { velocity.x = _x; }
         void setY_vel(float _y) { velocity.y = _y; }
-        void frameTime(float _dt) { dt = _dt; }
         void mouseX(double x) { mouseposX = x; }
         void mouseY(double y) { mouseposY = y; }
 
@@ -40,7 +39,6 @@ class MovementComponent : public Component {
         glm::vec3 pos;
         glm::vec3 velocity;
         float mass;
-        float dt;
         float scale;
         int speed;
         int speedMod;

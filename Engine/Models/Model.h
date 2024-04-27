@@ -20,9 +20,7 @@
 #include <vector>
 using namespace std;
 
-
-class Model 
-{
+class Model  {
 public:
     vector<Texture> textures_loaded;
     vector<Mesh>    meshes;
@@ -34,8 +32,7 @@ public:
         loadModel(path);
     }
 
-    void Draw(unsigned int shaderID)
-    {
+    void Draw(unsigned int shaderID) {
         for(unsigned int i = 0; i < meshes.size(); i++)
             meshes[i].Draw(shaderID);
     }
@@ -65,7 +62,6 @@ private:
         for(unsigned int i = 0; i < node->mNumChildren; i++) {
             processNode(node->mChildren[i], scene);
         }
-
     }
 
     Mesh processMesh(aiMesh *mesh, const aiScene *scene) {
