@@ -10,8 +10,8 @@ namespace Physics {
     
     class Movement {
         public:
-            glm::mat4 calcBehaviour(glm::mat4& trans, float dt, float& _mass, int& speedMod,
-                                     glm::vec3& _vel, glm::vec3& _pos, double xMousePos, double yMousePos);
+            glm::mat4 calcBehaviour(glm::mat4& trans, glm::mat4& rota, float dt, float& _mass, int& speedMod,
+                                     glm::vec3& direction, glm::vec3& _pos, glm::vec2& velocity, double xMousePos, double yMousePos);
 
             void planetRotation(glm::mat4& trans, float dt);
         

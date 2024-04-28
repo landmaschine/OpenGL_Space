@@ -5,10 +5,11 @@ class PlayerMovementComponent : public Component {
     public:
         void init() override {
             pos = glm::vec3(1.0f);
-            velocity = glm::vec3(0.0f);
+            direction = glm::vec3(0.0f);
+            velocity = glm::vec2(0.0f);
             trans = glm::mat4(1.0f);
-            mass = 10;
-            speed = 100;
+            rota = glm::mat4(1.0f);
+            mass = 2.f;
             speedMod = 1;
             scale = 1.f;
             trans = glm::scale(trans, glm::vec3(scale));
@@ -16,31 +17,31 @@ class PlayerMovementComponent : public Component {
         }
 
         void update(float dt) override {
-            movement = mov.calcBehaviour(trans, dt, mass, speedMod, velocity, pos, mouseposX, mouseposY);
+            movement = mov.calcBehaviour(trans, rota, dt, mass, speedMod, direction, pos, velocity, mouseposX, mouseposY);
         }
 
         glm::mat4& move() { return movement; }
         glm::vec3& Pos() { return pos; }
-        glm::vec3& getVel() { return velocity; }
+        glm::vec3& getVel() { return direction; }
         float& getMass() { return mass; }
-        int& getSpeed() { return speed; }
         int& getSpeedMod() { return speedMod; }
         void setX_pos(float _x) { pos.x = _x; }
         void setY_pos(float _y) { pos.y = _y; }
-        void setX_vel(float _x) { velocity.x = _x; }
-        void setY_vel(float _y) { velocity.y = _y; }
+        void setX_vel(float _x) { direction.x = _x; }
+        void setY_vel(float _y) { direction.y = _y; }
         void mouseX(double x) { mouseposX = x; }
         void mouseY(double y) { mouseposY = y; }
 
     private:
         Physics::Movement mov;
         glm::mat4 trans;
+        glm::mat4 rota;
         glm::mat4 movement;
         glm::vec3 pos;
-        glm::vec3 velocity;
+        glm::vec3 direction;
+        glm::vec2 velocity;
         float mass;
         float scale;
-        int speed;
         int speedMod;
         double mouseposX;
         double mouseposY;

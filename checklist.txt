@@ -57,3 +57,5 @@ its working again!
 
 14. view, projection, transformation with rotation matrix [x]
     -> everything working as i intented.
+
+15. let player move with some physics behavior []
