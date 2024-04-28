@@ -1,13 +1,14 @@
 #pragma once
 #include "Components.h"
-#include "lib/stb/stb_image.h"
-#include "Engine/RenderEngine/Shaders/shader.h"
-#include "Engine/Models/Model.h"
 
 class RenderComponent : public Component {
     public:
         void init() override {
             model = glm::mat4(1.0f);
+            view = glm::mat4(1.0f);
+            projection = glm::mat4(1.0f);
+            shader.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/Shaders/shaderfiles/vertex.vs",
+                              "/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/Shaders/shaderfiles/fragment.fs");
         }
 
         void update(float dt) override {
@@ -15,14 +16,15 @@ class RenderComponent : public Component {
         }
 
         void draw() override {
-            glUseProgram(shaderID);
-            unsigned int modelLoc = glGetUniformLocation(shaderID, "model");
-            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-            mdl.Draw(shaderID);
+            shader.use();
+            shader.setMat4("projection", projection);
+            shader.setMat4("view", view);
+            shader.setMat4("model", model);
+            mdl.Draw(shader.ID);
         }
 
         ~RenderComponent() override {
-
+    
         }
 
         void setTex(std::string path) {
@@ -40,12 +42,18 @@ class RenderComponent : public Component {
             mdl.load(modelPath);
         }
 
-        glm::mat4& getModelMat() { return model; } 
-        void getShaderID(unsigned int ID) { shaderID = ID; }
+        glm::mat4& getModelMat() { return model; }
+
+        void getCam(Icamer2D& cam) {
+            projection = cam.projection();
+            view = cam.view();
+        }
 
     private:
-        unsigned int shaderID;
         int width, height, nrChannels;
         glm::mat4 model;
+        glm::mat4 projection;
+        glm::mat4 view;
+        Shader shader;
         Model mdl;
 };

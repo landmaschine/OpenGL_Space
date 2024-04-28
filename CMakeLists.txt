@@ -25,4 +25,4 @@ target_link_libraries(Space PRIVATE glfw assimp ${OPENGL_LIBRARIES})
 
 target_include_directories(Space PRIVATE "${OPENGL_INCLUDE_DIR}")
 
-target_compile_options(Space PRIVATE "-Wall" "-pedantic" "-O2" "-fstrict-aliasing")
+target_compile_options(Space PRIVATE "-Wall" "-pedantic" "-O0" "-fstrict-aliasing")

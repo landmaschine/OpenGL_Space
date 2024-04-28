@@ -1,5 +1,9 @@
 #pragma once
 #include <glad/glad.h>
+#include "lib/stb/stb_image.h"
+#include "Engine/RenderEngine/Shaders/shader.h"
+#include "Engine/Models/Model.h"
+#include "Engine/Camera/Camera.h"
 #include "ECS.h"
 #include "Engine/math/math.h"
 #include "Engine/Pyhsics/physics.h"
@@ -7,3 +11,4 @@
 #include "RenderComponent.h"
 #include "PositionComponent.h"
 #include "PlanetComponent.h"
+#include "LightsourceComponent.h"

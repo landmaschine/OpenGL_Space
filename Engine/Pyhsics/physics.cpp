@@ -16,8 +16,6 @@ glm::mat4 Physics::Movement::calcBehaviour(glm::mat4& trans, glm::mat4& rota, fl
         acceleration4 = rota * acceleration4;
         acceleration = glm::vec2(acceleration4.x * 4, acceleration4.z * 4) * dt;
 
-        std::cout << acceleration.x << " : " << acceleration.y << std::endl;
-
         velocity += acceleration;
     } else {
         float velMag = glm::length(velocity);

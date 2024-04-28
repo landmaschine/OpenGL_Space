@@ -10,6 +10,7 @@ class Renderer {
         void init() {
             glEnable(GL_DEPTH_TEST);
             glEnable(GL_MULTISAMPLE);
+
             shaderInit();
         }
 
@@ -24,4 +25,5 @@ class Renderer {
 
         void render();
         Shader shader;
+    private:
 };

@@ -1,6 +1,9 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
+#include <random>
+#include <cstdlib>
 #include "RenderEngine/OpenGL/Renderer.h"
 #include "ECS/ECS.h"
 #include "profiler/guiDebugInfo.h"
@@ -24,18 +27,23 @@ Gamedependencies* dep = new Gamedependencies;
 struct Entities {
     Manager manager;
     Entity& player;
-    Entity& test;
+    Entity& light;
+    std::vector<Entity> planets;
 
-    Entities() : player(manager.addEntity()),
-                 test(manager.addEntity())
-        
-    {}
+    Entities() : player(manager.addEntity()), light(manager.addEntity())
+    {
+        planets.resize(100);
+        for(auto& c : planets) {
+            c = manager.addEntity();
+        }
+    }
 };
 Entities* entities = new Entities;
 
 typedef struct gameLoopData
 {
     double frameTime = 0;
+    int zoom = 100;
 } loopData;
 
 loopData gameloopdata;

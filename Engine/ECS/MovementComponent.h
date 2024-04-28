@@ -11,7 +11,7 @@ class PlayerMovementComponent : public Component {
             rota = glm::mat4(1.0f);
             mass = 2.f;
             speedMod = 1;
-            scale = 1.f;
+            scale = .3f;
             trans = glm::scale(trans, glm::vec3(scale));
             trans = glm::rotate(trans, -glm::radians(90.f), glm::vec3(1.0f, 0.0f, 0.0f));
         }

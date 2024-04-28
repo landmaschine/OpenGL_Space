@@ -13,8 +13,6 @@ void init() {
         std::cout << "Failed to init GLAD!" << std::endl;
     }
 
-    //stbi_set_flip_vertically_on_load(true);
-
     dep->debGui.Init(dep->window.getWin());
 
     dep->renderer.init();
@@ -26,14 +24,21 @@ void init() {
 
     entities->player.addComponent<PlayerMovementComponent>();
     entities->player.addComponent<RenderComponent>();
-    entities->player.getComponent<RenderComponent>().getShaderID(dep->renderer.shaderID());
+    entities->player.getComponent<RenderComponent>().getCam(dep->cam);
     entities->player.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/player/player.obj");
+    std::srand(std::time(0));
 
-    entities->test.addComponent<PlanetComponent>();
-    entities->test.addComponent<RenderComponent>();
-    entities->test.getComponent<RenderComponent>().getShaderID(dep->renderer.shaderID());
-    entities->test.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/world/world.obj");
-    
+    for(auto& p : entities->planets) {
+        p.addComponent<PlanetComponent>();
+        p.getComponent<PlanetComponent>().setinitPos(-std::rand() % 50, std::rand() % 50, -1000, std::rand() % 15 / 10.f);
+        p.addComponent<RenderComponent>();
+        p.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/cube/cube.obj");
+    }
+
+    entities->light.addComponent<LightsourceComponent>();
+    entities->light.getComponent<LightsourceComponent>().setCam(dep->cam);
+    entities->light.getComponent<LightsourceComponent>().loadModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/cube/cube.obj");
+
     dep->inputhandler.init(dep->window.getWin(), entities->player);
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
     dep->inputhandler.bindKey(GLFW_KEY_S, std::make_shared<MoveDown>());
@@ -43,8 +48,7 @@ void init() {
     dep->inputhandler.bindKey(GLFW_KEY_F2, std::make_shared<setVsync>());
     dep->inputhandler.bindKey(GLFW_KEY_F1, std::make_shared<SetFrameUnlimited>());
 
-    dep->renderer.shader.use();
-    dep->renderer.shader.setMat4("projection", dep->cam.getProjectionMatrix());
+
 }
 
 void input() {
@@ -57,11 +61,15 @@ void update(float dt) {
     
     dep->cam.updatePosition(playerMovement.Pos(), dep->window);
 
-    dep->renderer.shader.use();
-    dep->renderer.shader.setMat4("view", dep->cam.getViewMatrix());
+    entities->player.getComponent<RenderComponent>().getCam(dep->cam);
+    entities->light.getComponent<LightsourceComponent>().setCam(dep->cam);
 
     entities->player.getComponent<RenderComponent>().getModelMat() = playerMovement.move();
-    entities->test.getComponent<RenderComponent>().getModelMat() = entities->test.getComponent<PlanetComponent>().rotMat();
+    for(auto& c : entities->planets) {
+        c.getComponent<PlanetComponent>().update(dt);
+        c.getComponent<RenderComponent>().getModelMat() = c.getComponent<PlanetComponent>().rotMat();
+        c.getComponent<RenderComponent>().getCam(dep->cam);
+    }
 
     int width, height;
     double ypos, xpos;
@@ -80,6 +88,12 @@ void update(float dt) {
 void render() {
     dep->renderer.render();
     entities->manager.draw();
+    entities->light.draw();
+
+    //for(auto& p : entities->planets) {
+    //    p.draw();
+    //}
+
     dep->debGui.newFrame();
     dep->debGui.showValue("time/FPS", gameloopdata.frameTime, 1/gameloopdata.frameTime);
     dep->debGui.showVec("Player Pos", entities->player.getComponent<PlayerMovementComponent>().Pos());
@@ -120,9 +134,11 @@ void gameLoop::run() {
 }
 
 void shutDown() {
-    ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
+    ImGui_ImplOpenGL3_Shutdown();
     ImGui::DestroyContext();
+
+    delete entities;
     glfwTerminate();
 }
 
@@ -131,17 +147,12 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     dep->window.size().h = height;
     glViewport(0, 0, width, height);
     dep->cam.updatePosition(entities->player.getComponent<PlayerMovementComponent>().Pos(), dep->window);
-    dep->renderer.shader.setMat4("projection", dep->cam.getProjectionMatrix());
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-    static int tmp = 100;
-    
-    if(yoffset == 1) tmp += 2;
-    if(yoffset == -1) tmp -= 2;
-    if(tmp <= 10) tmp = 10;
-    if(tmp >= 7000) tmp = 7000;
-
-    dep->cam.setZoom(tmp);
-    dep->renderer.shader.setMat4("projection", dep->cam.getProjectionMatrix());
+    if(yoffset >= 1) gameloopdata.zoom += 2;
+    if(yoffset <= -1) gameloopdata.zoom -= 2;
+    if(gameloopdata.zoom <= 10) gameloopdata.zoom = 10;
+    if(gameloopdata.zoom >= 7000) gameloopdata.zoom = 7000;
+    dep->cam.setZoom(gameloopdata.zoom);
 }
