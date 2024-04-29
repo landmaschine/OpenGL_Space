@@ -12,7 +12,7 @@
 class Shader
 {
 public:
-    unsigned int ID;
+    unsigned int ID = 0;
 
     void loadShader(const char* vertexPath, const char* fragmentPath);
 

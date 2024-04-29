@@ -22,7 +22,7 @@ class guiDeb {
 
         void showVec(std::string name, glm::vec3 _pos) {
             ImGui::Begin(name.c_str());
-            ImGui::Text("playerPos: %f, %f", _pos.x, _pos.y);
+            ImGui::Text("playerPos: %f, %f, %f", _pos.x, _pos.y, _pos.z);
             ImGui::End();
         }
 

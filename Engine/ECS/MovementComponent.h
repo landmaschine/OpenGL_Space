@@ -4,15 +4,16 @@
 class PlayerMovementComponent : public Component {
     public:
         void init() override {
-            pos = glm::vec3(1.0f);
-            direction = glm::vec3(0.0f);
-            velocity = glm::vec2(0.0f);
+            pos = glm::vec3(1.0f, 1.f, -10.f);
+            direction = glm::vec3(1.0f);
+            velocity = glm::vec2(1.0f);
             trans = glm::mat4(1.0f);
             rota = glm::mat4(1.0f);
             mass = 2.f;
             speedMod = 1;
-            scale = .3f;
+            scale = 1.f;
             trans = glm::scale(trans, glm::vec3(scale));
+            trans = glm::translate(trans, pos);
             trans = glm::rotate(trans, -glm::radians(90.f), glm::vec3(1.0f, 0.0f, 0.0f));
         }
 

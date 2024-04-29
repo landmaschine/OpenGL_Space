@@ -32,7 +32,7 @@ struct Entities {
 
     Entities() : player(manager.addEntity()), light(manager.addEntity())
     {
-        planets.resize(100);
+        planets.resize(1);
         for(auto& c : planets) {
             c = manager.addEntity();
         }
@@ -43,7 +43,7 @@ Entities* entities = new Entities;
 typedef struct gameLoopData
 {
     double frameTime = 0;
-    int zoom = 100;
+    int zoom = 10;
 } loopData;
 
 loopData gameloopdata;

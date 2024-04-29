@@ -14,12 +14,16 @@ class Camera2D : public Icamer2D {
             this->screenHeight = win.size().h;
             this->screenWidth = win.size().w;
             position = glm::vec3(1.0f);
-            zoom = 100.0f;
+            zoom = 10.f;
 
-            shader.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/Shaders/shaderfiles/vertex.vs",
-                              "/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/Shaders/shaderfiles/fragment.fs");
+            shaderCam.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.vs",
+                                 "/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.fs");
 
-            updateProjectionMatrix();
+            shaderPlayer.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/Shaders/shaderfiles/vertex.vs", 
+                                    "/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/Shaders/shaderfiles/fragment.fs");
+
+
+            updateProjectionMatrixOrto();
         }
 
         void updatePosition(glm::vec3 playerPosition, Window& window) {
@@ -32,12 +36,12 @@ class Camera2D : public Icamer2D {
             position.y = playerScreenPos.y - screenHeight;
 
             updateViewMatrix();
-            updateProjectionMatrix();
+            updateProjectionMatrixOrto();
         }
 
         void setZoom(float newZoom) {
             zoom = newZoom;
-            updateProjectionMatrix();
+            updateProjectionMatrixOrto();
         }
 
         void window(Window& win) {
@@ -49,7 +53,7 @@ class Camera2D : public Icamer2D {
         }
 
         glm::mat4 getProjectionMatrix() {
-            updateProjectionMatrix();
+            updateProjectionMatrixOrto();
             return projectionMatrix;
         }
 
@@ -64,10 +68,10 @@ class Camera2D : public Icamer2D {
     private:
         void updateViewMatrix() {
             viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position.x, -position.y, 0.0f));
-            shader.setMat4("view", viewMatrix);
+            shaderCam.setMat4("view", viewMatrix);
         }
 
-        void updateProjectionMatrix() {
+        void updateProjectionMatrixOrto() {
             float zoomFactor = 1.0f / zoom;
             float halfScreenWidth = (float)screenWidth * 0.5f;
             float halfScreenHeight = (float)screenHeight * 0.5f;
@@ -76,7 +80,12 @@ class Camera2D : public Icamer2D {
             float bottom = -halfScreenHeight * zoomFactor;
             float top = halfScreenHeight * zoomFactor;
             projectionMatrix = glm::ortho(left, right, bottom, top, -10000.0f, 10000.0f);
-            shader.setMat4("projection", projectionMatrix);
+            shaderCam.setMat4("projection", projectionMatrix);
+        }
+
+        void updateProjectionMatrixPers() {
+            projectionMatrix = glm::perspective(1.f, screenWidth / float(screenHeight), 10.f, -10.f);
+            shaderCam.setMat4("projection", projectionMatrix);
         }
 
         glm::mat4 viewMatrix;
@@ -86,5 +95,6 @@ class Camera2D : public Icamer2D {
         float zoom = 1.0f;
         int screenWidth = 0;
         int screenHeight = 0;
-        Shader shader;
+        Shader shaderCam;
+        Shader shaderPlayer;
 };

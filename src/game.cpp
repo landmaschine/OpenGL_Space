@@ -32,11 +32,13 @@ void init() {
         p.addComponent<PlanetComponent>();
         p.getComponent<PlanetComponent>().setinitPos(-std::rand() % 50, std::rand() % 50, -1000, std::rand() % 15 / 10.f);
         p.addComponent<RenderComponent>();
+        p.getComponent<RenderComponent>().initShaders();
         p.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/cube/cube.obj");
     }
 
     entities->light.addComponent<LightsourceComponent>();
     entities->light.getComponent<LightsourceComponent>().setCam(dep->cam);
+    entities->light.addComponent<PlanetComponent>();
     entities->light.getComponent<LightsourceComponent>().loadModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/cube/cube.obj");
 
     dep->inputhandler.init(dep->window.getWin(), entities->player);
@@ -47,8 +49,6 @@ void init() {
     dep->inputhandler.bindKey(GLFW_KEY_LEFT_SHIFT, std::make_shared<MoveFaster>());
     dep->inputhandler.bindKey(GLFW_KEY_F2, std::make_shared<setVsync>());
     dep->inputhandler.bindKey(GLFW_KEY_F1, std::make_shared<SetFrameUnlimited>());
-
-
 }
 
 void input() {
@@ -90,9 +90,9 @@ void render() {
     entities->manager.draw();
     entities->light.draw();
 
-    //for(auto& p : entities->planets) {
-    //    p.draw();
-    //}
+    for(auto& p : entities->planets) {
+        p.draw();
+    }
 
     dep->debGui.newFrame();
     dep->debGui.showValue("time/FPS", gameloopdata.frameTime, 1/gameloopdata.frameTime);
@@ -152,7 +152,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
     if(yoffset >= 1) gameloopdata.zoom += 2;
     if(yoffset <= -1) gameloopdata.zoom -= 2;
-    if(gameloopdata.zoom <= 10) gameloopdata.zoom = 10;
+    if(gameloopdata.zoom <= 1) gameloopdata.zoom = 1;
     if(gameloopdata.zoom >= 7000) gameloopdata.zoom = 7000;
     dep->cam.setZoom(gameloopdata.zoom);
 }

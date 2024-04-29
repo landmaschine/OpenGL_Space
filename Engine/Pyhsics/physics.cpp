@@ -12,7 +12,7 @@ glm::mat4 Physics::Movement::calcBehaviour(glm::mat4& trans, glm::mat4& rota, fl
     glm::vec2 direction_norm(direction.x, direction.y);
     if (!(direction_norm.x == 0 && direction_norm.y == 0)) {
         direction_norm = glm::normalize(direction_norm);
-        glm::vec4 acceleration4 = glm::vec4(20.f * speedMod * direction_norm.x / _mass, 0.0f, 20.f * speedMod * direction_norm.y / _mass, 0.0f);
+        glm::vec4 acceleration4 = glm::vec4(10.f * speedMod * direction_norm.x / _mass, 0.0f, 10.f * speedMod * direction_norm.y / _mass, 0.0f);
         acceleration4 = rota * acceleration4;
         acceleration = glm::vec2(acceleration4.x * 4, acceleration4.z * 4) * dt;
 
@@ -27,10 +27,11 @@ glm::mat4 Physics::Movement::calcBehaviour(glm::mat4& trans, glm::mat4& rota, fl
         }
     }
 
-    trans = glm::translate(trans, glm::vec3(velocity.x * dt, 0.0f, velocity.y * dt));
+    trans = glm::translate(trans, glm::vec3(velocity.x * dt, _pos.z, velocity.y * dt));
     glm::mat4 tmp = glm::mat4(1.0f);
     tmp = trans * rota;
-    
+    trans = glm::translate(trans, glm::vec3(velocity.x * dt, -_pos.z, velocity.y * dt));
+
     rota = glm::rotate(rota, cursorangle - glm::radians(90.f), glm::vec3(0.0f, 1.0f, 0.0f));
     _pos = extractTranslation(trans);
 

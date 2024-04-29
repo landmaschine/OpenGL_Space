@@ -1,3 +1,12 @@
+Allgeime spielidee:
+    -> 3d world, 2d camera field
+    -> world endless
+    -> Space
+    -> rotating plantes with maybe asteroid field
+    -> no background image
+    -> backgorund nebulas, heightmap with color interpolating
+    -> 
+
 1. Window Class -> dont singleton it!!  [x]
     glfw
     window Size
@@ -62,4 +71,4 @@ its working again!
 
 16. lights! []
     -> make player emit lights
-    -> funfact, you can have more than 2 shaders, im dumb 
+    -> funfact, you can have more than 2 shaders, im dumb
