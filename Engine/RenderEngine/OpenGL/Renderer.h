@@ -13,6 +13,5 @@ class Renderer {
         }
 
         void render();
-        Shader shader;
     private:
 };

@@ -32,7 +32,6 @@ void init() {
         p.addComponent<PlanetComponent>();
         p.getComponent<PlanetComponent>().setinitPos(-std::rand() % 50, std::rand() % 50, -1000, std::rand() % 15 / 10.f);
         p.addComponent<RenderComponent>();
-        p.getComponent<RenderComponent>().initShaders();
         p.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/cube/cube.obj");
     }
 

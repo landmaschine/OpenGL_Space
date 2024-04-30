@@ -19,10 +19,6 @@ class Camera2D : public Icamer2D {
             shaderCam.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.vs",
                                  "/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.fs");
 
-            shaderPlayer.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/Shaders/shaderfiles/vertex.vs", 
-                                    "/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/Shaders/shaderfiles/fragment.fs");
-
-
             updateProjectionMatrixOrto();
         }
 
@@ -96,5 +92,4 @@ class Camera2D : public Icamer2D {
         int screenWidth = 0;
         int screenHeight = 0;
         Shader shaderCam;
-        Shader shaderPlayer;
 };

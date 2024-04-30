@@ -11,10 +11,6 @@ class RenderComponent : public Component {
                               "/home/leonw/Documents/dev/OpenGL_Space/Engine/ECS/RenderComponent/renderFragment.fs");
         }
 
-        void initShaders() {
-
-        }
-
         void update(float dt) override {
             
         }
