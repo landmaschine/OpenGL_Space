@@ -9,10 +9,13 @@ class RenderComponent : public Component {
             projection = glm::mat4(1.0f);
             shader.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/ECS/RenderComponent/renderVertex.vs",
                               "/home/leonw/Documents/dev/OpenGL_Space/Engine/ECS/RenderComponent/renderFragment.fs");
+            if(!entity->hasComponent<PositionComponent>()) {
+                entity->addComponent<PositionComponent>();
+            }
         }
 
         void update(float dt) override {
-            
+            model = entity->getComponent<PositionComponent>().transform;
         }
 
         void draw() override {

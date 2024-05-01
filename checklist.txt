@@ -5,7 +5,6 @@ Allgeime spielidee:
     -> rotating plantes with maybe asteroid field
     -> no background image
     -> backgorund nebulas, heightmap with color interpolating
-    -> 
 
 1. Window Class -> dont singleton it!!  [x]
     glfw
@@ -69,6 +68,10 @@ its working again!
 
 15. let player move with some physics behavior [x]
 
-16. lights! []
+16. lights! [] -> later
     -> make player emit lights
     -> funfact, you can have more than 2 shaders, im dumb
+
+17. refactor a bit [x]
+
+18. collision detection []

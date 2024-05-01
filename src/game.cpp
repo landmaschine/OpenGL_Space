@@ -22,23 +22,19 @@ void init() {
 
     dep->cam.init(dep->window);
 
-    entities->player.addComponent<PlayerMovementComponent>();
+    entities->player.addComponent<PositionComponent>();
+    entities->player.addComponent<MovementComponent>();
+    entities->player.addComponent<Physics::Movement>();
+    entities->player.addComponent<CollisionComponent>();
     entities->player.addComponent<RenderComponent>();
     entities->player.getComponent<RenderComponent>().getCam(dep->cam);
     entities->player.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/player/player.obj");
-    std::srand(std::time(0));
 
-    for(auto& p : entities->planets) {
-        p.addComponent<PlanetComponent>();
-        p.getComponent<PlanetComponent>().setinitPos(-std::rand() % 50, std::rand() % 50, -1000, std::rand() % 15 / 10.f);
-        p.addComponent<RenderComponent>();
-        p.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/cube/cube.obj");
-    }
-
-    entities->light.addComponent<LightsourceComponent>();
-    entities->light.getComponent<LightsourceComponent>().setCam(dep->cam);
-    entities->light.addComponent<PlanetComponent>();
-    entities->light.getComponent<LightsourceComponent>().loadModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/cube/cube.obj");
+    entities->collider.addComponent<PositionComponent>();
+    //entities->collider.addComponent<CollisionComponent>();
+    entities->collider.addComponent<RenderComponent>();
+    entities->collider.getComponent<RenderComponent>().getCam(dep->cam);
+    entities->collider.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/cube/cube.obj");
 
     dep->inputhandler.init(dep->window.getWin(), entities->player);
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
@@ -56,19 +52,13 @@ void input() {
 }
 
 void update(float dt) {
-    auto& playerMovement = entities->player.getComponent<PlayerMovementComponent>();
+    auto& playerMovement = entities->player.getComponent<MovementComponent>();
     
-    dep->cam.updatePosition(playerMovement.Pos(), dep->window);
+    dep->cam.updatePosition(playerMovement.pos, dep->window);
 
     entities->player.getComponent<RenderComponent>().getCam(dep->cam);
-    entities->light.getComponent<LightsourceComponent>().setCam(dep->cam);
+    entities->collider.getComponent<RenderComponent>().getCam(dep->cam);
 
-    entities->player.getComponent<RenderComponent>().getModelMat() = playerMovement.move();
-    for(auto& c : entities->planets) {
-        c.getComponent<PlanetComponent>().update(dt);
-        c.getComponent<RenderComponent>().getModelMat() = c.getComponent<PlanetComponent>().rotMat();
-        c.getComponent<RenderComponent>().getCam(dep->cam);
-    }
 
     int width, height;
     double ypos, xpos;
@@ -78,8 +68,8 @@ void update(float dt) {
     float center_y = static_cast<float>(height) / 2.0f;
     float x_window = static_cast<float>(xpos) - center_x;
     float y_window = center_y - static_cast<float>(ypos);
-    playerMovement.mouseX(x_window);
-    playerMovement.mouseY(y_window);
+    playerMovement.mouseX = x_window;
+    playerMovement.mouseY = y_window;
 
     entities->manager.update(dt);
 }
@@ -87,15 +77,10 @@ void update(float dt) {
 void render() {
     dep->renderer.render();
     entities->manager.draw();
-    entities->light.draw();
-
-    for(auto& p : entities->planets) {
-        p.draw();
-    }
 
     dep->debGui.newFrame();
     dep->debGui.showValue("time/FPS", gameloopdata.frameTime, 1/gameloopdata.frameTime);
-    dep->debGui.showVec("Player Pos", entities->player.getComponent<PlayerMovementComponent>().Pos());
+    dep->debGui.showVec("Player Pos", entities->player.getComponent<MovementComponent>().pos);
     dep->debGui.draw();
 
     glfwSwapBuffers(dep->window.getWin());
@@ -145,7 +130,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     dep->window.size().w = width;
     dep->window.size().h = height;
     glViewport(0, 0, width, height);
-    dep->cam.updatePosition(entities->player.getComponent<PlayerMovementComponent>().Pos(), dep->window);
+    dep->cam.updatePosition(entities->player.getComponent<MovementComponent>().pos, dep->window);
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {

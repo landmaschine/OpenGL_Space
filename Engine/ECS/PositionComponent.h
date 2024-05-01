@@ -1,21 +1,22 @@
 #pragma once
 #include "Components.h"
 
-
 class PositionComponent : public Component {
     public:
         void init() override {
-            pos = glm::vec4(1.0f);
+            pos = glm::vec3(1.0f, 1.0f, -10.f);
+            transform = glm::mat4(1.0f);
+            transform = glm::translate(transform, pos);
+            transform = glm::scale(transform, glm::vec3(1.0f));
         }
 
         void update(float dt) override {
-
         }
 
-        glm::vec4& getPos() { return pos; }
-        void setX_pos(float _x) { pos.x = _x; }
-        void setY_pos(float _y) { pos.y = _y; }
+        glm::vec3 pos;
+        glm::mat4 transform;
 
-    private:
-        glm::vec4 pos;
+        int height = 32;
+        int widht = 32;
+        int scale = 1;
 };

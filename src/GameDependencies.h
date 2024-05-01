@@ -27,15 +27,12 @@ Gamedependencies* dep = new Gamedependencies;
 struct Entities {
     Manager manager;
     Entity& player;
-    Entity& light;
-    std::vector<Entity> planets;
 
-    Entities() : player(manager.addEntity()), light(manager.addEntity())
+    Entity& collider;
+
+    Entities() : player(manager.addEntity()), collider(manager.addEntity()) 
     {
-        planets.resize(1);
-        for(auto& c : planets) {
-            c = manager.addEntity();
-        }
+
     }
 };
 Entities* entities = new Entities;
@@ -43,7 +40,7 @@ Entities* entities = new Entities;
 typedef struct gameLoopData
 {
     double frameTime = 0;
-    int zoom = 10;
+    int zoom = 50;
 } loopData;
 
 loopData gameloopdata;

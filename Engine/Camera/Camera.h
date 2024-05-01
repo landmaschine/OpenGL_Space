@@ -10,11 +10,13 @@ class Icamer2D {
 
 class Camera2D : public Icamer2D {
     public:
+        Camera2D() {}
+
         void init(Window& win) {
             this->screenHeight = win.size().h;
             this->screenWidth = win.size().w;
             position = glm::vec3(1.0f);
-            zoom = 10.f;
+            zoom = 50.f;
 
             shaderCam.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.vs",
                                  "/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.fs");

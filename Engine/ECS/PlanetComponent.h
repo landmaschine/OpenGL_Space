@@ -11,7 +11,7 @@ class PlanetComponent : public Component {
         }
 
         void update(float dt) override {
-                rot.planetRotation(model, dt);
+            
         }
 
         void setdt(float dt) {
@@ -28,7 +28,6 @@ class PlanetComponent : public Component {
         }
 
     private:
-        Physics::Movement rot;
         glm::mat4 model;
         float dt;
         float tmpdt;

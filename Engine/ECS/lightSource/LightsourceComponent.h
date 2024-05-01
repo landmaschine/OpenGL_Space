@@ -7,6 +7,7 @@ class LightsourceComponent : public Component {
             objColor = glm::vec3(1.f, 0.5f, 0.31f);
             lightColor = glm::vec3(1.f, 1.f, 1.f);
             lightPos = glm::vec3(1.2f, 1.0f, 2.0f);
+            playerPos = glm::vec3(1.0f);
 
             trans = glm::mat4(1.0f);
 
@@ -32,8 +33,9 @@ class LightsourceComponent : public Component {
             lightShader.setMat4("projection", proj);
             lightShader.setMat4("view", view);
             lightShader.setVec3("lightPos", lightPos);
+            lightShader.setVec3("viewPos", playerPos);
             trans = glm::mat4(1.0f);
-            trans = glm::translate(trans, glm::vec3(1.f, 2.f, -15.f));
+            trans = glm::translate(trans, glm::vec3(1.f, 2.f, -11.f));
             lightShader.setMat4("model", trans);
             light.Draw(lightShader.ID);
 
@@ -42,8 +44,7 @@ class LightsourceComponent : public Component {
             lightCubeShader.setMat4("projection", proj);
             lightCubeShader.setMat4("view", view);
             trans = glm::mat4(1.0f);
-            trans = glm::translate(trans, glm::vec3(3.f, 3.f, -15.f));
-            trans = glm::scale(trans, glm::vec3(0.5f));
+            trans = glm::translate(trans, playerPos);
             lightCubeShader.setMat4("model", trans);
             lightCube.Draw(lightCubeShader.ID);
             
@@ -59,12 +60,17 @@ class LightsourceComponent : public Component {
             view = cam.view();
         }
 
+        void getPlayerPos(glm::vec3 playerPos) {
+            this->playerPos = playerPos;
+        }
+
     private:
         Shader lightShader;
         Shader lightCubeShader;
         glm::vec3 objColor;
         glm::vec3 lightColor;
         glm::vec3 lightPos;
+        glm::vec3 playerPos;
         
         Model light;
         Model lightCube;
