@@ -15,12 +15,15 @@
 #include "Engine/Camera/Camera.h"
 #include "Engine/ECS/Components.h"
 
+#include "Engine/jsonParser/Json.h"
+
 struct Gamedependencies {
     Window window;
     InputHandler inputhandler;
     Renderer renderer;
     Camera2D cam;
     guiDeb debGui;
+    Json data;
 };
 Gamedependencies* dep = new Gamedependencies;
 
@@ -29,8 +32,9 @@ struct Entities {
     Entity& player;
 
     Entity& collider;
+    Entity& collider2;
 
-    Entities() : player(manager.addEntity()), collider(manager.addEntity()) 
+    Entities() : player(manager.addEntity()), collider(manager.addEntity()), collider2(manager.addEntity())
     {
 
     }
@@ -41,6 +45,8 @@ typedef struct gameLoopData
 {
     double frameTime = 0;
     int zoom = 50;
+    int col = 0;
+    CollisionSide side;
 } loopData;
 
 loopData gameloopdata;

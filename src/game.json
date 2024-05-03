@@ -1,0 +1,27 @@
+{
+    "app": {
+        "name": "Space",
+        "window": {
+            "width": 800,
+            "height": 600
+        }
+    },
+
+    "player": {
+        "posx": 3,
+        "posy": 3,
+        "posz": 1,
+        "width": 1,
+        "height": 1,
+        "scale": 1,
+        "accelSpeed": 3,
+        "speedMod": 2,
+        "mass": 1,
+        "maxSpeed": 10
+    },
+
+    "backObjs": {
+        "posz": 0,
+        "scale": 1
+    }
+}

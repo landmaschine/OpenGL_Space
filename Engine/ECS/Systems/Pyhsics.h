@@ -8,39 +8,25 @@
 #include "Engine/RenderEngine/Window/window.h"
 
 namespace Physics {
-    class Movement : public Component{
+    class Movement {
         public:
-
-            void init() override {
-                if(!entity->hasComponent<MovementComponent>()) {
-                    std::cout << "Player doesnt have PlayerMovementComponent!" << std::endl;
-                }
-
-                move = &entity->getComponent<MovementComponent>();
-
-            };
-
-            void update(float dt) override {
-                move->finaltrans = calcBehaviour(dt);
-            }
- 
-            glm::mat4 calcBehaviour(float dt);
-
-            void planetRotation(glm::mat4& trans, float dt);
+            void calcBehaviour(MovementComponent* move, float dt);
         
         private:
-            MovementComponent* move;
-
             glm::vec3 extractTranslation(const glm::mat4& matrix) {
                 return glm::vec3(matrix[3][0], matrix[3][1], matrix[3][2]);
             }
     };
 
-    class Collision : public Component {
+    class PlanetRotation {
         public:
-            static bool AABB();
-        
-        private:
+            void planetRotation(PlanetComponent* planet, float dt);
+    };
+
+
+    class Collision {
+        public:
+            static bool AABB(const collRect& recA, const collRect& recB, CollisionSide& side);
     };
 
 }

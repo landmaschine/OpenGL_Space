@@ -15,7 +15,7 @@ class Camera2D : public Icamer2D {
         void init(Window& win) {
             this->screenHeight = win.size().h;
             this->screenWidth = win.size().w;
-            position = glm::vec3(1.0f);
+            position = glm::vec3(0.0f);
             zoom = 50.f;
 
             shaderCam.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.vs",
@@ -32,6 +32,8 @@ class Camera2D : public Icamer2D {
 
             position.x = playerScreenPos.x - screenWidth;
             position.y = playerScreenPos.y - screenHeight;
+
+            
 
             updateViewMatrix();
             updateProjectionMatrixOrto();
@@ -65,7 +67,9 @@ class Camera2D : public Icamer2D {
 
     private:
         void updateViewMatrix() {
-            viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-position.x, -position.y, 0.0f));
+            viewMatrix = glm::lookAt(glm::vec3(position.x, position.y, zoom),
+                         glm::vec3(position.x, position.y, position.z),
+                         glm::vec3(0.0f, 1.0f, 0.0f));   
             shaderCam.setMat4("view", viewMatrix);
         }
 
@@ -81,8 +85,8 @@ class Camera2D : public Icamer2D {
             shaderCam.setMat4("projection", projectionMatrix);
         }
 
-        void updateProjectionMatrixPers() {
-            projectionMatrix = glm::perspective(1.f, screenWidth / float(screenHeight), 10.f, -10.f);
+        void updateProjectionMatrixPers(float fov) {
+            projectionMatrix = glm::perspective(glm::radians(fov), screenWidth / float(screenHeight), -10.f, 10.f);
             shaderCam.setMat4("projection", projectionMatrix);
         }
 

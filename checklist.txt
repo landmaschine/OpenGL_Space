@@ -75,3 +75,6 @@ its working again!
 17. refactor a bit [x]
 
 18. collision detection []
+    -> aabb works
+    -> additional checking for which side is hit;
+    

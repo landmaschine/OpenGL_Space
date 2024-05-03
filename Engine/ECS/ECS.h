@@ -104,6 +104,6 @@ class Manager {
             return *e;
         }
 
-    private:
         std::vector<std::unique_ptr<Entity>> entities;
+    private:
 };

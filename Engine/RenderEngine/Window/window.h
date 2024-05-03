@@ -11,7 +11,7 @@ class Window {
     public:
         Window() = default;
         ~Window() {glfwDestroyWindow(window);}
-        void createWindow(int width, int height);
+        void createWindow(int width, int height, std::string name);
         windowSize& size() {return _size;}
         GLFWwindow* getWin() { return window;}
 

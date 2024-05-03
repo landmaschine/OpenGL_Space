@@ -10,9 +10,6 @@ class Renderer {
         void init() {
             glEnable(GL_DEPTH_TEST);
             glEnable(GL_MULTISAMPLE);
-            glEnable(GL_CULL_FACE);
-            glCullFace(GL_BACK);
-            glFrontFace(GL_CCW);
         }
 
         void render();

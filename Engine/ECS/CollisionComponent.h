@@ -2,10 +2,17 @@
 #include "Components.h"
 
 typedef struct rect {
-    float width = 1.f;
-    float height = 1.f;
-    PositionComponent* pos;
+    float w = 2.f;
+    float h = 2.f;
+    glm::vec3 pos;
 } collRect;
+
+enum class CollisionSide {
+    None,
+    Horizontal,
+    Vertical,
+    Both
+};
 
 class CollisionComponent : public Component {
     public:
@@ -13,16 +20,20 @@ class CollisionComponent : public Component {
             if(!entity->hasComponent<PositionComponent>()) {
                 entity->addComponent<PositionComponent>();
             } else {
-                rect.pos = &entity->getComponent<PositionComponent>();
+                rect.pos = entity->getComponent<PositionComponent>().pos;
             }
         }
 
         void update(float dt) override {
-            rect.pos = &entity->getComponent<PositionComponent>();
-            std::cout << rect.pos->pos.x << " : " << rect.pos->pos.y << std::endl;
+            rect.pos = entity->getComponent<PositionComponent>().pos;
+        }
+
+        void datainit() {
+            rect.w *= entity->getComponent<PositionComponent>().scale;
+            rect.h *= entity->getComponent<PositionComponent>().scale;
         }
 
         std::string tag;
-    private:
         collRect rect;
+    private:
 };

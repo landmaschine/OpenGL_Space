@@ -27,7 +27,7 @@ class RenderComponent : public Component {
         }
 
         ~RenderComponent() override {
-    
+
         }
 
         void setModel(std::string modelPath) {

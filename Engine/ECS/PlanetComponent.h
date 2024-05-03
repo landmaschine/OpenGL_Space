@@ -4,31 +4,23 @@
 class PlanetComponent : public Component {
     public:
         void init() override {
-            tmpdt = 0;
-            model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(5.0f, -5.0f, -1000.f));
-            model = glm::scale(model, glm::vec3(2.f));
+            rotMat = glm::mat4(1.0f);
+            if(!entity->hasComponent<PositionComponent>()) {
+                std::cout << "Entity has no Position Component!" << std::endl;
+            }
+            pos = &entity->getComponent<PositionComponent>();
         }
 
         void update(float dt) override {
-            
-        }
-
-        void setdt(float dt) {
-            this->dt = dt;
-        }
-
-        glm::mat4& rotMat() {
-            return model;
+            pos->transform = rotMat;
         }
 
         void setinitPos(float x, float y, float z, float scale) {
-            model = glm::translate(model, glm::vec3(x, y, z));
-            model = glm::scale(model, glm::vec3(scale));
+            rotMat = glm::translate(rotMat, glm::vec3(x, y, z));
+            rotMat = glm::scale(rotMat, glm::vec3(scale));
         }
 
+        glm::mat4 rotMat;
     private:
-        glm::mat4 model;
-        float dt;
-        float tmpdt;
+        PositionComponent* pos;
 };

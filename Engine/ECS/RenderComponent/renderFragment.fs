@@ -12,5 +12,5 @@ uniform sampler2D texture_specular2;
 
 void main()
 {
-    FragColor = texture(texture_diffuse1, TexCoords);
+    FragColor = vec4(ourColor, 1.0);
 }

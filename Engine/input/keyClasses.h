@@ -3,13 +3,13 @@
 
 class MoveLeft : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().direction.x = -1;
+        ent.getComponent<MovementComponent>().direction.x = 1;
     }
 };
 
 class MoveRight : public Command {
     void pressed(Entity& ent) override {
-       ent.getComponent<MovementComponent>().direction.x = 1;
+       ent.getComponent<MovementComponent>().direction.x = -1;
     }
     void released(Entity& ent) override {
         ent.getComponent<MovementComponent>().direction.x = 0;
@@ -33,7 +33,7 @@ class MoveDown : public Command {
 
 class MoveFaster : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().speedMod = 2; 
+        ent.getComponent<MovementComponent>().speedMod = data.player->speedMod; 
     }
 
     void released(Entity& ent) override {

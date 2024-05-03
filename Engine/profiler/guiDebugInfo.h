@@ -26,6 +26,12 @@ class guiDeb {
             ImGui::End();
         }
 
+         void showVec(std::string name, glm::vec2 _pos) {
+            ImGui::Begin(name.c_str());
+            ImGui::Text("playerPos: %f, %f", _pos.x, _pos.y);
+            ImGui::End();
+        }
+
         void showValue(std::string name, float var) {
             ImGui::Begin(name.c_str());
             ImGui::Text("%s: %f", name.c_str(), var);
@@ -38,7 +44,15 @@ class guiDeb {
             ImGui::Text("%f", var2);
             ImGui::End();
         }
-
+        
+        void showValue(std::string name, glm::vec4 val) {
+            ImGui::Begin(name.c_str());
+            ImGui::Text("%f", val.x);
+            ImGui::Text("%f", val.y);
+            ImGui::Text("%f", val.z);
+            ImGui::Text("%f", val.w);
+            ImGui::End();
+        }
 
         void draw() {
             ImGui::Render();
