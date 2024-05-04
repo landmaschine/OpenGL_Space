@@ -20,33 +20,33 @@ class guiDeb {
             ImGui::NewFrame();
         }
 
-        void showVec(std::string name, glm::vec3 _pos) {
-            ImGui::Begin(name.c_str());
+        void showVec(const char* name, glm::vec3 _pos) {
+            ImGui::Begin(name);
             ImGui::Text("playerPos: %f, %f, %f", _pos.x, _pos.y, _pos.z);
             ImGui::End();
         }
 
-         void showVec(std::string name, glm::vec2 _pos) {
-            ImGui::Begin(name.c_str());
+         void showVec(const char* name, glm::vec2 _pos) {
+            ImGui::Begin(name);
             ImGui::Text("playerPos: %f, %f", _pos.x, _pos.y);
             ImGui::End();
         }
 
-        void showValue(std::string name, float var) {
-            ImGui::Begin(name.c_str());
-            ImGui::Text("%s: %f", name.c_str(), var);
+        void showValue(const char* name, float var) {
+            ImGui::Begin(name);
+            ImGui::Text("%s: %f", name, var);
             ImGui::End();
         }
 
-        void showValue(std::string name, float var, float var2) {
-            ImGui::Begin(name.c_str());
+        void showValue(const char* name, float var, float var2) {
+            ImGui::Begin(name);
             ImGui::Text("%f", var);
             ImGui::Text("%f", var2);
             ImGui::End();
         }
         
-        void showValue(std::string name, glm::vec4 val) {
-            ImGui::Begin(name.c_str());
+        void showValue(const char* name, glm::vec4 val) {
+            ImGui::Begin(name);
             ImGui::Text("%f", val.x);
             ImGui::Text("%f", val.y);
             ImGui::Text("%f", val.z);

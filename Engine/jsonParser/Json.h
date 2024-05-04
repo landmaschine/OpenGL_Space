@@ -16,12 +16,14 @@ typedef struct playerData {
     int speedMod;
     double maxSpeed;
     double scale;
+    std::string texPath;
     glm::vec3 pos;
 } playerData;
 
 typedef struct background {
     int posz;
     double scale;
+    std::string texPath;
 } background;
 
 class Json {
@@ -38,16 +40,18 @@ class Json {
             win->width = data["app"]["window"]["width"];
             
             player->pos.x = data["player"]["posx"];
-            player->pos.z = data["player"]["posy"];
-            player->pos.y = data["player"]["posz"];
+            player->pos.y = data["player"]["posy"];
+            player->pos.z = data["player"]["posz"];
             player->scale = data["player"]["scale"];
             player->accelSpeed = data["player"]["accelSpeed"];
             player->speedMod = data["player"]["speedMod"];
             player->mass = data["player"]["mass"];
             player->maxSpeed = data["player"]["maxSpeed"];
+            player->texPath = data["player"]["texture"];
 
             backObj->posz = data["backObjs"]["posz"];
             backObj->scale = data["backObjs"]["scale"];
+            backObj->texPath = data["backObjs"]["texture"];
         }
 
         background* backObj = new background;

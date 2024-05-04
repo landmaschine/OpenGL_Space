@@ -8,20 +8,22 @@
     },
 
     "player": {
-        "posx": 3,
-        "posy": 3,
-        "posz": 1,
+        "posx": 5,
+        "posy": 5,
+        "posz": 0,
         "width": 1,
         "height": 1,
-        "scale": 1,
+        "scale": 2,
         "accelSpeed": 3,
         "speedMod": 2,
         "mass": 1,
-        "maxSpeed": 10
+        "maxSpeed": 10,
+        "texture": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/SpaceShip.png"
     },
 
     "backObjs": {
         "posz": 0,
-        "scale": 1
+        "scale": 2,
+        "texture": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/nice.png"
     }
 }

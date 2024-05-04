@@ -19,44 +19,18 @@ void init() {
     glViewport(0, 0, dep->window.size().w, dep->window.size().h);
 
     dep->cam.init(dep->window);
+    stbi_set_flip_vertically_on_load(true);
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    entities->player.addComponent<PositionComponent>();
-    entities->player.getComponent<PositionComponent>().pos.x = dep->data.player->pos.x;
-    entities->player.getComponent<PositionComponent>().pos.y = dep->data.player->pos.y;
-    entities->player.getComponent<PositionComponent>().pos.z = dep->data.player->pos.z;
-    entities->player.getComponent<PositionComponent>().scale = dep->data.player->scale;
-    entities->player.getComponent<PositionComponent>().datainit();
-    entities->player.addComponent<MovementComponent>();
-    entities->player.getComponent<MovementComponent>().mass = dep->data.player->mass;
-    entities->player.getComponent<MovementComponent>().accelSpeed = dep->data.player->accelSpeed;
-    entities->player.getComponent<MovementComponent>().maxSpeed = dep->data.player->maxSpeed;
-    entities->player.getComponent<MovementComponent>().datainit();
-    entities->player.addComponent<CollisionComponent>();
-    entities->player.addComponent<RenderComponent>();
-    entities->player.getComponent<RenderComponent>().getCam(dep->cam);
-    entities->player.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/cube/cube.obj");
+    entities->player.addComponent<PositionComponent>(dep->data.player);
+    entities->player.addComponent<MovementComponent>(dep->data.player);
+    entities->player.addComponent<CollisionComponent>(dep->data.player);
+    entities->player.addComponent<RenderComponent>(dep->data.player->texPath);
 
-    entities->collider.addComponent<PositionComponent>(10.f, 10.f, 1.f);
-    entities->collider.getComponent<PositionComponent>().pos.z = dep->data.backObj->posz;
-    entities->collider.getComponent<PositionComponent>().scale = dep->data.backObj->scale;
-    entities->collider.getComponent<PositionComponent>().datainit();
-    entities->collider.addComponent<CollisionComponent>();
-    entities->collider.getComponent<CollisionComponent>().datainit();
-    entities->collider.addComponent<RenderComponent>();
-    entities->collider.getComponent<RenderComponent>().getCam(dep->cam);
-    entities->collider.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/cube/cube.obj");
-
-    entities->collider2.addComponent<PositionComponent>();
-    entities->collider2.getComponent<PositionComponent>().pos.z = dep->data.backObj->posz;
-    entities->collider2.getComponent<PositionComponent>().scale = dep->data.backObj->scale;
-    entities->collider2.getComponent<PositionComponent>().datainit();
-    entities->collider2.addComponent<CollisionComponent>();
-    entities->collider2.getComponent<CollisionComponent>().datainit();
-    entities->collider2.addComponent<RenderComponent>();
-    entities->collider2.getComponent<RenderComponent>().getCam(dep->cam);
-    entities->collider2.getComponent<RenderComponent>().setModel("/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/cube/cube.obj");
+    entities->collider.addComponent<PositionComponent>(0.f, 0.f, dep->data.backObj);
+    entities->collider.addComponent<CollisionComponent>(0.f, 0.f, dep->data.backObj);
+    entities->collider.addComponent<RenderComponent>(dep->data.backObj->texPath);
 
     dep->inputhandler.init(dep->window.getWin(), entities->player);
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
@@ -77,14 +51,6 @@ void update(float dt) {
     auto& playerMovement = entities->player.getComponent<MovementComponent>();
     
     dep->cam.updatePosition(playerMovement.pos, dep->window);
-
-    for(auto& e : entities->manager.entities) {
-        if(e.get()->hasComponent<RenderComponent>()) {
-            e.get()->getComponent<RenderComponent>().getCam(dep->cam);
-        }
-    }
-
-    //Physics::PlanetRotation().planetRotation(&entities->collider.getComponent<PlanetComponent>(), dt);
 
     for(auto it1 = entities->manager.entities.begin(); it1 != entities->manager.entities.end(); ++it1) {
         for(auto it2 = std::next(it1); it2 != entities->manager.entities.end(); ++it2) {
@@ -124,6 +90,12 @@ void update(float dt) {
     playerMovement.mouseY = y_window;
 
     entities->manager.update(dt);
+    
+    for(auto& re : entities->manager.entities) {
+        if(re->hasComponent<RenderComponent>()) {
+            re->getComponent<RenderComponent>().cam(&dep->cam);
+        }
+    }
 }
 
 void render() {
@@ -131,9 +103,9 @@ void render() {
     entities->manager.draw();
 
     dep->debGui.newFrame();
-    dep->debGui.showValue("time/FPS", gameloopdata.frameTime, 1/gameloopdata.frameTime);
+    dep->debGui.showValue((const char*)(glGetString(GL_VERSION)), gameloopdata.frameTime, 1/gameloopdata.frameTime);
     dep->debGui.showVec("Player Pos", entities->player.getComponent<MovementComponent>().pos);
-    dep->debGui.showVec("player vel", entities->player.getComponent<MovementComponent>().velocity);
+    dep->debGui.showVec("player Vel", entities->player.getComponent<MovementComponent>().velocity);
     dep->debGui.draw();
 
     glfwSwapBuffers(dep->window.getWin());
@@ -159,11 +131,9 @@ void gameLoop::run() {
         accumulator += gameloopdata.frameTime;
 
         while(accumulator >= timeStep) {
-            //measureFPS([&]() {input();}, [&](){update(frameTime);}, [&](){render();});
             input();
             update(gameloopdata.frameTime);
             render(); 
-
             accumulator -= gameloopdata.frameTime;
         }
     }

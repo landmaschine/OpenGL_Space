@@ -8,12 +8,11 @@
 #include "PositionComponent.h"
 #include "lib/stb/stb_image.h"
 #include "Engine/RenderEngine/Shaders/shader.h"
-#include "Engine/Models/Model.h"
 #include "Engine/Camera/Camera.h"
 #include "MovementComponent.h"
 #include "PlanetComponent.h"
 #include "lightSource/LightsourceComponent.h"
 #include "CollisionComponent.h"
-#include "RenderComponent/RenderComponent.h"
+#include "RenderComponent.h"
 
 #include "Systems/Pyhsics.h"

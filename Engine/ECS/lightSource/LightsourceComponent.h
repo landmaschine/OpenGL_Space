@@ -37,7 +37,6 @@ class LightsourceComponent : public Component {
             trans = glm::mat4(1.0f);
             trans = glm::translate(trans, glm::vec3(1.f, 2.f, -11.f));
             lightShader.setMat4("model", trans);
-            light.Draw(lightShader.ID);
 
             
             lightCubeShader.use();
@@ -46,14 +45,9 @@ class LightsourceComponent : public Component {
             trans = glm::mat4(1.0f);
             trans = glm::translate(trans, playerPos);
             lightCubeShader.setMat4("model", trans);
-            lightCube.Draw(lightCubeShader.ID);
             
         }
 
-        void loadModel(std::string path) {
-            light.load(path);
-            lightCube.load(path);
-        }
 
         void setCam(Icamer2D& cam) {
             proj = cam.projection();
@@ -72,8 +66,6 @@ class LightsourceComponent : public Component {
         glm::vec3 lightPos;
         glm::vec3 playerPos;
         
-        Model light;
-        Model lightCube;
         glm::mat4 trans;
         glm::mat4 proj;
         glm::mat4 view;

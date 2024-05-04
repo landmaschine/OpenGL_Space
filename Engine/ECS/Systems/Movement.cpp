@@ -2,7 +2,7 @@
 
 void Physics::Movement::calcBehaviour(MovementComponent* move, float dt) {
     float cursorangle = glm::atan(move->mouseY, move->mouseX);
-    move->rota = glm::rotate(move->rota, cursorangle + glm::radians(90.f), glm::vec3(0.0f, 1.0f, 0.0f));
+    move->rota = glm::rotate(move->rota, cursorangle - glm::radians(90.f), glm::vec3(0.0f, 0.0f, 1.0f));
 
     static glm::vec2 acceleration = glm::vec2(0.0f);
     float friction = 0;
@@ -10,11 +10,12 @@ void Physics::Movement::calcBehaviour(MovementComponent* move, float dt) {
     glm::vec2 direction_norm(move->direction.x, move->direction.y);
     if (!(direction_norm.x == 0 && direction_norm.y == 0)) {
         direction_norm = glm::normalize(direction_norm);
-        move->acceleration = glm::vec4(move->accelSpeed * move->speedMod * direction_norm.x / move->mass, 0.0f, 
-                                       move->accelSpeed * move->speedMod * direction_norm.y / move->mass, 0.0f);
+        move->acceleration = glm::vec4(move->accelSpeed * move->speedMod * direction_norm.x / move->mass, 
+                                       move->accelSpeed * move->speedMod * direction_norm.y / move->mass, 
+                                       0.0f , 0.0f);
         
         move->acceleration = move->rota * move->acceleration;
-        acceleration = glm::vec2(move->acceleration.x * 4, move->acceleration.z * 4) * dt;
+        acceleration = glm::vec2(move->acceleration.x * 4, move->acceleration.y * 4) * dt;
 
         move->velocity += acceleration;
 
@@ -32,15 +33,15 @@ void Physics::Movement::calcBehaviour(MovementComponent* move, float dt) {
             move->velocity = glm::vec2(0.0f);
         }
     }
-    move->trans = glm::translate(move->trans, glm::vec3(move->velocity.x * dt, move->pos.z, move->velocity.y * dt));
+    move->trans = glm::translate(move->trans, glm::vec3(move->velocity.x * dt, move->velocity.y * dt,  move->pos.z));
 
     glm::mat4 tmp = glm::mat4(1.0f);
     tmp = move->trans * move->rota;
-    move->trans = glm::translate(move->trans, glm::vec3(move->velocity.x * dt, -move->pos.z, move->velocity.y * dt));
+    move->trans = glm::translate(move->trans, glm::vec3(move->velocity.x * dt, move->velocity.y * dt, -move->pos.z));
 
     move->finaltrans = tmp;
 
-    move->rota = glm::rotate(move->rota, -cursorangle - glm::radians(90.f), glm::vec3(0.0f, 1.0f, 0.0f));
+    move->rota = glm::rotate(move->rota, -cursorangle + glm::radians(90.f), glm::vec3(0.0f, 0.0f, 1.0f));
     move->pos = extractTranslation(move->trans);
 }
 

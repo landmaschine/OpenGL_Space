@@ -3,13 +3,13 @@
 
 class MoveLeft : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().direction.x = 1;
+        ent.getComponent<MovementComponent>().direction.x = -1;
     }
 };
 
 class MoveRight : public Command {
     void pressed(Entity& ent) override {
-       ent.getComponent<MovementComponent>().direction.x = -1;
+       ent.getComponent<MovementComponent>().direction.x = 1;
     }
     void released(Entity& ent) override {
         ent.getComponent<MovementComponent>().direction.x = 0;
