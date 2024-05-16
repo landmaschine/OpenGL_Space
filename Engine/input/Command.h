@@ -1,7 +1,6 @@
 #pragma once
 #include "Engine/ECS/ECS.h"
-#include "Engine/ECS/Components.h"
-#include "Engine/jsonParser/Json.h"
+#include "Engine/Tools/Json.h"
 
 class Command {
     public:

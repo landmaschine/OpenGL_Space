@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine/ECS/Components.h"
+#include "Engine/ECS/depComponents.h"
 
 class LightsourceComponent : public Component {
     public:

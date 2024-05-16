@@ -1,5 +1,6 @@
 #pragma once
 #include "Command.h"
+#include "Engine/ECS/MovementComponent.h"
 
 class MoveLeft : public Command {
     void pressed(Entity& ent) override {

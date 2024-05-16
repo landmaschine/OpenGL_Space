@@ -1,10 +1,10 @@
 #pragma once
-#include "Components.h"
+#include "depComponents.h"
 
 typedef struct rect {
-    float w = 1.f;
-    float h = 1.f;
-    double scale = 1;
+    int w = 1.f;
+    int h = 1.f;
+    int scale = 1;
     glm::vec3 pos;
 } collRect;
 
@@ -15,9 +15,9 @@ enum class CollisionSide {
     Both
 };
 
-class CollisionComponent : public Component {
+class CollisionComponentAABB : public Component {
     public:
-        CollisionComponent(playerData* data) {
+        CollisionComponentAABB(playerData* data) {
             rect.scale = data->scale;
             rect.w *= rect.scale;
             rect.h *= rect.scale;
@@ -25,7 +25,7 @@ class CollisionComponent : public Component {
             rect.pos.y = data->pos.y - rect.h / 2;
         }
 
-        CollisionComponent(float x, float y, background* data) {
+        CollisionComponentAABB(float x, float y, background* data) {
             pos = glm::vec3(x, y, data->posz);
             rect.scale = data->scale;
             rect.pos = pos;

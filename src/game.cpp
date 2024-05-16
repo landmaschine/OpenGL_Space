@@ -25,12 +25,23 @@ void init() {
 
     entities->player.addComponent<PositionComponent>(dep->data.player);
     entities->player.addComponent<MovementComponent>(dep->data.player);
-    entities->player.addComponent<CollisionComponent>(dep->data.player);
+    entities->player.addComponent<CollisionComponentAABB>(dep->data.player);
+    entities->player.addComponent<CollisionComponentPoly>(dep->data.player);
     entities->player.addComponent<RenderComponent>(dep->data.player->texPath);
 
-    entities->collider.addComponent<PositionComponent>(0.f, 0.f, dep->data.backObj);
-    entities->collider.addComponent<CollisionComponent>(0.f, 0.f, dep->data.backObj);
+    entities->collider.addComponent<PositionComponent>(5.f, 5.f, dep->data.backObj);
+    entities->collider.addComponent<CollisionComponentPoly>(dep->data.backObj);
     entities->collider.addComponent<RenderComponent>(dep->data.backObj->texPath);
+
+    /*
+    entities->collider2.addComponent<PositionComponent>(-5.f, -5.f, dep->data.backObj);
+    entities->collider2.addComponent<CollisionComponentAABB>(-5.f, -5.f, dep->data.backObj);
+    entities->collider2.addComponent<RenderComponent>(dep->data.backObj->texPath);
+
+    entities->collider3.addComponent<PositionComponent>(5.f, -5.f, dep->data.backObj);
+    entities->collider3.addComponent<CollisionComponentAABB>(5.f, -5.f, dep->data.backObj);
+    entities->collider3.addComponent<RenderComponent>(dep->data.backObj->texPath);
+    */
 
     dep->inputhandler.init(dep->window.getWin(), entities->player);
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
@@ -54,26 +65,15 @@ void update(float dt) {
 
     for(auto it1 = entities->manager.entities.begin(); it1 != entities->manager.entities.end(); ++it1) {
         for(auto it2 = std::next(it1); it2 != entities->manager.entities.end(); ++it2) {
-            if((*it1)->hasComponent<CollisionComponent>() && (*it2)->hasComponent<CollisionComponent>()) {
-                gameloopdata.col = Physics::Collision().AABB((*it1)->getComponent<CollisionComponent>().rect, (*it2)->getComponent<CollisionComponent>().rect, gameloopdata.side);
-                switch(gameloopdata.side) {
-                    case CollisionSide::Horizontal:
-                        entities->player.getComponent<MovementComponent>().direction = -entities->player.getComponent<MovementComponent>().direction;
-                        entities->player.getComponent<MovementComponent>().velocity.x = -entities->player.getComponent<MovementComponent>().velocity.x;
-                        entities->player.getComponent<MovementComponent>().velocity.y = entities->player.getComponent<MovementComponent>().velocity.y;
-                        break;
-                    case CollisionSide::Vertical:
-                        entities->player.getComponent<MovementComponent>().direction = -entities->player.getComponent<MovementComponent>().direction;
-                        entities->player.getComponent<MovementComponent>().velocity.x = entities->player.getComponent<MovementComponent>().velocity.x;
-                        entities->player.getComponent<MovementComponent>().velocity.y = -entities->player.getComponent<MovementComponent>().velocity.y;
-                        break;
-                    case CollisionSide::Both:
-                        break;
-                    case CollisionSide::None:
-                        break;
+            if((*it1)->hasComponent<CollisionComponentAABB>() && (*it2)->hasComponent<CollisionComponentAABB>()) {
+                gameloopdata.col = Physics::Collision().AABB((*it1)->getComponent<CollisionComponentAABB>().rect, (*it2)->getComponent<CollisionComponentAABB>().rect, gameloopdata.side);
+                Physics::Collision().HandleCollision_Player(entities->player.getComponent<MovementComponent>(), gameloopdata.side);
                 }
             }
         }
+
+    {
+        //gameloopdata.col = Physics::Collision().CheckCollision(entities->player.getComponent<CollisionComponentPoly>().polygon.Polygons, entities->collider.getComponent<CollisionComponentPoly>().polygon.Polygons);
     }
 
     Physics::Movement().calcBehaviour(&entities->player.getComponent<MovementComponent>(), dt);
@@ -106,6 +106,7 @@ void render() {
     dep->debGui.showValue((const char*)(glGetString(GL_VERSION)), gameloopdata.frameTime, 1/gameloopdata.frameTime);
     dep->debGui.showVec("Player Pos", entities->player.getComponent<MovementComponent>().pos);
     dep->debGui.showVec("player Vel", entities->player.getComponent<MovementComponent>().velocity);
+    dep->debGui.showBool("Collision", gameloopdata.col);
     dep->debGui.draw();
 
     glfwSwapBuffers(dep->window.getWin());

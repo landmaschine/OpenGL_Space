@@ -14,7 +14,7 @@ class Shader
 public:
     unsigned int ID = 0;
 
-    void loadShader(const char* vertexPath, const char* fragmentPath);
+    void loadShader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr);
 
     void use() { glUseProgram(ID); };
 

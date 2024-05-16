@@ -38,6 +38,12 @@ class guiDeb {
             ImGui::End();
         }
 
+        void showBool(const char* name, bool var) {
+            ImGui::Begin(name);
+            ImGui::Text("%s: %d", name, var);
+            ImGui::End();
+        }
+
         void showValue(const char* name, float var, float var2) {
             ImGui::Begin(name);
             ImGui::Text("%f", var);

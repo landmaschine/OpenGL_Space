@@ -1,5 +1,5 @@
 #pragma once
-#include "Components.h"
+#include "depComponents.h"
 
 class PlanetComponent : public Component {
     public:

@@ -8,22 +8,25 @@
     },
 
     "player": {
-        "posx": 5,
-        "posy": 5,
+        "posx": 0,
+        "posy": 0,
         "posz": 0,
         "width": 1,
         "height": 1,
-        "scale": 2,
-        "accelSpeed": 3,
+        "scale": 1,
+        "accelSpeed": 2,
         "speedMod": 2,
         "mass": 1,
         "maxSpeed": 10,
-        "texture": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/SpaceShip.png"
+        "texture": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/SpaceShipV2.png",
+        "collision": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/SpaceShipCol.txt",
+        "tag": "player"
     },
 
     "backObjs": {
         "posz": 0,
-        "scale": 2,
-        "texture": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/nice.png"
+        "scale": 1,
+        "texture": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/nice.png",
+        "collision": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/Box.txt"
     }
 }

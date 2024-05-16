@@ -1,5 +1,6 @@
 #pragma once
-#include "Components.h"
+#include "depComponents.h"
+#include "PositionComponent.h"
 
 class MovementComponent : public Component {
     public:

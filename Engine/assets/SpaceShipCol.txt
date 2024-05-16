@@ -1,0 +1,52 @@
+Simple plain text exporter for demo purposes
+
+See http://www.grantlee.org/apidox/for_themers.html for more information
+
+Custom values (from the <bodies> section)
+    Grav: 0
+
+List of all bodies:
+
+
+    Name:               SpaceShipV2
+    Custom values (from the <bodies> section):
+        Identifier:     0
+        FixedRotation:  NO
+
+        AnchorPointRel: { 0.500,0.500 }
+        AnchorPointAbs: { 32.000,32.000 }
+        Size:           { 64.000,64.000 }
+    
+    List of all fixtures:
+
+        ----------------------------------------------------------
+        fixtureType:             POLYGON
+
+        Custom values (from the <fixtures> section):
+            density:             2
+            friction:            0
+            restitution:         0
+            isSensor:            NO
+            filter_groupIndex:   0
+            filter_categoryBits: 1
+            filter_maskBits:     65535
+
+
+        Hull polygon:
+             (1, -32)  , (12, -11)  , (18, -8)  , (19, -4)  , (26, -3)  , (32, 5)  , (32, 27)  , (27, 26)  , (23, 16)  , (17, 16)  , (14, 19)  , (14, 23)  , (9, 23)  , (9, 19)  , (7, 16)  , (0, 20)  , (-5, 16)  , (-9, 18)  , (-9, 23)  , (-14, 23)  , (-14, 19)  , (-16, 16)  , (-22, 16)  , (-26, 25)  , (-32, 27)  , (-32, 5)  , (-25, -3)  , (-19, -3)  , (-18, -8)  , (-12, -11)  , (-1, -32) 
+
+        Convex sub polygons:
+
+             (-14, 23)  , (-14, 19)  , (-9, 18)  , (-9, 23) 
+             (9, 23)  , (9, 19)  , (14, 19)  , (14, 23) 
+             (-5, 16)  , (-12, -11)  , (-1, -32)  , (1, -32)  , (12, -11)  , (7, 16)  , (0, 20) 
+             (-16, 16)  , (-19, -3)  , (-12, -11)  , (-5, 16)  , (-9, 18)  , (-14, 19) 
+             (7, 16)  , (12, -11)  , (18, -8)  , (19, -4)  , (17, 16)  , (14, 19)  , (9, 19) 
+             (-12, -11)  , (-19, -3)  , (-18, -8) 
+             (32, 5)  , (32, 27)  , (27, 26)  , (23, 16)  , (19, -4)  , (26, -3) 
+             (-32, 27)  , (-32, 5)  , (-25, -3)  , (-19, -3)  , (-22, 16)  , (-26, 25) 
+             (-19, -3)  , (-16, 16)  , (-22, 16) 
+             (17, 16)  , (19, -4)  , (23, 16) 
+
+
+
