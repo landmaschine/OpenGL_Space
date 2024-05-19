@@ -1,6 +1,7 @@
 #pragma once
 #include "../depComponents.h"
 #include "../PositionComponent.h"
+#include "HitBoxRender.h"
 
 class CollisionComponentPoly : public Component {
     public:
@@ -15,6 +16,11 @@ class CollisionComponentPoly : public Component {
             polyData.extractHullPolygonsFromTextFile(data->collision, &polygon);
         }
         
+        void draw() override {
+            
+        }
+
+        void cam(Icamer2D& cam) {}
         
         void init() override {
             if(entity->hasComponent<PositionComponent>()) {
@@ -29,7 +35,6 @@ class CollisionComponentPoly : public Component {
                 auto newPos = entity->getComponent<PositionComponent>().pos;
                 glm::vec3 deltaPos = newPos - initialPos;
                 if(deltaPos != glm::vec3(0.0f)) {
-                    updatePolygonPosition(deltaPos);
                     initialPos = newPos;
                 }
             }
@@ -39,13 +44,9 @@ class CollisionComponentPoly : public Component {
 
     PolyData polygon;
     private:
-
-        void updatePolygonPosition(const glm::vec3& deltaPos) {
-            //for(auto& polygon : polygon.Polygons) {
-                    //polygon.x += deltaPos.x;
-                    //polygon.y += deltaPos.y;
-            //}
-        }
+    HitBoxRender render;
+    glm::mat4 projection = glm::mat4(1.0f);
+    glm::mat4 view = glm::mat4(1.0f);
 
     glm::vec3 initialPos;
     PolyFromTxt polyData;

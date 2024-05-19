@@ -95,6 +95,9 @@ void update(float dt) {
         if(re->hasComponent<RenderComponent>()) {
             re->getComponent<RenderComponent>().cam(&dep->cam);
         }
+        if(re->hasComponent<CollisionComponentPoly>()) {
+            re->getComponent<CollisionComponentPoly>();
+        }
     }
 }
 

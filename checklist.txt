@@ -77,4 +77,3 @@ its working again!
 18. collision detection []
     -> aabb works
     -> additional checking for which side is hit;
-    
