@@ -27,6 +27,7 @@
         "posz": 0,
         "scale": 1,
         "texture": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/nice.png",
-        "collision": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/Box.txt"
+        "collision": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/Box.txt",
+        "tag": "backObj"
     }
 }

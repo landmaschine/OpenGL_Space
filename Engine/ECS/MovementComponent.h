@@ -38,7 +38,7 @@ class MovementComponent : public Component {
         }
 
         void update(float dt) override {
-            entity->getComponent<PositionComponent>().pos = pos;
+            entity->getComponent<PositionComponent>().transform = finaltrans;
         }
 
         glm::mat4 trans;

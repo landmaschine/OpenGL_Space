@@ -7,48 +7,44 @@ class CollisionComponentPoly : public Component {
     public:
         CollisionComponentPoly() {}
         CollisionComponentPoly(playerData* data) {
-            polyData.extractHullPolygonsFromTextFile(data->collision, &polygon);
-            //HitBoxRender render(polygon, entity->getComponent<MovementComponent>());
-            //polyData.print(polygon);
+            polyData.extractConPolygonsFromTextFile(data->collision, &polygon);
+            render.init(polygon);
         }
 
         CollisionComponentPoly(background* data) {
-            polyData.extractHullPolygonsFromTextFile(data->collision, &polygon);
+            polyData.extractConPolygonsFromTextFile(data->collision, &polygon);
+            render.init(polygon);
         }
         
         void draw() override {
-            
+            render.render(view, projection, transform);
         }
 
-        void cam(Icamer2D& cam) {}
+        void cam(Icamer2D& cam) {
+            projection = cam.projection();
+            view = cam.view();
+        }
         
         void init() override {
             if(entity->hasComponent<PositionComponent>()) {
-                pos = entity->getComponent<PositionComponent>().pos;
+                transform = entity->getComponent<PositionComponent>().transform;
             } else {
                 std::cout << "ERROR entity has CollisionComponentPoly but no PositionComponent" << std::endl;
             }
+            render.setpolygons(polygon);
         }
 
         void update(float dt) override {
             if(entity->hasComponent<PositionComponent>()) {
-                auto newPos = entity->getComponent<PositionComponent>().pos;
-                glm::vec3 deltaPos = newPos - initialPos;
-                if(deltaPos != glm::vec3(0.0f)) {
-                    initialPos = newPos;
-                }
+                transform = entity->getComponent<PositionComponent>().transform;
             }
-            //polyData.print(polygon);
         }
-
 
     PolyData polygon;
     private:
     HitBoxRender render;
     glm::mat4 projection = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
-
-    glm::vec3 initialPos;
+    glm::mat4 transform = glm::mat4(1.0f);
     PolyFromTxt polyData;
-    glm::vec3 pos;
 };

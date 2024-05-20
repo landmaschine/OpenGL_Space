@@ -25,23 +25,12 @@ void init() {
 
     entities->player.addComponent<PositionComponent>(dep->data.player);
     entities->player.addComponent<MovementComponent>(dep->data.player);
-    entities->player.addComponent<CollisionComponentAABB>(dep->data.player);
     entities->player.addComponent<CollisionComponentPoly>(dep->data.player);
-    entities->player.addComponent<RenderComponent>(dep->data.player->texPath);
+    //entities->player.addComponent<RenderComponent>(dep->data.player->texPath);
 
     entities->collider.addComponent<PositionComponent>(5.f, 5.f, dep->data.backObj);
     entities->collider.addComponent<CollisionComponentPoly>(dep->data.backObj);
-    entities->collider.addComponent<RenderComponent>(dep->data.backObj->texPath);
-
-    /*
-    entities->collider2.addComponent<PositionComponent>(-5.f, -5.f, dep->data.backObj);
-    entities->collider2.addComponent<CollisionComponentAABB>(-5.f, -5.f, dep->data.backObj);
-    entities->collider2.addComponent<RenderComponent>(dep->data.backObj->texPath);
-
-    entities->collider3.addComponent<PositionComponent>(5.f, -5.f, dep->data.backObj);
-    entities->collider3.addComponent<CollisionComponentAABB>(5.f, -5.f, dep->data.backObj);
-    entities->collider3.addComponent<RenderComponent>(dep->data.backObj->texPath);
-    */
+    //entities->collider.addComponent<RenderComponent>(dep->data.backObj->texPath);
 
     dep->inputhandler.init(dep->window.getWin(), entities->player);
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
@@ -77,6 +66,7 @@ void update(float dt) {
     }
 
     Physics::Movement().calcBehaviour(&entities->player.getComponent<MovementComponent>(), dt);
+    entities->player.getComponent<CollisionComponentPoly>().cam(dep->cam);
 
     int width, height;
     double ypos, xpos;

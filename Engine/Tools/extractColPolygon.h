@@ -11,7 +11,7 @@ struct PolyData {
 
 class PolyFromTxt {
 public:
-    void extractHullPolygonsFromTextFile(const std::string filename, PolyData* polyData) {
+    void extractConPolygonsFromTextFile(const std::string filename, PolyData* polyData) {
         std::ifstream file(filename);
         if (!file.is_open()) {
             std::cerr << "Error opening file: " << filename << std::endl;
@@ -61,5 +61,32 @@ public:
             }
             std::cout << std::endl;
         }
+    }
+
+    std::vector<float> createVertecis(const PolyData& polydata) {
+        std::vector<float> vertices;
+        for (const auto& polygon : polydata.Polygons) {
+            for (const auto& point : polygon) {
+                vertices.push_back(point.x / 64.f);
+                vertices.push_back(point.y / 64.f);
+                vertices.push_back(0.0f);
+            }
+        }
+        return vertices;
+    }
+
+    std::vector<unsigned int> createIndices(const PolyData& polyData) {
+        std::vector<unsigned int> indices;
+        unsigned int offset = 0;
+        for (const auto& polygon : polyData.Polygons) {
+            unsigned int vertexCount = polygon.size();
+            for (unsigned int i = 1; i < vertexCount - 1; ++i) {
+                indices.push_back(offset);
+                indices.push_back(offset + i);
+                indices.push_back(offset + i + 1);
+            }
+            offset += vertexCount;
+        }
+        return indices;
     }
 };
