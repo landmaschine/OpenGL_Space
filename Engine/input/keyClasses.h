@@ -4,13 +4,13 @@
 
 class MoveLeft : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().direction.x = -1;
+        ent.getComponent<MovementComponent>().direction.x = 1;
     }
 };
 
 class MoveRight : public Command {
     void pressed(Entity& ent) override {
-       ent.getComponent<MovementComponent>().direction.x = 1;
+       ent.getComponent<MovementComponent>().direction.x = -1;
     }
     void released(Entity& ent) override {
         ent.getComponent<MovementComponent>().direction.x = 0;
@@ -19,13 +19,13 @@ class MoveRight : public Command {
 
 class MoveUp : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().direction.y = 1;
+        ent.getComponent<MovementComponent>().direction.y = -1;
     }
 };
 
 class MoveDown : public Command {
     void pressed(Entity& ent) override {
-        ent.getComponent<MovementComponent>().direction.y = -1;
+        ent.getComponent<MovementComponent>().direction.y = 1;
     }
     void released(Entity& ent) override {
         ent.getComponent<MovementComponent>().direction.y = 0;
@@ -51,5 +51,11 @@ class SetFrameUnlimited : public Command {
 class setVsync : public Command {
     void pressed(Entity& ent) override {
         glfwSwapInterval(1);
+    }
+};
+
+class shouldHitBoxRender : public Command {
+    void pressed(Entity& ent) override {
+
     }
 };

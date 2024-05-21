@@ -19,7 +19,6 @@
 #include "Engine/Tools/extractColPolygon.h"
 
 #include "Engine/ECS/CollisionComponent/CollisionComponentPoly.h"
-#include "Engine/ECS/CollisionComponent.h"
 #include "Engine/ECS/MovementComponent.h"
 #include "Engine/ECS/PositionComponent.h"
 #include "Engine/ECS/PlanetComponent.h"
@@ -44,10 +43,10 @@ struct Entities {
     Entity& player;
 
     Entity& collider;
+    Entity& collider1;
     Entity& collider2;
-    Entity& collider3;
 
-    Entities() : player(manager.addEntity()), collider(manager.addEntity()), collider2(manager.addEntity()), collider3(manager.addEntity())
+    Entities() : player(manager.addEntity()), collider(manager.addEntity()), collider1(manager.addEntity()), collider2(manager.addEntity())
     {
 
     }
@@ -59,7 +58,8 @@ typedef struct gameLoopData
     double frameTime = 0;
     int zoom = 50;
     int col = 0;
-    CollisionSide side;
+    Physics::CollInfo::CollisionInfo collinfo;
+    
 } loopData;
 
 loopData gameloopdata;

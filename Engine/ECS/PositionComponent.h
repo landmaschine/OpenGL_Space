@@ -6,6 +6,7 @@ class PositionComponent : public Component {
         PositionComponent() {
             pos = glm::vec3(1.0f);
             transform = glm::mat4(1.0f);
+            rota = glm::mat4(1.0f);
             scale = 1;
         }
 
@@ -35,6 +36,7 @@ class PositionComponent : public Component {
 
         glm::vec3 pos;
         glm::mat4 transform;
+        glm::mat4 rota;
         double scale;
         int width, height;
 };

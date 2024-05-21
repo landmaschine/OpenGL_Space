@@ -2,7 +2,7 @@
 
 void Physics::Movement::calcBehaviour(MovementComponent* move, float dt) {
     float cursorangle = glm::atan(move->mouseY, move->mouseX);
-    move->rota = glm::rotate(move->rota, cursorangle - glm::radians(90.f), glm::vec3(0.0f, 0.0f, 1.0f));
+    move->rota = glm::rotate(move->rota, cursorangle + glm::radians(90.f), glm::vec3(0.0f, 0.0f, 1.0f));
 
     static glm::vec2 acceleration = glm::vec2(0.0f);
     float friction = 0;
@@ -40,9 +40,10 @@ void Physics::Movement::calcBehaviour(MovementComponent* move, float dt) {
     move->trans = glm::translate(move->trans, glm::vec3(move->velocity.x * dt, move->velocity.y * dt, -move->pos.z));
 
     move->finaltrans = tmp;
+    move->finalRota = move->rota;
 
-    move->rota = glm::rotate(move->rota, -cursorangle + glm::radians(90.f), glm::vec3(0.0f, 0.0f, 1.0f));
-    move->pos = extractTranslation(move->trans);
+    move->rota = glm::rotate(move->rota, -cursorangle - glm::radians(90.f), glm::vec3(0.0f, 0.0f, 1.0f));
+    move->pos = utils::extractTranslation(move->trans);
 }
 
 void Physics::PlanetRotation::planetRotation(PlanetComponent* planet, float dt) {

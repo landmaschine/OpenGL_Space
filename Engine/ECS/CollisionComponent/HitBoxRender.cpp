@@ -21,13 +21,14 @@ void HitBoxRender::init(PolyData poly) {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     shader.use();
 }
 
 HitBoxRender::~HitBoxRender() {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
 }
 
 void HitBoxRender::render(glm::mat4 view, glm::mat4 projection, glm::mat4 transform) {

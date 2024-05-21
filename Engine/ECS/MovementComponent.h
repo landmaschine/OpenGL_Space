@@ -35,14 +35,17 @@ class MovementComponent : public Component {
                 std::cout << "Entity has MovementComponent but no PositionComponent!" << std::endl;
             }
             trans = entity->getComponent<PositionComponent>().transform;
+            entity->getComponent<PositionComponent>().rota = rota;
         }
 
         void update(float dt) override {
             entity->getComponent<PositionComponent>().transform = finaltrans;
+            entity->getComponent<PositionComponent>().rota = rota;
         }
 
         glm::mat4 trans;
         glm::mat4 rota;
+        glm::mat4 finalRota;
         glm::mat4 finaltrans;
         glm::vec3 pos;
         glm::vec3 direction;

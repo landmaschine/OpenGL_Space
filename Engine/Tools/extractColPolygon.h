@@ -44,6 +44,8 @@ public:
                 if (discard == '(') {
                     float x, y;
                     iss >> x >> discard >> y >> discard;
+                    x /= 64.f;
+                    y /= 64.f;
                     polygonPoints.emplace_back(x, y);
                 }
             }
@@ -67,8 +69,8 @@ public:
         std::vector<float> vertices;
         for (const auto& polygon : polydata.Polygons) {
             for (const auto& point : polygon) {
-                vertices.push_back(point.x / 64.f);
-                vertices.push_back(point.y / 64.f);
+                vertices.push_back(point.x);
+                vertices.push_back(point.y);
                 vertices.push_back(0.0f);
             }
         }

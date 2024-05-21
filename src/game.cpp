@@ -19,27 +19,31 @@ void init() {
     glViewport(0, 0, dep->window.size().w, dep->window.size().h);
 
     dep->cam.init(dep->window);
-    stbi_set_flip_vertically_on_load(true);
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
     entities->player.addComponent<PositionComponent>(dep->data.player);
     entities->player.addComponent<MovementComponent>(dep->data.player);
     entities->player.addComponent<CollisionComponentPoly>(dep->data.player);
-    //entities->player.addComponent<RenderComponent>(dep->data.player->texPath);
+    entities->player.addComponent<RenderComponent>(dep->data.player->texPath);
 
     entities->collider.addComponent<PositionComponent>(5.f, 5.f, dep->data.backObj);
     entities->collider.addComponent<CollisionComponentPoly>(dep->data.backObj);
-    //entities->collider.addComponent<RenderComponent>(dep->data.backObj->texPath);
+    entities->collider.addComponent<RenderComponent>(dep->data.backObj->texPath);
+
+    entities->collider1.addComponent<PositionComponent>(-5.f, -5.f, dep->data.backObj);
+    entities->collider1.addComponent<CollisionComponentPoly>(dep->data.backObj);
+    entities->collider1.addComponent<RenderComponent>(dep->data.backObj->texPath);
 
     dep->inputhandler.init(dep->window.getWin(), entities->player);
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
-    dep->inputhandler.bindKey(GLFW_KEY_S, std::make_shared<MoveDown>());
     dep->inputhandler.bindKey(GLFW_KEY_A, std::make_shared<MoveLeft>());
+    dep->inputhandler.bindKey(GLFW_KEY_S, std::make_shared<MoveDown>());
     dep->inputhandler.bindKey(GLFW_KEY_D, std::make_shared<MoveRight>());
     dep->inputhandler.bindKey(GLFW_KEY_LEFT_SHIFT, std::make_shared<MoveFaster>());
-    dep->inputhandler.bindKey(GLFW_KEY_F2, std::make_shared<setVsync>());
     dep->inputhandler.bindKey(GLFW_KEY_F1, std::make_shared<SetFrameUnlimited>());
+    dep->inputhandler.bindKey(GLFW_KEY_F2, std::make_shared<setVsync>());
+    dep->inputhandler.bindKey(GLFW_KEY_F3, std::make_shared<shouldHitBoxRender>());
 }
 
 void input() {
@@ -52,21 +56,25 @@ void update(float dt) {
     
     dep->cam.updatePosition(playerMovement.pos, dep->window);
 
-    for(auto it1 = entities->manager.entities.begin(); it1 != entities->manager.entities.end(); ++it1) {
-        for(auto it2 = std::next(it1); it2 != entities->manager.entities.end(); ++it2) {
-            if((*it1)->hasComponent<CollisionComponentAABB>() && (*it2)->hasComponent<CollisionComponentAABB>()) {
-                gameloopdata.col = Physics::Collision().AABB((*it1)->getComponent<CollisionComponentAABB>().rect, (*it2)->getComponent<CollisionComponentAABB>().rect, gameloopdata.side);
-                Physics::Collision().HandleCollision_Player(entities->player.getComponent<MovementComponent>(), gameloopdata.side);
+    for (auto it1 = entities->manager.entities.begin(); it1 != entities->manager.entities.end(); ++it1) {
+        for (auto it2 = std::next(it1); it2 != entities->manager.entities.end(); ++it2) {
+        // Überprüfen, ob beide Entitäten die CollisionComponentPoly-Komponente haben
+            if ((*it1)->hasComponent<CollisionComponentPoly>() && (*it2)->hasComponent<CollisionComponentPoly>()) {
+                auto& poly1 = (*it1)->getComponent<CollisionComponentPoly>().polygon;
+                auto& poly2 = (*it2)->getComponent<CollisionComponentPoly>().polygon;
+
+                // Kollisionsprüfung
+                if (Physics::Collision().CheckCollision(poly1, poly2, gameloopdata.collinfo)) {
+                    gameloopdata.col = true;
+                    Physics::Collision().HandleCollision_Player(entities->player.getComponent<MovementComponent>(), gameloopdata.collinfo.collisionNormal);
+                } else {
+                    gameloopdata.col = false;
                 }
             }
         }
-
-    {
-        //gameloopdata.col = Physics::Collision().CheckCollision(entities->player.getComponent<CollisionComponentPoly>().polygon.Polygons, entities->collider.getComponent<CollisionComponentPoly>().polygon.Polygons);
     }
-
+    
     Physics::Movement().calcBehaviour(&entities->player.getComponent<MovementComponent>(), dt);
-    entities->player.getComponent<CollisionComponentPoly>().cam(dep->cam);
 
     int width, height;
     double ypos, xpos;
@@ -86,7 +94,7 @@ void update(float dt) {
             re->getComponent<RenderComponent>().cam(&dep->cam);
         }
         if(re->hasComponent<CollisionComponentPoly>()) {
-            re->getComponent<CollisionComponentPoly>();
+            re->getComponent<CollisionComponentPoly>().cam(dep->cam);
         }
     }
 }
