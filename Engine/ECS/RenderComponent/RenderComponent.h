@@ -32,10 +32,10 @@ class RenderComponent : public Component {
             glGenTextures(1, &texture);
             glBindTexture(GL_TEXTURE_2D, texture);
 
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);	
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
             int nrChannels;
             unsigned char* data = stbi_load(texturePath.c_str(), &width, &height, &nrChannels, 0);
@@ -45,6 +45,13 @@ class RenderComponent : public Component {
             } else {
                 std::cout << "Failed to load texture" << std::endl;
             }
+
+            if (GLAD_GL_EXT_texture_filter_anisotropic) {
+                GLfloat largest;
+                glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &largest);
+                glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, largest);
+            }
+
             stbi_image_free(data);
         }
 
@@ -59,7 +66,7 @@ class RenderComponent : public Component {
                 model = entity->getComponent<PositionComponent>().transform;
             }
         }
-        
+
         ~RenderComponent() override {}
 
         glm::mat4 model;
