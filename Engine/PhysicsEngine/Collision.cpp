@@ -5,8 +5,7 @@
 void Physics::Collision::HandleCollision_Player(MovementComponent& move, const glm::vec2& collisionNormal) {
     move.velocity -= 2.0f * glm::dot(move.velocity, collisionNormal) * collisionNormal;
 
-    // Dämpfungsfaktor (Restitutionskoeffizient)
-    float restitution = 0.8f; // Wert zwischen 0 (vollständig inelastisch) und 1 (vollständig elastisch)
+    float restitution = 0.8f;
     move.velocity *= restitution;
 }
 
@@ -40,7 +39,7 @@ bool Physics::Collision::SameDirection(const glm::vec2& direction, const glm::ve
     return glm::dot(direction, ao) > 0;
 }
 
-bool Physics::Collision::CheckCollision(const PolyData& obj1, const PolyData& obj2, CollInfo::CollisionInfo& collisionInfo) {
+bool Physics::Collision::CheckCollision(const PolyData& obj1, const PolyData& obj2, CollisionInfo& collisionInfo) {
     for (const auto& poly1 : obj1.Polygons) {
         for (const auto& poly2 : obj2.Polygons) {
             std::vector<glm::vec2> simplex;
@@ -104,7 +103,7 @@ bool Physics::Collision::GJK(const std::vector<glm::vec2>& poly1, const std::vec
     }
 }
 
-bool Physics::Collision::EPA(const std::vector<glm::vec2>& poly1, const std::vector<glm::vec2>& poly2, std::vector<glm::vec2>& simplex, CollInfo::CollisionInfo& collisionInfo) {
+bool Physics::Collision::EPA(const std::vector<glm::vec2>& poly1, const std::vector<glm::vec2>& poly2, std::vector<glm::vec2>& simplex, CollisionInfo& collisionInfo) {
     const float EPA_TOLERANCE = 0.0001f;
     const int EPA_MAX_ITERATIONS = 100;
     int iterations = 0;

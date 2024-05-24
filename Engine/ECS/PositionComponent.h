@@ -30,7 +30,7 @@ class PositionComponent : public Component {
             transform = glm::scale(transform, glm::vec3(scale));
         }
 
-        void update(float dt) override {
+        void update() override {
             
         }
 

@@ -23,43 +23,37 @@
 #include "Engine/ECS/PositionComponent.h"
 #include "Engine/ECS/PlanetComponent.h"
 #include "Engine/ECS/RenderComponent/RenderComponent.h"
+#include "Engine/ECS/Systems/Collision/CollisionSystem.h"
+#include "Engine/ECS/Systems/RenderSystem/RenderSystem.h"
 
-#include "Engine/ECS/Systems/Pyhsics.h"
+#include "Engine/PhysicsEngine/Pyhsics.h"
 
 struct Gamedependencies {
     Window window;
     InputHandler inputhandler;
-    Renderer renderer;
     Camera2D cam;
     guiDeb debGui;
     Json data;
     PolyFromTxt colData;
 };
-
 Gamedependencies* dep = new Gamedependencies;
 
-struct Entities {
-    Manager manager;
-    Entity& player;
-
-    Entity& collider;
-    Entity& collider1;
-    Entity& collider2;
-
-    Entities() : player(manager.addEntity()), collider(manager.addEntity()), collider1(manager.addEntity()), collider2(manager.addEntity())
-    {
-
-    }
+struct Ecs {
+    Entities entities;
+    EntityManager ent_manager = EntityManager(entities);
+    SystemManager sys_manager = SystemManager(entities);
+    
+    Entity& player = ent_manager.addEntity();
+    Entity& collider = ent_manager.addEntity();
+    Entity& collider1 = ent_manager.addEntity();
+    Entity& collider2 = ent_manager.addEntity();
 };
-Entities* entities = new Entities;
+Ecs* ecs = new Ecs;
 
-typedef struct gameLoopData
-{
+typedef struct gameLoopData {
     double frameTime = 0;
     int zoom = 50;
     int col = 0;
-    Physics::CollInfo::CollisionInfo collinfo;
-    
-} loopData;
-
-loopData gameloopdata;
+    Physics::CollisionInfo collinfo;
+} loopata;
+loopata gameloopdata;

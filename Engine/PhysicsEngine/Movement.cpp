@@ -45,8 +45,3 @@ void Physics::Movement::calcBehaviour(MovementComponent* move, float dt) {
     move->rota = glm::rotate(move->rota, -cursorangle - glm::radians(90.f), glm::vec3(0.0f, 0.0f, 1.0f));
     move->pos = utils::extractTranslation(move->trans);
 }
-
-void Physics::PlanetRotation::planetRotation(PlanetComponent* planet, float dt) {
-    float rotateAngle = .1f * dt;
-    planet->rotMat = glm::rotate(planet->rotMat, rotateAngle, glm::vec3(0.0f, 1.0f, 1.0f));
-}

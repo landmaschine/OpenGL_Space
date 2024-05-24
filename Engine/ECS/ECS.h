@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <bitset>
 #include <array>
+#include "Engine/Camera/Camera.h"
 
 class Component;
 class Entity;
@@ -31,20 +32,15 @@ class Component {
         Entity* entity;
 
         virtual void init() {};
-        virtual void update(float dt) {};
-        virtual void draw() {};
+        virtual void update() {};
 
         virtual ~Component() {};
 };
 
 class Entity {
     public:
-        void update(float dt) {
-            for(auto& c : components) c->update(dt);
-        }
-
-        void draw() {
-            for(auto& c : components) c->draw();
+        void update() {
+            for(auto& c : components) c->update();
         }
 
         bool isActive() const {return active;}
@@ -83,27 +79,62 @@ class Entity {
         ComponentBitSet componentBitSet;
 };
 
-class Manager {
+class Entities {
     public:
-        void draw() { for(auto& e : entities) e->draw(); }
+        std::vector<std::unique_ptr<Entity>> entities;
+};
+
+class System {
+    public:
+        virtual void update(float dt, std::vector<std::unique_ptr<Entity>>& entities) {}
+        virtual void render(Icamer2D& cam, std::vector<std::unique_ptr<Entity>>& entities) {}
+        virtual ~System() {}
+};
+
+class SystemManager {
+    public:
+        SystemManager(Entities& entities) : m_entities(entities) {}
 
         void update(float dt) {
-            entities.erase(std::remove_if(std::begin(entities), std::end(entities), 
+            for(auto& s : systems) s->update(dt, m_entities.entities);
+        }
+
+        void render(Icamer2D& cam) {
+            for(auto& s : systems) s->render(cam, m_entities.entities);
+        }
+
+        template<typename T, typename... TArgs>
+        void addSystem(TArgs&&... mArgs) {
+            T* s = new T(std::forward<TArgs>(mArgs)...);
+            std::unique_ptr<System> uPtr{ s };
+            systems.emplace_back(std::move(uPtr));
+        }
+
+    private:
+        std::vector<std::unique_ptr<System>> systems;
+        Entities& m_entities;
+};
+
+class EntityManager {
+    public:
+        EntityManager(Entities& entities) : m_entities(entities) {}
+
+        void update() {
+            m_entities.entities.erase(std::remove_if(std::begin(m_entities.entities), std::end(m_entities.entities), 
                 [](const std::unique_ptr<Entity> &mEntity) {
                     return !mEntity->isActive();
                 }), 
-                std::end(entities));
-
-                for(auto& e : entities) e->update(dt);
+                std::end(m_entities.entities));
+                for(auto& e : m_entities.entities) e->update();
             }
         
         Entity& addEntity() {
             Entity* e = new Entity;
             std::unique_ptr<Entity> uPtr{ e };
-            entities.emplace_back(std::move(uPtr));
+            m_entities.entities.emplace_back(std::move(uPtr));
             return *e;
         }
 
-        std::vector<std::unique_ptr<Entity>> entities;
+        Entities& m_entities;
     private:
 };

@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine/math/math.h"
 #include "Engine/RenderEngine/Window/window.h"
+#include "Engine/RenderEngine/Shaders/shader.h"
 
 class Icamer2D {
     public:
@@ -18,8 +19,8 @@ class Camera2D : public Icamer2D {
             position = glm::vec3(0.0f);
             zoom = 50.f;
 
-            shaderCam.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.vs",
-                                 "/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.fs");
+            shaderCam.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/ECS/Systems/RenderSystem/Camera/camShader.vs",
+                                 "/home/leonw/Documents/dev/OpenGL_Space/Engine/ECS/Systems/RenderSystem/Camera/camShader.fs");
 
             updateProjectionMatrixOrto();
         }
@@ -32,8 +33,6 @@ class Camera2D : public Icamer2D {
 
             position.x = playerScreenPos.x - screenWidth;
             position.y = playerScreenPos.y - screenHeight;
-
-            
 
             updateViewMatrix();
             updateProjectionMatrixOrto();

@@ -11,9 +11,6 @@ class RenderComponent : public Component {
         RenderComponent() {}
 
         RenderComponent(std::string texturePath) {
-            shader.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/OpenGL/renderVertex.vs", 
-                              "/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/OpenGL/renderFragment.fs");
-
             glGenVertexArrays(1, &VAO);
             glGenBuffers(1, &VBO);
             glGenBuffers(1, &EBO);
@@ -26,10 +23,9 @@ class RenderComponent : public Component {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-            // position attribute
             glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
             glEnableVertexAttribArray(0);
-            // texture coord attribute
+
             glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
             glEnableVertexAttribArray(1);
 
@@ -50,66 +46,38 @@ class RenderComponent : public Component {
                 std::cout << "Failed to load texture" << std::endl;
             }
             stbi_image_free(data);
-
-            shader.use();
-            shader.setInt("tex", 0);
         }
 
         void init() override {
             model = glm::mat4(1.0f);
-            if(!entity->hasComponent<PositionComponent>()) {
-                entity->addComponent<PositionComponent>();
-            }
         }
 
-        void update(float dt) override {
+        void update() override {
             if(entity->hasComponent<MovementComponent>()) {
                 model = entity->getComponent<MovementComponent>().finaltrans;
             } else {
                 model = entity->getComponent<PositionComponent>().transform;
             }
         }
-
-        void cam(Camera2D* cam) {
-            view = cam->getViewMatrix();
-            projection = cam->getProjectionMatrix();
-        }
-
-        void draw() override {
-            shader.use();
-            shader.setMat4("view", view);
-            shader.setMat4("projection", projection);
-            shader.setMat4("model", model);
-
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, texture);
-            glBindVertexArray(VAO);
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        }
-
-        ~RenderComponent() override {
-
-        }
+        
+        ~RenderComponent() override {}
 
         glm::mat4 model;
+        unsigned int VAO;
         unsigned int texture;
-        unsigned int VBO, VAO, EBO;
-        Shader shader;
-    private: 
-        int width, height;
-        glm::mat4 projection = glm::mat4(1.0f);
-        glm::mat4 view = glm::mat4(1.0f);
+    private:
+        unsigned int VBO, EBO;
 
+        int width, height;
         float vertices[20] = {
-            // positions       // texture coords
-            0.5f,  0.5f, 0.0f, 1.0f, 1.0f,   // top right
-            0.5f, -0.5f, 0.0f, 1.0f, 0.0f,   // bottom right
-           -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,   // bottom left
-           -0.5f,  0.5f, 0.0f, 0.0f, 1.0f    // top left 
+            0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+            0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+           -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+           -0.5f,  0.5f, 0.0f, 0.0f, 1.0f
         };
 
         unsigned int indices[6] = {  
-            0, 1, 3, // first triangle
-            1, 2, 3  // second triangle
+            0, 1, 3,
+            1, 2, 3
         };
 };

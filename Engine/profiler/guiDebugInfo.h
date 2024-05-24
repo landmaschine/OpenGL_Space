@@ -46,8 +46,8 @@ class guiDeb {
 
         void showValue(const char* name, float var, float var2) {
             ImGui::Begin(name);
-            ImGui::Text("%f", var);
-            ImGui::Text("%f", var2);
+            ImGui::Text("%f ms", var);
+            ImGui::Text("%f fps", var2);
             ImGui::End();
         }
         

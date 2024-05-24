@@ -11,7 +11,7 @@ class PlanetComponent : public Component {
             pos = &entity->getComponent<PositionComponent>();
         }
 
-        void update(float dt) override {
+        void update() override {
             pos->transform = rotMat;
         }
 

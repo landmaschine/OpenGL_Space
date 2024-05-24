@@ -20,7 +20,7 @@ class CollisionComponentPoly : public Component {
             render.init(polygon);
         }
         
-        void draw() override {
+        void draw() {
             if(shouldrender) {
                 render.render(view, projection, transform);
             }
@@ -39,10 +39,9 @@ class CollisionComponentPoly : public Component {
                 std::cout << "ERROR entity has CollisionComponentPoly but no PositionComponent" << std::endl;
             }
             render.setpolygons(polygon);
-
         }
 
-        void update(float dt) override {
+        void update() override {
 
             if(entity->hasComponent<MovementComponent>()) {
                 transform = entity->getComponent<MovementComponent>().finaltrans;
@@ -72,14 +71,15 @@ class CollisionComponentPoly : public Component {
 
     PolyData polygon;
     bool shouldrender = false;
+
     private:
-    HitBoxRender render;
-    glm::vec3 prevPos = glm::vec3(0.0f);
-    glm::mat4 projection = glm::mat4(1.0f);
-    glm::mat4 view = glm::mat4(1.0f);
-    glm::mat4 transform = glm::mat4(1.0f);
-    glm::mat4 rota = glm::mat4(1.0f);
-    PolyFromTxt polyData;
-    PolyData originalPolygons;
-    glm::vec3 pos = glm::vec3(0.f);
+        HitBoxRender render;
+        glm::vec3 prevPos = glm::vec3(0.0f);
+        glm::mat4 projection = glm::mat4(1.0f);
+        glm::mat4 view = glm::mat4(1.0f);
+        glm::mat4 transform = glm::mat4(1.0f);
+        glm::mat4 rota = glm::mat4(1.0f);
+        PolyFromTxt polyData;
+        PolyData originalPolygons;
+        glm::vec3 pos = glm::vec3(0.f);
 };

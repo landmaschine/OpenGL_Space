@@ -38,7 +38,7 @@ class MovementComponent : public Component {
             entity->getComponent<PositionComponent>().rota = rota;
         }
 
-        void update(float dt) override {
+        void update() override {
             entity->getComponent<PositionComponent>().transform = finaltrans;
             entity->getComponent<PositionComponent>().rota = rota;
         }
