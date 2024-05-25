@@ -3,8 +3,8 @@
 
 void init() {
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
     glfwWindowHint(GLFW_SAMPLES, 4);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     dep->window.createWindow(dep->data.win->width, dep->data.win->height, dep->data.win->winName);
@@ -49,40 +49,22 @@ void init() {
     dep->inputhandler.bindKey(GLFW_KEY_LEFT_SHIFT, std::make_shared<MoveFaster>());
     dep->inputhandler.bindKey(GLFW_KEY_F1, std::make_shared<SetFrameUnlimited>());
     dep->inputhandler.bindKey(GLFW_KEY_F2, std::make_shared<setVsync>());
-    dep->inputhandler.bindKey(GLFW_KEY_F3, std::make_shared<shouldHitBoxRender>());
 }
 
 void input() {
     dep->inputhandler.update();
     dep->inputhandler.shutdownKey();
+    gameloopdata.shouldRenderHitbox = dep->inputhandler.shouldRenderHitbox();
 }
 
 void update(float dt) {
     auto& playerMovement = ecs->player.getComponent<MovementComponent>();
-    
     dep->cam.updatePosition(playerMovement.pos, dep->window);
-    
     Physics::Movement().calcBehaviour(&ecs->player.getComponent<MovementComponent>(), dt);
-
-    int width, height;
-    double ypos, xpos;
-    glfwGetCursorPos(dep->window.getWin(), &xpos, &ypos);
-    glfwGetWindowSize(dep->window.getWin(), &width, &height);
-    float center_x = static_cast<float>(width) / 2.0f;
-    float center_y = static_cast<float>(height) / 2.0f;
-    float x_window = static_cast<float>(xpos) - center_x;
-    float y_window = center_y - static_cast<float>(ypos);
-    playerMovement.mouseX = x_window;
-    playerMovement.mouseY = y_window;
-
+    
+    mousePos(&playerMovement);
     ecs->ent_manager.update();
     ecs->sys_manager.update(dt);
-    
-    for(auto& re : ecs->ent_manager.m_entities.entities) {
-        if(re->hasComponent<CollisionComponentPoly>()) {
-            re->getComponent<CollisionComponentPoly>().cam(dep->cam);
-        }
-    }
 }
 
 void render() {

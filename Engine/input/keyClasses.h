@@ -53,9 +53,3 @@ class setVsync : public Command {
         glfwSwapInterval(1);
     }
 };
-
-class shouldHitBoxRender : public Command {
-    void pressed(Entity& ent) override {
-
-    }
-};

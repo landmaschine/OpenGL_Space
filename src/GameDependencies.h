@@ -54,6 +54,20 @@ typedef struct gameLoopData {
     double frameTime = 0;
     int zoom = 50;
     int col = 0;
+    bool shouldRenderHitbox;
     Physics::CollisionInfo collinfo;
 } loopata;
 loopata gameloopdata;
+
+void mousePos(MovementComponent* playerMovement) {
+    int width, height;
+    double ypos, xpos;
+    glfwGetCursorPos(dep->window.getWin(), &xpos, &ypos);
+    glfwGetWindowSize(dep->window.getWin(), &width, &height);
+    float center_x = static_cast<float>(width) / 2.0f;
+    float center_y = static_cast<float>(height) / 2.0f;
+    float x_window = static_cast<float>(xpos) - center_x;
+    float y_window = center_y - static_cast<float>(ypos);
+    playerMovement->mouseX = x_window;
+    playerMovement->mouseY = y_window;
+}

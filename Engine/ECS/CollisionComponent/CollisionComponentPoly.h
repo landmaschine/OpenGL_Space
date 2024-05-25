@@ -42,7 +42,6 @@ class CollisionComponentPoly : public Component {
         }
 
         void update() override {
-
             if(entity->hasComponent<MovementComponent>()) {
                 transform = entity->getComponent<MovementComponent>().finaltrans;
                 rota = entity->getComponent<MovementComponent>().finalRota;
@@ -59,12 +58,9 @@ class CollisionComponentPoly : public Component {
                 auto& p = polygon.Polygons[i];
                 auto& originalP = originalPolygons.Polygons[i];
                 for(size_t j = 0; j < p.size(); ++j) {
-                    auto& v = p[j];
-                    auto& originalV = originalP[j];
-
-                    glm::vec3 rotatedVertex = rota * glm::vec4(originalV.x, originalV.y, 0.0f, 1.0f);
-                    v.x = rotatedVertex.x + pos.x;
-                    v.y = rotatedVertex.y + pos.y;
+                    glm::vec3 rotatedVertex = rota * glm::vec4(originalP[j].x, originalP[j].y, 0.0f, 1.0f);
+                    p[j].x = rotatedVertex.x + pos.x;
+                    p[j].y = rotatedVertex.y + pos.y;
                 }
             }
         }

@@ -21,6 +21,7 @@ public:
     }
 
     void shutdownKey();
+    bool shouldRenderHitbox();
 
 private:
     std::unordered_map<int, std::shared_ptr<Command>> keyBindings;
