@@ -87,7 +87,7 @@ class Entities {
 class System {
     public:
         virtual void update(float dt, std::vector<std::unique_ptr<Entity>>& entities) {}
-        virtual void render(Icamer2D& cam, std::vector<std::unique_ptr<Entity>>& entities) {}
+        virtual void render(Icamer2D& cam, bool renderhitbox, std::vector<std::unique_ptr<Entity>>& entities) {}
         virtual ~System() {}
 };
 
@@ -99,8 +99,8 @@ class SystemManager {
             for(auto& s : systems) s->update(dt, m_entities.entities);
         }
 
-        void render(Icamer2D& cam) {
-            for(auto& s : systems) s->render(cam, m_entities.entities);
+        void render(Icamer2D& cam, bool renderhitbox) {
+            for(auto& s : systems) s->render(cam, renderhitbox, m_entities.entities);
         }
 
         template<typename T, typename... TArgs>

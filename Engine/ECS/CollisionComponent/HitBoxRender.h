@@ -7,13 +7,13 @@ class HitBoxRender {
         HitBoxRender();
         ~HitBoxRender();
         void init(PolyData poly);
-        void render(glm::mat4 view, glm::mat4 projection, glm::mat4 transform);
         void setpolygons(PolyData polygons);
+        
+        unsigned int VAO;
+        std::vector<unsigned int> indices;
     private:
-        unsigned int VAO, VBO, EBO;
-        Shader shader;
+        unsigned int VBO, EBO;
         PolyFromTxt polydata;
         PolyData polygons;
         std::vector<float> vertices;
-        std::vector<unsigned int> indices;
 };

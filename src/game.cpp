@@ -68,13 +68,12 @@ void update(float dt) {
 }
 
 void render() {
-    ecs->sys_manager.render(dep->cam);
+    ecs->sys_manager.render(dep->cam, gameloopdata.shouldRenderHitbox);
 
     dep->debGui.newFrame();
     dep->debGui.showValue((const char*)(glGetString(GL_VERSION)), gameloopdata.frameTime, 1/gameloopdata.frameTime);
     dep->debGui.showVec("Player Pos", ecs->player.getComponent<MovementComponent>().pos);
     dep->debGui.showVec("player Vel", ecs->player.getComponent<MovementComponent>().velocity);
-    dep->debGui.showBool("Collision", gameloopdata.col);
     dep->debGui.draw();
 
     glfwSwapBuffers(dep->window.getWin());

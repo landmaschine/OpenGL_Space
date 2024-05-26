@@ -3,9 +3,6 @@
 HitBoxRender::HitBoxRender() : VAO(0), VBO(0), EBO(0) {}
 
 void HitBoxRender::init(PolyData poly) {
-    shader.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/ECS/CollisionComponent/vertexShader.vs",
-                      "/home/leonw/Documents/dev/OpenGL_Space/Engine/ECS/CollisionComponent/fragmentShader.fs");
-
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -20,24 +17,12 @@ void HitBoxRender::init(PolyData poly) {
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    
-    shader.use();
 }
 
 HitBoxRender::~HitBoxRender() {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
-}
-
-void HitBoxRender::render(glm::mat4 view, glm::mat4 projection, glm::mat4 transform) {
-    shader.use();
-    shader.setMat4("view", view);
-    shader.setMat4("projection", projection);
-    shader.setMat4("model", transform);
-
-    glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 }
 
 void HitBoxRender::setpolygons(PolyData polygons) {

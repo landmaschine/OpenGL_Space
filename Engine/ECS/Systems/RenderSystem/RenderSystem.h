@@ -2,6 +2,7 @@
 #include "Engine/ECS/ECS.h"
 #include "Engine/ECS/RenderComponent/RenderComponent.h"
 #include "Engine/RenderEngine/OpenGL/Renderer.h"
+#include "Engine/ECS/CollisionComponent/CollisionComponentPoly.h"
 
 class RenderSystem : public System {
     public:
@@ -11,24 +12,10 @@ class RenderSystem : public System {
             renderer.init();
         }
 
-        void render(Icamer2D& cam, std::vector<std::unique_ptr<Entity>>& entities) override {
-            renderer.render();
-            for(auto& e : entities) {
-                if(e->hasComponent<RenderComponent>()) {
-                    shader.use();
-                    shader.setMat4("model", e->getComponent<RenderComponent>().model);
-                    shader.setMat4("projection", cam.projection());
-                    shader.setMat4("view", cam.view());
-
-                    glActiveTexture(GL_TEXTURE0);
-                    glBindTexture(GL_TEXTURE_2D, e->getComponent<RenderComponent>().texture);
-                    glBindVertexArray(e->getComponent<RenderComponent>().VAO);
-                    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-                }
-            }
-        }
+        void render(Icamer2D& cam, bool renderhitbox, std::vector<std::unique_ptr<Entity>>& entities) override;
 
     private:
+        void renderHitbox(Icamer2D& cam, std::vector<std::unique_ptr<Entity>>& entities);
         Shader shader;
         Renderer renderer;
 };
