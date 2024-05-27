@@ -19,8 +19,8 @@ class Camera2D : public Icamer2D {
             position = glm::vec3(0.0f);
             zoom = 50.f;
 
-            shaderCam.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/ECS/Systems/RenderSystem/Camera/camShader.vs",
-                                 "/home/leonw/Documents/dev/OpenGL_Space/Engine/ECS/Systems/RenderSystem/Camera/camShader.fs");
+            shaderCam.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.vs",
+                                 "/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.fs");
 
             updateProjectionMatrixOrto();
         }

@@ -1,7 +1,6 @@
 #pragma once
 #include "../depComponents.h"
 #include "../PositionComponent.h"
-#include "../MovementComponent.h"
 #include "HitBoxRender.h"
 #include "Engine/Tools/utils.h"
 
@@ -10,14 +9,16 @@ class CollisionComponentPoly : public Component {
         CollisionComponentPoly() {}
         CollisionComponentPoly(playerData* data) {
             polyData.extractConPolygonsFromTextFile(data->collision, &polygon);
+            polyData.scalePolygons(data->scale, polygon);
             originalPolygons = polygon;
-            render.init(polygon);
+            render.init();
         }
 
-        CollisionComponentPoly(background* data) {
+        CollisionComponentPoly(colliderData* data) {
             polyData.extractConPolygonsFromTextFile(data->collision, &polygon);
+            polyData.scalePolygons(data->scale, polygon);
             originalPolygons = polygon;
-            render.init(polygon);
+            render.init();
         }
         
         void init() override {
@@ -27,13 +28,12 @@ class CollisionComponentPoly : public Component {
             } else {
                 std::cout << "ERROR entity has CollisionComponentPoly but no PositionComponent" << std::endl;
             }
-            render.setpolygons(polygon);
         }
 
         void update() override {
-            if(entity->hasComponent<MovementComponent>()) {
-                transform = entity->getComponent<MovementComponent>().finaltrans;
-                rota = entity->getComponent<MovementComponent>().finalRota;
+            if(entity->hasComponent<PositionComponent>()) {
+                transform = entity->getComponent<PositionComponent>().transform;
+                rota = entity->getComponent<PositionComponent>().rota;
                 pos = utils::extractTranslation(transform);
             } else if(entity->hasComponent<PositionComponent>()) {
                 pos = entity->getComponent<PositionComponent>().pos;

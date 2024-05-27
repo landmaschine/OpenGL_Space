@@ -91,4 +91,12 @@ public:
         }
         return indices;
     }
+
+    void scalePolygons(float scale, PolyData& polygons) {
+        for(auto& polygon : polygons.Polygons) {
+            for(auto& p : polygon) {
+                p *= scale;
+            }
+        }
+    }
 };

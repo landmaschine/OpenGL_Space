@@ -7,7 +7,17 @@
         }
     },
 
+    "PhysicsSim": {
+        "steps": 100
+    },
+
     "player": {
+        "Rigidbody": {
+            "mass": 1,
+            "damping": 1,
+            "static": false,
+            "awake": true
+        },
         "posx": 0,
         "posy": 0,
         "posz": 0,
@@ -16,18 +26,32 @@
         "scale": 1,
         "accelSpeed": 2,
         "speedMod": 2,
-        "mass": 1,
         "maxSpeed": 10,
         "texture": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/SpaceShipV2.png",
-        "collision": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/SpaceShipCol.txt",
-        "tag": "player"
+        "collision": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/SpaceShipCol.txt"
+    },
+
+    "collider": {
+        "Rigidbody": {
+            "mass": 1,
+            "damping": 1,
+            "static": true,
+            "awake": false
+        },
+        "posx": 0,
+        "posy": 0,
+        "posz": 0,
+        "width": 1,
+        "height": 1,
+        "scale": 1,
+        "texture": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/nice.png",
+        "collision": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/Box.txt"
     },
 
     "backObjs": {
         "posz": 0,
         "scale": 1,
         "texture": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/nice.png",
-        "collision": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/Box.txt",
-        "tag": "backObj"
+        "collision": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/Box.txt"
     }
 }

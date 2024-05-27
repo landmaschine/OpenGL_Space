@@ -21,25 +21,22 @@ void init() {
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
+    //TODO: Handle entitie creation enterily over Json file
     ecs->player.addComponent<PositionComponent>(dep->data.player);
-    ecs->player.addComponent<MovementComponent>(dep->data.player);
+    ecs->player.addComponent<InputComponent>();
+    ecs->player.addComponent<PhysicsComponent>(dep->data.player);
     ecs->player.addComponent<CollisionComponentPoly>(dep->data.player);
     ecs->player.addComponent<RenderComponent>(dep->data.player->texPath);
 
     ecs->collider.addComponent<PositionComponent>(5.f, 5.f, dep->data.backObj);
-    ecs->collider.addComponent<CollisionComponentPoly>(dep->data.backObj);
     ecs->collider.addComponent<RenderComponent>(dep->data.backObj->texPath);
 
     ecs->collider1.addComponent<PositionComponent>(-5.f, -5.f, dep->data.backObj);
-    ecs->collider1.addComponent<CollisionComponentPoly>(dep->data.backObj);
     ecs->collider1.addComponent<RenderComponent>(dep->data.backObj->texPath);
-
-    //ecs->collider2.addComponent<PositionComponent>(5.f, -5.f, dep->data.backObj);
-    //ecs->collider2.addComponent<CollisionComponentPoly>(dep->data.backObj);
-    //ecs->collider2.addComponent<RenderComponent>(dep->data.backObj->texPath);
 
     ecs->sys_manager.addSystem<CollisionSystem>();
     ecs->sys_manager.addSystem<RenderSystem>();
+    ecs->sys_manager.addSystem<PhysicsSystem>(dep->data.physSim->numSteps);
 
     dep->inputhandler.init(dep->window.getWin(), ecs->player);
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
@@ -58,11 +55,8 @@ void input() {
 }
 
 void update(float dt) {
-    auto& playerMovement = ecs->player.getComponent<MovementComponent>();
-    dep->cam.updatePosition(playerMovement.pos, dep->window);
-    Physics::Movement().calcBehaviour(&ecs->player.getComponent<MovementComponent>(), dt);
-    
-    mousePos(&playerMovement);
+    dep->cam.updatePosition(ecs->player.getComponent<PositionComponent>().pos, dep->window);    
+    mousePos(&ecs->player.getComponent<PositionComponent>());
     ecs->ent_manager.update();
     ecs->sys_manager.update(dt);
 }
@@ -72,8 +66,8 @@ void render() {
 
     dep->debGui.newFrame();
     dep->debGui.showValue((const char*)(glGetString(GL_VERSION)), gameloopdata.frameTime, 1/gameloopdata.frameTime);
-    dep->debGui.showVec("Player Pos", ecs->player.getComponent<MovementComponent>().pos);
-    dep->debGui.showVec("player Vel", ecs->player.getComponent<MovementComponent>().velocity);
+    dep->debGui.showVec("Player Pos", ecs->player.getComponent<PositionComponent>().pos);
+    dep->debGui.showVec("player Vel", ecs->player.getComponent<PhysicsComponent>().velocity);
     dep->debGui.draw();
 
     glfwSwapBuffers(dep->window.getWin());
@@ -121,7 +115,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
     dep->window.size().w = width;
     dep->window.size().h = height;
     glViewport(0, 0, width, height);
-    dep->cam.updatePosition(ecs->player.getComponent<MovementComponent>().pos, dep->window);
+    dep->cam.updatePosition(ecs->player.getComponent<PositionComponent>().pos, dep->window);
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {

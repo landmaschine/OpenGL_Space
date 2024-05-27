@@ -6,7 +6,7 @@ class HitBoxRender {
     public:
         HitBoxRender();
         ~HitBoxRender();
-        void init(PolyData poly);
+        void init();
         void setpolygons(PolyData polygons);
         
         unsigned int VAO;

@@ -39,4 +39,6 @@ class PositionComponent : public Component {
         glm::mat4 rota;
         double scale;
         int width, height;
+        double mouseX;
+        double mouseY;
 };

@@ -2,7 +2,6 @@
 #include "Engine/ECS/depComponents.h"
 
 #include "Engine/ECS/PositionComponent.h"
-#include "Engine/ECS/MovementComponent.h"
 #include "Engine/Camera/Camera.h"
 #include "lib/stb/stb_image.h"
 
@@ -51,7 +50,6 @@ class RenderComponent : public Component {
                 glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &largest);
                 glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, largest);
             }
-
             stbi_image_free(data);
         }
 
@@ -60,9 +58,7 @@ class RenderComponent : public Component {
         }
 
         void update() override {
-            if(entity->hasComponent<MovementComponent>()) {
-                model = entity->getComponent<MovementComponent>().finaltrans;
-            } else {
+            if(entity->hasComponent<PositionComponent>()) {
                 model = entity->getComponent<PositionComponent>().transform;
             }
         }

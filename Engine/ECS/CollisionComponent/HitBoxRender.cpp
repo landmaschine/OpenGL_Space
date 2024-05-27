@@ -2,7 +2,8 @@
 
 HitBoxRender::HitBoxRender() : VAO(0), VBO(0), EBO(0) {}
 
-void HitBoxRender::init(PolyData poly) {
+void HitBoxRender::init() {
+
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -17,6 +18,7 @@ void HitBoxRender::init(PolyData poly) {
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+
 }
 
 HitBoxRender::~HitBoxRender() {

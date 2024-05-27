@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <cfloat>
 
-void Physics::Collision::HandleCollision_Player(MovementComponent& move, const glm::vec2& collisionNormal) {
+void Physics::Collision::HandleCollision_Player(PhysicsComponent& move, const glm::vec2& collisionNormal) {
     move.velocity -= 2.0f * glm::dot(move.velocity, collisionNormal) * collisionNormal;
 
     float restitution = 0.8f;

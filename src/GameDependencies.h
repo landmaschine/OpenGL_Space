@@ -19,12 +19,12 @@
 #include "Engine/Tools/extractColPolygon.h"
 
 #include "Engine/ECS/CollisionComponent/CollisionComponentPoly.h"
-#include "Engine/ECS/MovementComponent.h"
 #include "Engine/ECS/PositionComponent.h"
 #include "Engine/ECS/PlanetComponent.h"
-#include "Engine/ECS/RenderComponent/RenderComponent.h"
+#include "Engine/ECS/RenderComponent.h"
 #include "Engine/ECS/Systems/Collision/CollisionSystem.h"
 #include "Engine/ECS/Systems/RenderSystem/RenderSystem.h"
+#include "Engine/ECS/Systems/PhysicsSystem/PhysicsSystem.h"
 
 #include "Engine/PhysicsEngine/Pyhsics.h"
 
@@ -59,7 +59,7 @@ typedef struct gameLoopData {
 } loopata;
 loopata gameloopdata;
 
-void mousePos(MovementComponent* playerMovement) {
+void mousePos(PositionComponent* playerMovement) {
     int width, height;
     double ypos, xpos;
     glfwGetCursorPos(dep->window.getWin(), &xpos, &ypos);

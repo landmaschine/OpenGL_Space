@@ -1,6 +1,6 @@
 #pragma once 
 #include "Engine/ECS/ECS.h"
-#include "Engine/ECS/RenderComponent/RenderComponent.h"
+#include "Engine/ECS/RenderComponent.h"
 #include "Engine/RenderEngine/OpenGL/Renderer.h"
 #include "Engine/ECS/CollisionComponent/CollisionComponentPoly.h"
 
