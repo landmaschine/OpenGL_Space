@@ -8,13 +8,15 @@
     },
 
     "PhysicsSim": {
-        "steps": 100
+        "timeStep": 0.005
     },
 
     "player": {
         "Rigidbody": {
-            "mass": 1,
-            "damping": 1,
+            "mass": 5,
+            "damping": 0.99,
+            "inertia": 1.0,
+            "angularDamping": 1.0,
             "static": false,
             "awake": true
         },
@@ -24,22 +26,23 @@
         "width": 1,
         "height": 1,
         "scale": 1,
-        "accelSpeed": 2,
+        "accelSpeed": 100,
         "speedMod": 2,
-        "maxSpeed": 10,
         "texture": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/SpaceShipV2.png",
         "collision": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/SpaceShipCol.txt"
     },
 
     "collider": {
         "Rigidbody": {
-            "mass": 1,
+            "mass": 10,
             "damping": 1,
+            "inertia": 1.0,
+            "angularDamping": 1.0,
             "static": true,
             "awake": false
         },
-        "posx": 0,
-        "posy": 0,
+        "posx": 5,
+        "posy": 5,
         "posz": 0,
         "width": 1,
         "height": 1,

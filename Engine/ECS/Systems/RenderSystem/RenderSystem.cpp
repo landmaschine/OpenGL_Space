@@ -13,9 +13,10 @@
             glBindTexture(GL_TEXTURE_2D, e->getComponent<RenderComponent>().texture);
             glBindVertexArray(e->getComponent<RenderComponent>().VAO);
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+            
+            renderHitbox(cam, entities);
 
             if(renderhitbox) {
-                renderHitbox(cam, entities);
             }
         }
     }

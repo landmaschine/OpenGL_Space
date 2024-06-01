@@ -8,9 +8,9 @@ void CollisionSystem::update(float dt, std::vector<std::unique_ptr<Entity>>& ent
                 auto& poly2 = (*it2)->getComponent<CollisionComponentPoly>().polygon;
 
                 if (Physics::Collision().CheckCollision(poly1, poly2, collinfo)) {
-                    std::cout << "Hello" << std::endl;
+                    //std::cout << "Hello" << std::endl;
                 } else {
-                    std::cout << "nolle" << std::endl;
+                    //std::cout << "nolle" << std::endl;
                 }
             }
         }

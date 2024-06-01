@@ -27,8 +27,9 @@ namespace Physics {
             void physicsSim(PhysicsComponent* phys, float dt);
         private:
             void applyVerletIntegration(RigidBody& body, float dt);
-            void applyForce(RigidBody& body, const glm::vec2& force);
-            void applyUserInputForce(PhysicsComponent* phys);
+            void applyForce(RigidBody& body);
+            void applyRotationVerletIntegration(RigidBody& body, float torque, float dt);
+            void applyTorque(RigidBody& body, float torque);
     };
 
     class Collision {

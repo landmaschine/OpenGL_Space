@@ -35,8 +35,6 @@ class CollisionComponentPoly : public Component {
                 transform = entity->getComponent<PositionComponent>().transform;
                 rota = entity->getComponent<PositionComponent>().rota;
                 pos = utils::extractTranslation(transform);
-            } else if(entity->hasComponent<PositionComponent>()) {
-                pos = entity->getComponent<PositionComponent>().pos;
             }
 
             if(pos != prevPos) {
@@ -50,6 +48,7 @@ class CollisionComponentPoly : public Component {
                     glm::vec3 rotatedVertex = rota * glm::vec4(originalP[j].x, originalP[j].y, 0.0f, 1.0f);
                     p[j].x = rotatedVertex.x + pos.x;
                     p[j].y = rotatedVertex.y + pos.y;
+
                 }
             }
         }

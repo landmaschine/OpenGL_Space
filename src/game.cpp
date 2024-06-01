@@ -23,12 +23,13 @@ void init() {
 
     //TODO: Handle entitie creation enterily over Json file
     ecs->player.addComponent<PositionComponent>(dep->data.player);
-    ecs->player.addComponent<InputComponent>();
+    ecs->player.addComponent<InputComponent>(dep->data.player);
     ecs->player.addComponent<PhysicsComponent>(dep->data.player);
     ecs->player.addComponent<CollisionComponentPoly>(dep->data.player);
     ecs->player.addComponent<RenderComponent>(dep->data.player->texPath);
 
-    ecs->collider.addComponent<PositionComponent>(5.f, 5.f, dep->data.backObj);
+    ecs->collider.addComponent<PositionComponent>(dep->data.collider);
+    ecs->collider.addComponent<CollisionComponentPoly>(dep->data.collider);
     ecs->collider.addComponent<RenderComponent>(dep->data.backObj->texPath);
 
     ecs->collider1.addComponent<PositionComponent>(-5.f, -5.f, dep->data.backObj);
@@ -36,7 +37,7 @@ void init() {
 
     ecs->sys_manager.addSystem<CollisionSystem>();
     ecs->sys_manager.addSystem<RenderSystem>();
-    ecs->sys_manager.addSystem<PhysicsSystem>(dep->data.physSim->numSteps);
+    ecs->sys_manager.addSystem<PhysicsSystem>();
 
     dep->inputhandler.init(dep->window.getWin(), ecs->player);
     dep->inputhandler.bindKey(GLFW_KEY_W, std::make_shared<MoveUp>());
@@ -56,7 +57,7 @@ void input() {
 
 void update(float dt) {
     dep->cam.updatePosition(ecs->player.getComponent<PositionComponent>().pos, dep->window);    
-    mousePos(&ecs->player.getComponent<PositionComponent>());
+    mousePos(&ecs->player.getComponent<InputComponent>());
     ecs->ent_manager.update();
     ecs->sys_manager.update(dt);
 }
@@ -77,30 +78,35 @@ void render() {
 void gameLoop::run() {
     init();
 
-    double currentTime = 0;
-    const float timeStep = 0.005f;
+    double currentTime = glfwGetTime();
+    const float timeStep = dep->data.physSim->timeStep;
     float accumulator = 0;
 
-    while(!glfwWindowShouldClose(dep->window.getWin())) {
+    while (!glfwWindowShouldClose(dep->window.getWin())) {
         
         double newTime = glfwGetTime();
-        gameloopdata.frameTime = 0;
-        gameloopdata.frameTime = newTime - currentTime;
+        double frameTime = newTime - currentTime;
 
-        if(gameloopdata.frameTime > 0.25f) {gameloopdata.frameTime = 0.25f;}
+        if (frameTime > 0.25f) {
+            frameTime = 0.25f;
+        }
 
         currentTime = newTime;
-        accumulator += gameloopdata.frameTime;
+        accumulator += frameTime;
 
-        while(accumulator >= timeStep) {
+        while (accumulator >= timeStep) {
             input();
-            update(gameloopdata.frameTime);
-            render(); 
-            accumulator -= gameloopdata.frameTime;
+            update(timeStep);
+            accumulator -= timeStep;
         }
+        render();
+
+        double endtime = glfwGetTime();
+        gameloopdata.frameTime = endtime - currentTime;
     }
     shutDown();
 }
+
 
 void shutDown() {
     ImGui_ImplGlfw_Shutdown();

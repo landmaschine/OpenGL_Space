@@ -2,6 +2,7 @@
 #include "Engine/ECS/depComponents.h"
 
 #include "Engine/ECS/PositionComponent.h"
+#include "Engine/ECS/InputComponent.h"
 #include "Engine/Camera/Camera.h"
 #include "lib/stb/stb_image.h"
 
@@ -60,6 +61,9 @@ class RenderComponent : public Component {
         void update() override {
             if(entity->hasComponent<PositionComponent>()) {
                 model = entity->getComponent<PositionComponent>().transform;
+            }
+            if(entity->hasComponent<InputComponent>()) {
+                model = entity->getComponent<PositionComponent>().transform * entity->getComponent<PositionComponent>().rota;
             }
         }
 

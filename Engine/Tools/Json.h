@@ -20,7 +20,7 @@ class Json {
             win->height = data["app"]["window"]["height"];
             win->width = data["app"]["window"]["width"];
 
-            physSim->numSteps = data["PhysicsSim"]["steps"];
+            physSim->timeStep = data["PhysicsSim"]["timeStep"];
             
             player->pos.x = data["player"]["posx"];
             player->pos.y = data["player"]["posy"];
@@ -28,24 +28,28 @@ class Json {
             player->scale = data["player"]["scale"];
             player->accelSpeed = data["player"]["accelSpeed"];
             player->speedMod = data["player"]["speedMod"];
+            player->collision = data["player"]["collision"];
+            player->texPath = data["player"]["texture"];
+
+            player->awake = data["player"]["Rigidbody"]["awake"];
             player->mass = data["player"]["Rigidbody"]["mass"];
             player->damping = data["player"]["Rigidbody"]["damping"];
-            player->awake = data["player"]["Rigidbody"]["awake"];
             player->Static = data["player"]["Rigidbody"]["static"];
-            player->collision = data["player"]["collision"];
-            player->maxSpeed = data["player"]["maxSpeed"];
-            player->texPath = data["player"]["texture"];
+            player->angularDamping = data["player"]["Rigidbody"]["angularDamping"];
+            player->inertia = data["player"]["Rigidbody"]["inertia"];
 
             collider->pos.x = data["collider"]["posx"];
             collider->pos.y = data["collider"]["posy"];
             collider->pos.z = data["collider"]["posz"];
             collider->scale = data["collider"]["scale"];
+            collider->texPath = data["collider"]["texture"];
+            collider->collision = data["collider"]["collision"];
             collider->mass = data["collider"]["Rigidbody"]["mass"];
             collider->damping = data["collider"]["Rigidbody"]["damping"];
             collider->awake = data["collider"]["Rigidbody"]["awake"];
             collider->Static = data["collider"]["Rigidbody"]["static"];
-            collider->texPath = data["collider"]["texture"];
-            collider->collision = data["collider"]["collision"];
+            collider->angularDamping = data["collider"]["Rigidbody"]["angularDamping"];
+            collider->inertia = data["collider"]["Rigidbody"]["inertia"];
 
             backObj->posz = data["backObjs"]["posz"];
             backObj->scale = data["backObjs"]["scale"];

@@ -59,7 +59,7 @@ typedef struct gameLoopData {
 } loopata;
 loopata gameloopdata;
 
-void mousePos(PositionComponent* playerMovement) {
+void mousePos(InputComponent* input) {
     int width, height;
     double ypos, xpos;
     glfwGetCursorPos(dep->window.getWin(), &xpos, &ypos);
@@ -68,6 +68,6 @@ void mousePos(PositionComponent* playerMovement) {
     float center_y = static_cast<float>(height) / 2.0f;
     float x_window = static_cast<float>(xpos) - center_x;
     float y_window = center_y - static_cast<float>(ypos);
-    playerMovement->mouseX = x_window;
-    playerMovement->mouseY = y_window;
+    input->mouseX = x_window;
+    input->mouseY = y_window;
 }

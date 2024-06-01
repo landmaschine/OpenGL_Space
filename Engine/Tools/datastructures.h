@@ -8,17 +8,19 @@ typedef struct winData {
 } winData;
 
 typedef struct PhysicsSim {
-    int numSteps;
+    float timeStep;
 }PhysicsSim;
 
 typedef struct playerData {
     float mass;
     float damping;
+    float angularDamping;
+    float inertia;
     bool awake;
     bool Static;
+    
     float accelSpeed;
     int speedMod;
-    double maxSpeed;
     double scale;
     std::string texPath;
     std::string collision;
@@ -34,6 +36,8 @@ typedef struct background {
 typedef struct colliderData {
     float mass;
     float damping;
+    float angularDamping;
+    float inertia;
     bool awake;
     bool Static;
     glm::vec3 pos;
