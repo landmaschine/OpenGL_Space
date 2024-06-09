@@ -12,19 +12,19 @@ public:
     void update();
 
     void bindKey(int key, std::shared_ptr<Command> command) {
-        keyBindings[key] = command;
+        m_keyBindings[key] = command;
     }
 
     void init(GLFWwindow* win, Entity& ent) {
-        window = win;
-        entity = &ent;
+        m_window = win;
+        m_entity = &ent;
     }
 
     void shutdownKey();
     bool shouldRenderHitbox();
 
 private:
-    std::unordered_map<int, std::shared_ptr<Command>> keyBindings;
-    GLFWwindow* window;
-    Entity* entity;
+    std::unordered_map<int, std::shared_ptr<Command>> m_keyBindings;
+    GLFWwindow* m_window;
+    Entity* m_entity;
 };

@@ -1,14 +1,14 @@
 #include "window.h"
 
 void Window::createWindow(int width, int height, std::string name) {
-    _size.w = width;
-    _size.h = height;
+    m_size.w = width;
+    m_size.h = height;
 
-    window = glfwCreateWindow(_size.w, _size.h, name.c_str(), NULL, NULL);
-    if(window == NULL) {
+    m_window = glfwCreateWindow(m_size.w, m_size.h, name.c_str(), NULL, NULL);
+    if(m_window == NULL) {
         std::cout << "Error: Failed to create GLFW window: " << glfwGetError(NULL) << std::endl;
         glfwTerminate();
     }
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(m_window);
     glfwSwapInterval(1);
 }

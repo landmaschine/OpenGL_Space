@@ -12,16 +12,16 @@ class RenderComponent : public Component {
 
         RenderComponent(std::string texturePath) {
             glGenVertexArrays(1, &VAO);
-            glGenBuffers(1, &VBO);
-            glGenBuffers(1, &EBO);
+            glGenBuffers(1, &m_VBO);
+            glGenBuffers(1, &m_EBO);
 
             glBindVertexArray(VAO);
 
-            glBindBuffer(GL_ARRAY_BUFFER, VBO);
-            glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+            glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+            glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_STATIC_DRAW);
 
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(m_indices), m_indices, GL_STATIC_DRAW);
 
             glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
             glEnableVertexAttribArray(0);
@@ -38,9 +38,9 @@ class RenderComponent : public Component {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
             int nrChannels;
-            unsigned char* data = stbi_load(texturePath.c_str(), &width, &height, &nrChannels, 0);
+            unsigned char* data = stbi_load(texturePath.c_str(), &m_width, &m_height, &nrChannels, 0);
             if(data) {
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
                 glGenerateMipmap(GL_TEXTURE_2D);
             } else {
                 std::cout << "Failed to load texture" << std::endl;
@@ -73,17 +73,17 @@ class RenderComponent : public Component {
         unsigned int VAO;
         unsigned int texture;
     private:
-        unsigned int VBO, EBO;
+        unsigned int m_VBO, m_EBO;
 
-        int width, height;
-        float vertices[20] = {
+        int m_width, m_height;
+        float m_vertices[20] = {
             0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
             0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
            -0.5f,  0.5f, 0.0f, 0.0f, 1.0f
         };
 
-        unsigned int indices[6] = {  
+        unsigned int m_indices[6] = {  
             0, 1, 3,
             1, 2, 3
         };

@@ -1,8 +1,10 @@
-#pragma once 
+#pragma once
+#include <vector>
+#include <memory>
 #include "Engine/ECS/ECS.h"
 #include "Engine/ECS/RenderComponent.h"
 #include "Engine/RenderEngine/OpenGL/Renderer.h"
-#include "Engine/ECS/CollisionComponent/CollisionComponentPoly.h"
+#include "Engine/ECS/CollisionComponentPoly.h"
 
 class RenderSystem : public System {
     public:

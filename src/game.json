@@ -14,7 +14,7 @@
     "player": {
         "Rigidbody": {
             "mass": 5,
-            "damping": 0.99,
+            "damping": 0.991,
             "inertia": 1.0,
             "angularDamping": 1.0,
             "static": false,
@@ -26,7 +26,7 @@
         "width": 1,
         "height": 1,
         "scale": 1,
-        "accelSpeed": 100,
+        "accelSpeed": 200,
         "speedMod": 2,
         "texture": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/SpaceShipV2.png",
         "collision": "/home/leonw/Documents/dev/OpenGL_Space/Engine/assets/SpaceShipCol.txt"

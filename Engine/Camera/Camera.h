@@ -14,87 +14,36 @@ class Camera2D : public Icamer2D {
         Camera2D() {}
 
         void init(Window& win) {
-            this->screenHeight = win.size().h;
-            this->screenWidth = win.size().w;
-            position = glm::vec3(0.0f);
-            zoom = 50.f;
+            m_screenHeight = win.size().h;
+            m_screenWidth = win.size().w;
+            m_position = glm::vec3(0.0f);
+            m_zoom = 50.f;
 
-            shaderCam.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.vs",
-                                 "/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.fs");
+            m_shaderCam.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.vs",
+                                   "/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.fs");
 
             updateProjectionMatrixOrto();
         }
 
-        void updatePosition(glm::vec3 playerPosition, Window& window) {
-            glm::vec2 playerScreenPos = glm::vec2(playerPosition.x + window.size().w, playerPosition.y + window.size().h);
-
-            screenWidth = window.size().w;
-            screenHeight = window.size().h;
-
-            position.x = playerScreenPos.x - screenWidth;
-            position.y = playerScreenPos.y - screenHeight;
-
-            updateViewMatrix();
-            updateProjectionMatrixOrto();
-        }
-
-        void setZoom(float newZoom) {
-            zoom = newZoom;
-            updateProjectionMatrixOrto();
-        }
-
-        void window(Window& win) {
-            _window = win;
-        }
-
-        glm::mat4 getViewMatrix() const {
-            return viewMatrix;
-        }
-
-        glm::mat4 getProjectionMatrix() {
-            updateProjectionMatrixOrto();
-            return projectionMatrix;
-        }
-
-        glm::mat4 projection() override {
-            return projectionMatrix;
-        }
-
-        glm::mat4 view() override {
-            return viewMatrix;
-        }
+        void updatePosition(glm::vec3 playerPosition, Window& window);
+        void setZoom(float newZoom);
+        void window(Window& win);
+        glm::mat4 getViewMatrix() const;
+        glm::mat4 getProjectionMatrix();
+        glm::mat4 projection() override;
+        glm::mat4 view() override;
 
     private:
-        void updateViewMatrix() {
-            viewMatrix = glm::lookAt(glm::vec3(position.x, position.y, zoom),
-                         glm::vec3(position.x, position.y, position.z),
-                         glm::vec3(0.0f, 1.0f, 0.0f));   
-            shaderCam.setMat4("view", viewMatrix);
-        }
+        void updateViewMatrix();
+        void updateProjectionMatrixOrto();
+        void updateProjectionMatrixPers(float fov);
 
-        void updateProjectionMatrixOrto() {
-            float zoomFactor = 1.0f / zoom;
-            float halfScreenWidth = (float)screenWidth * 0.5f;
-            float halfScreenHeight = (float)screenHeight * 0.5f;
-            float left = -halfScreenWidth * zoomFactor;
-            float right = halfScreenWidth * zoomFactor;
-            float bottom = -halfScreenHeight * zoomFactor;
-            float top = halfScreenHeight * zoomFactor;
-            projectionMatrix = glm::ortho(left, right, bottom, top, -10000.0f, 10000.0f);
-            shaderCam.setMat4("projection", projectionMatrix);
-        }
-
-        void updateProjectionMatrixPers(float fov) {
-            projectionMatrix = glm::perspective(glm::radians(fov), screenWidth / float(screenHeight), -10.f, 10.f);
-            shaderCam.setMat4("projection", projectionMatrix);
-        }
-
-        glm::mat4 viewMatrix;
-        glm::mat4 projectionMatrix;
-        glm::vec3 position;
-        Window _window;
-        float zoom = 1.0f;
-        int screenWidth = 0;
-        int screenHeight = 0;
-        Shader shaderCam;
+        glm::mat4 m_viewMatrix;
+        glm::mat4 m_projectionMatrix;
+        glm::vec3 m_position;
+        Window m_window;
+        float m_zoom = 1.0f;
+        int m_screenWidth = 0;
+        int m_screenHeight = 0;
+        Shader m_shaderCam;
 };

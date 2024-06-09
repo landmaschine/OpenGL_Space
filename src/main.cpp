@@ -1,8 +1,7 @@
 #include <iostream>
 #include "game.h"
 
-int main(int, char**){
+int main() {
     gameLoop gameloop;
     gameloop.run();
-    return 0;
 }

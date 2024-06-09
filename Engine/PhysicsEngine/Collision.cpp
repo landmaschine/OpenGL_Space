@@ -2,14 +2,14 @@
 #include <algorithm>
 #include <cfloat>
 
-void Physics::Collision::HandleCollision_Player(PhysicsComponent& move, const glm::vec2& collisionNormal) {
+void Collision::HandleCollision_Player(PhysicsComponent& move, const glm::vec2& collisionNormal) {
     move.velocity -= 2.0f * glm::dot(move.velocity, collisionNormal) * collisionNormal;
 
     float restitution = 0.8f;
     move.velocity *= restitution;
 }
 
-glm::vec2 Physics::Collision::Support(const std::vector<glm::vec2>& poly1, const std::vector<glm::vec2>& poly2, const glm::vec2& direction) {
+glm::vec2 Collision::Support(const std::vector<glm::vec2>& poly1, const std::vector<glm::vec2>& poly2, const glm::vec2& direction) {
     glm::vec2 furthestPointInPoly1 = poly1[0];
     glm::vec2 furthestPointInPoly2 = poly2[0];
     
@@ -35,11 +35,11 @@ glm::vec2 Physics::Collision::Support(const std::vector<glm::vec2>& poly1, const
     return furthestPointInPoly1 - furthestPointInPoly2;
 }
 
-bool Physics::Collision::SameDirection(const glm::vec2& direction, const glm::vec2& ao) {
+bool Collision::SameDirection(const glm::vec2& direction, const glm::vec2& ao) {
     return glm::dot(direction, ao) > 0;
 }
 
-bool Physics::Collision::CheckCollision(const PolyData& obj1, const PolyData& obj2, CollisionInfo& collisionInfo) {
+bool Collision::CheckCollision(const PolyData& obj1, const PolyData& obj2, CollisionInfo& collisionInfo) {
     for (const auto& poly1 : obj1.Polygons) {
         for (const auto& poly2 : obj2.Polygons) {
             std::vector<glm::vec2> simplex;
@@ -51,13 +51,13 @@ bool Physics::Collision::CheckCollision(const PolyData& obj1, const PolyData& ob
     return false;
 }
 
-glm::vec2 Physics::Collision::TripleProduct(const glm::vec2& a, const glm::vec2& b, const glm::vec2& c) {
+glm::vec2 Collision::TripleProduct(const glm::vec2& a, const glm::vec2& b, const glm::vec2& c) {
     float ac = glm::dot(a, c);
     float bc = glm::dot(b, c);
     return b * ac - a * bc;
 }
 
-bool Physics::Collision::GJK(const std::vector<glm::vec2>& poly1, const std::vector<glm::vec2>& poly2, std::vector<glm::vec2>& simplex) {
+bool Collision::GJK(const std::vector<glm::vec2>& poly1, const std::vector<glm::vec2>& poly2, std::vector<glm::vec2>& simplex) {
     glm::vec2 direction(1, 0);
     simplex.push_back(Support(poly1, poly2, direction));
     direction = -simplex[0];
@@ -103,7 +103,7 @@ bool Physics::Collision::GJK(const std::vector<glm::vec2>& poly1, const std::vec
     }
 }
 
-bool Physics::Collision::EPA(const std::vector<glm::vec2>& poly1, const std::vector<glm::vec2>& poly2, std::vector<glm::vec2>& simplex, CollisionInfo& collisionInfo) {
+bool Collision::EPA(const std::vector<glm::vec2>& poly1, const std::vector<glm::vec2>& poly2, std::vector<glm::vec2>& simplex, CollisionInfo& collisionInfo) {
     const float EPA_TOLERANCE = 0.0001f;
     const int EPA_MAX_ITERATIONS = 100;
     int iterations = 0;

@@ -9,7 +9,7 @@ class PhysicsComponent : public Component {
         PhysicsComponent() {}
         PhysicsComponent(playerData* data) {
             pos = data->pos;
-            _accelSpeed = data->accelSpeed;
+            m_accelSpeed = data->accelSpeed;
             body.damping = data->damping;
             body.mass = data->mass;
             body.currentPos = data->pos;
@@ -33,10 +33,9 @@ class PhysicsComponent : public Component {
         }
 
         void init() override {
-            _direction = glm::vec3(0.0f);
+            m_direction = glm::vec3(0.0f);
             velocity = glm::vec2(0.0f);
             trans = glm::mat4(1.0f);
-            finaltrans = glm::mat4(1.0f);
             body.acceleration = glm::vec4(1.0f);
         }
 
@@ -56,11 +55,11 @@ class PhysicsComponent : public Component {
         }
 
         glm::vec2 direction() {
-            return _direction;
+            return m_direction;
         }
 
         float accelSpeed() {
-            return _accelSpeed;
+            return m_accelSpeed;
         }
 
         glm::vec2 velocity = glm::vec2(0.f);
@@ -68,8 +67,7 @@ class PhysicsComponent : public Component {
         glm::mat4 trans = glm::mat4(1.0f);
         float torque = 0.1f;
     private:
-        glm::vec2 _direction;
-        glm::mat4 finaltrans = glm::mat4(1.0f);
+        glm::vec2 m_direction;
         glm::vec3 pos;
-        float _accelSpeed;
+        float m_accelSpeed;
 };

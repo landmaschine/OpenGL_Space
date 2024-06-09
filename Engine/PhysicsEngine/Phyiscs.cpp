@@ -1,6 +1,6 @@
 #include "Pyhsics.h"
 
-void Physics::Physics::physicsSim(PhysicsComponent* phys, float dt) {
+void Physics::physicsSim(PhysicsComponent* phys, float dt) {
    if (!phys->body.isStatic && phys->body.isAwake) {
         applyForce(phys->body);
         applyTorque(phys->body, phys->torque);
@@ -11,7 +11,7 @@ void Physics::Physics::physicsSim(PhysicsComponent* phys, float dt) {
     }
 }
 
-void Physics::Physics::applyForce(RigidBody& body) {
+void Physics::applyForce(RigidBody& body) {
     if (!body.isStatic && body.isAwake) {
         glm::vec4 force = glm::vec4(body.force, 0.f, 0.f) * body.inverserotmat;
         body.force.x = force.x;
@@ -21,13 +21,13 @@ void Physics::Physics::applyForce(RigidBody& body) {
     }
 }
 
-void Physics::Physics::applyTorque(RigidBody& body, float torque) {
+void Physics::applyTorque(RigidBody& body, float torque) {
     if (!body.isStatic && body.isAwake) {
         body.angularAcceleration += torque / body.Inertia();
     }
 }
 
-void Physics::Physics::applyVerletIntegration(RigidBody& body, float dt) {
+void Physics::applyVerletIntegration(RigidBody& body, float dt) {
     if (!body.isStatic && body.isAwake) {
         glm::vec2 newPos = body.currentPos + body.velocity * dt + 0.5f * body.acceleration * dt * dt;
         glm::vec2 newVelocity = body.velocity + 0.5f * (body.acceleration + (body.force / body.Mass())) * dt;
@@ -38,7 +38,7 @@ void Physics::Physics::applyVerletIntegration(RigidBody& body, float dt) {
     }
 }
 
-void Physics::Physics::applyRotationVerletIntegration(RigidBody& body, float torque, float dt) {
+void Physics::applyRotationVerletIntegration(RigidBody& body, float torque, float dt) {
     if (!body.isStatic && body.isAwake) {
         float newAngle = body.currentAngle + body.angularVelocity * dt + 0.5f * body.angularAcceleration * dt * dt;
 

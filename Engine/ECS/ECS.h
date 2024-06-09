@@ -40,14 +40,14 @@ class Component {
 class Entity {
     public:
         void update() {
-            for(auto& c : components) c->update();
+            for(auto& c : m_components) c->update();
         }
 
-        bool isActive() const {return active;}
-        void destroy() {active = false;}
+        bool isActive() const {return m_active;}
+        void destroy() {m_active = false;}
 
         template <typename T> bool hasComponent() const {
-            return componentBitSet[getComponentTypeID<T>()];
+            return m_componentBitSet[getComponentTypeID<T>()];
         }
 
         template <typename T, typename... TArgs>
@@ -55,10 +55,10 @@ class Entity {
             T* c(new T(std::forward<TArgs>(mAgrs)...));
             c->entity = this;
             std::shared_ptr<Component> uPtr{ c };
-            components.emplace_back(std::move(uPtr));
+            m_components.emplace_back(std::move(uPtr));
 
-            componentArray[getComponentTypeID<T>()] = c;
-            componentBitSet[getComponentTypeID<T>()] = true;
+            m_componentArray[getComponentTypeID<T>()] = c;
+            m_componentBitSet[getComponentTypeID<T>()] = true;
 
             c->init();
             return *c;
@@ -67,16 +67,16 @@ class Entity {
         template<typename T> T& getComponent() const {
             if(!hasComponent<T>()) throw std::runtime_error("Entity has no such component!");
 
-            auto ptr(componentArray[getComponentTypeID<T>()]);
+            auto ptr(m_componentArray[getComponentTypeID<T>()]);
             return *static_cast<T*>(ptr);
         }
 
     private:
-        bool active = true;
-        std::vector<std::shared_ptr<Component>> components;
+        bool m_active = true;
+        std::vector<std::shared_ptr<Component>> m_components;
 
-        ComponentArray componentArray;
-        ComponentBitSet componentBitSet;
+        ComponentArray m_componentArray;
+        ComponentBitSet m_componentBitSet;
 };
 
 class Entities {
@@ -86,7 +86,7 @@ class Entities {
 
 class System {
     public:
-        virtual void update(float dt, std::vector<std::unique_ptr<Entity>>& entities) {}
+        virtual void update(std::vector<std::unique_ptr<Entity>>& entities, float dt) {}
         virtual void render(Icamer2D& cam, bool renderhitbox, std::vector<std::unique_ptr<Entity>>& entities) {}
         virtual ~System() {}
 };
@@ -96,22 +96,22 @@ class SystemManager {
         SystemManager(Entities& entities) : m_entities(entities) {}
 
         void update(float dt) {
-            for(auto& s : systems) s->update(dt, m_entities.entities);
+            for(auto& s : m_systems) s->update(m_entities.entities, dt);
         }
 
         void render(Icamer2D& cam, bool renderhitbox) {
-            for(auto& s : systems) s->render(cam, renderhitbox, m_entities.entities);
+            for(auto& s : m_systems) s->render(cam, renderhitbox, m_entities.entities);
         }
 
         template<typename T, typename... TArgs>
         void addSystem(TArgs&&... mArgs) {
             T* s = new T(std::forward<TArgs>(mArgs)...);
             std::unique_ptr<System> uPtr{ s };
-            systems.emplace_back(std::move(uPtr));
+            m_systems.emplace_back(std::move(uPtr));
         }
 
     private:
-        std::vector<std::unique_ptr<System>> systems;
+        std::vector<std::unique_ptr<System>> m_systems;
         Entities& m_entities;
 };
 
@@ -135,6 +135,6 @@ class EntityManager {
             return *e;
         }
 
-        Entities& m_entities;
     private:
+        Entities& m_entities;
 };

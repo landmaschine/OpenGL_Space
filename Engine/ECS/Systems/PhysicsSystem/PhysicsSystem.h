@@ -4,7 +4,7 @@
 
 class PhysicsSystem : public System {
     public:
-        void update(float dt, std::vector<std::unique_ptr<Entity>>& entities) override {
+        void update(std::vector<std::unique_ptr<Entity>>& entities, float dt) override {
             for(auto& e : entities) {
                 if(e->hasComponent<PhysicsComponent>()) {
                     physics.physicsSim(&e->getComponent<PhysicsComponent>(), dt);
@@ -13,5 +13,5 @@ class PhysicsSystem : public System {
         }
 
     private:
-        Physics::Physics physics;
+        Physics physics;
 };

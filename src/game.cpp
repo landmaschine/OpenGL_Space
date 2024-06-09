@@ -58,8 +58,8 @@ void input() {
 void update(float dt) {
     dep->cam.updatePosition(ecs->player.getComponent<PositionComponent>().pos, dep->window);    
     mousePos(&ecs->player.getComponent<InputComponent>());
-    ecs->ent_manager.update();
     ecs->sys_manager.update(dt);
+    ecs->ent_manager.update();
 }
 
 void render() {
@@ -68,7 +68,6 @@ void render() {
     dep->debGui.newFrame();
     dep->debGui.showValue((const char*)(glGetString(GL_VERSION)), gameloopdata.frameTime, 1/gameloopdata.frameTime);
     dep->debGui.showVec("Player Pos", ecs->player.getComponent<PositionComponent>().pos);
-    dep->debGui.showVec("player Vel", ecs->player.getComponent<PhysicsComponent>().velocity);
     dep->debGui.draw();
 
     glfwSwapBuffers(dep->window.getWin());
@@ -99,7 +98,7 @@ void gameLoop::run() {
             update(timeStep);
             accumulator -= timeStep;
         }
-        render();
+            render();
 
         double endtime = glfwGetTime();
         gameloopdata.frameTime = endtime - currentTime;

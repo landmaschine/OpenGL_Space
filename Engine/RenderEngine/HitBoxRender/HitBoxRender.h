@@ -1,5 +1,5 @@
 #pragma once
-#include "../PositionComponent.h"
+#include "ECS/depComponents.h"
 #include "Engine/Camera/Camera.h"
 
 class HitBoxRender {
@@ -11,9 +11,10 @@ class HitBoxRender {
         
         unsigned int VAO;
         std::vector<unsigned int> indices;
+        Shader hitboxShader;
     private:
-        unsigned int VBO, EBO;
-        PolyFromTxt polydata;
-        PolyData polygons;
-        std::vector<float> vertices;
+        unsigned int m_VBO, m_EBO;
+        PolyFromTxt m_polydata;
+        PolyData m_polygons;
+        std::vector<float> m_vertices;
 };

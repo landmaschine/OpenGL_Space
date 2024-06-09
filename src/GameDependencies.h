@@ -18,7 +18,7 @@
 #include "Engine/Tools/Json.h"
 #include "Engine/Tools/extractColPolygon.h"
 
-#include "Engine/ECS/CollisionComponent/CollisionComponentPoly.h"
+#include "Engine/ECS/CollisionComponentPoly.h"
 #include "Engine/ECS/PositionComponent.h"
 #include "Engine/ECS/PlanetComponent.h"
 #include "Engine/ECS/RenderComponent.h"
@@ -55,7 +55,7 @@ typedef struct gameLoopData {
     int zoom = 50;
     int col = 0;
     bool shouldRenderHitbox;
-    Physics::CollisionInfo collinfo;
+    CollisionInfo collinfo;
 } loopata;
 loopata gameloopdata;
 

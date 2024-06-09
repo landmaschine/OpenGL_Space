@@ -6,7 +6,7 @@ void shutDown();
 
 void input();
 void update(float dt);
-void render();
+void render(float alpha);
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -14,8 +14,4 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 struct gameLoop {
     void run();
-};
-
-enum GAME_STATE {
-
 };

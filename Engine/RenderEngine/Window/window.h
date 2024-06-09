@@ -10,12 +10,12 @@ typedef struct windowSize {
 class Window {
     public:
         Window() = default;
-        ~Window() {glfwDestroyWindow(window);}
+        ~Window() {glfwDestroyWindow(m_window);}
         void createWindow(int width, int height, std::string name);
-        windowSize& size() {return _size;}
-        GLFWwindow* getWin() { return window;}
+        windowSize& size() {return m_size;}
+        GLFWwindow* getWin() { return m_window;}
 
     private:
-        windowSize _size;
-        GLFWwindow* window;
+        windowSize m_size;
+        GLFWwindow* m_window;
 };

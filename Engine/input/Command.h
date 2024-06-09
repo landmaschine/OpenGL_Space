@@ -7,6 +7,6 @@ class Command {
         virtual ~Command() = default;
         virtual void pressed(Entity& ent) {};
         virtual void released(Entity& ent) {};
-    
+
         Json data;
 };
