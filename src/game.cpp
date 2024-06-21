@@ -32,9 +32,6 @@ void init() {
     ecs->collider.addComponent<CollisionComponentPoly>(dep->data.collider);
     ecs->collider.addComponent<RenderComponent>(dep->data.backObj->texPath);
 
-    ecs->collider1.addComponent<PositionComponent>(-5.f, -5.f, dep->data.backObj);
-    ecs->collider1.addComponent<RenderComponent>(dep->data.backObj->texPath);
-
     ecs->sys_manager.addSystem<CollisionSystem>();
     ecs->sys_manager.addSystem<RenderSystem>();
     ecs->sys_manager.addSystem<PhysicsSystem>();
@@ -98,7 +95,7 @@ void gameLoop::run() {
             update(timeStep);
             accumulator -= timeStep;
         }
-            render();
+        render();
 
         double endtime = glfwGetTime();
         gameloopdata.frameTime = endtime - currentTime;

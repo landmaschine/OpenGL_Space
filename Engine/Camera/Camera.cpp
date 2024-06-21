@@ -43,7 +43,6 @@ void Camera2D::updateViewMatrix() {
     m_viewMatrix = glm::lookAt(glm::vec3(m_position.x, m_position.y, m_zoom),
                    glm::vec3(m_position.x, m_position.y, m_position.z),
                    glm::vec3(0.0f, 1.0f, 0.0f));   
-    m_shaderCam.setMat4("view", m_viewMatrix);
 }
 
 void Camera2D::updateProjectionMatrixOrto() {
@@ -55,10 +54,8 @@ void Camera2D::updateProjectionMatrixOrto() {
     float bottom = -halfScreenHeight * zoomFactor;
     float top = halfScreenHeight * zoomFactor;
     m_projectionMatrix = glm::ortho(left, right, bottom, top, -10000.0f, 10000.0f);
-    m_shaderCam.setMat4("projection", m_projectionMatrix);
 }
 
 void Camera2D::updateProjectionMatrixPers(float fov) {
     m_projectionMatrix = glm::perspective(glm::radians(fov), m_screenWidth / float(m_screenHeight), -10.f, 10.f);
-    m_shaderCam.setMat4("projection", m_projectionMatrix);
 }

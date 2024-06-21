@@ -19,9 +19,6 @@ class Camera2D : public Icamer2D {
             m_position = glm::vec3(0.0f);
             m_zoom = 50.f;
 
-            m_shaderCam.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.vs",
-                                   "/home/leonw/Documents/dev/OpenGL_Space/Engine/Camera/camShader.fs");
-
             updateProjectionMatrixOrto();
         }
 
@@ -45,5 +42,4 @@ class Camera2D : public Icamer2D {
         float m_zoom = 1.0f;
         int m_screenWidth = 0;
         int m_screenHeight = 0;
-        Shader m_shaderCam;
 };

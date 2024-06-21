@@ -11,7 +11,6 @@ class HitBoxRender {
         
         unsigned int VAO;
         std::vector<unsigned int> indices;
-        Shader hitboxShader;
     private:
         unsigned int m_VBO, m_EBO;
         PolyFromTxt m_polydata;

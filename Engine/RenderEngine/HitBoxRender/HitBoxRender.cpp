@@ -1,9 +1,6 @@
 #include "HitBoxRender.h"
 
-HitBoxRender::HitBoxRender() : VAO(0), m_VBO(0), m_EBO(0) {
-    hitboxShader.loadShader("/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/HitBoxRender/hitboxVertex.vs",
-                            "/home/leonw/Documents/dev/OpenGL_Space/Engine/RenderEngine/HitBoxRender/hitboxFragment.fs");
-}
+HitBoxRender::HitBoxRender() : VAO(0), m_VBO(0), m_EBO(0) {}
 
 void HitBoxRender::init() {
     glGenVertexArrays(1, &VAO);
